@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Model suite" parallel="classes" thread-count="10">
+    <test name="model tests" verbose="1" annotations="JDK" thread-count="10" parallel="classes">
+        <!--<groups>-->
+            <!--<run>-->
+                <!--<include name="roleDaoGroup"/>-->
+                <!--<include name="userDaoGroup"/>-->
+            <!--</run>-->
+        <!--</groups>-->
+        <packages>
+            <package name="com.td.model.*"/>
+        </packages>
+    </test>
+</suite>

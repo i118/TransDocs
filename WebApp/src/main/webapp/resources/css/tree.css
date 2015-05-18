@@ -1,0 +1,24 @@
+.tree-icon-delete{
+    background-image: url(../../resources/icon/node/deletered.svg);
+}
+.tree-icon-excel{
+    background-image: url(../../resources/icon/node/application_vnd_ms_excel.png);
+}
+.tree-icon-archive{
+    background-image: url(../../resources/icon/node/archive.png);
+}
+.tree-icon-xml{
+     background-image: url(../../resources/icon/node/crystal_xml.png);
+ }
+.tree-icon-file{
+     background-image: url(../../resources/icon/node/document.png);
+ }
+.tree-icon-image{
+     background-image: url(../../resources/icon/node/image.png);
+ }
+.tree-icon-word{
+     background-image: url(../../resources/icon/node/page_white_word.png);
+ }
+.tree-icon-txt{
+     background-image: url(../../resources/icon/node/mime_txt.png);
+ }

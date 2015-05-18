@@ -1,0 +1,11 @@
+/**
+ * Нужен для кооректной работы плагина Sencha ExtJS в Intellij IDEA
+ */
+{
+    /**
+     * The application's namespace.
+     */
+    "name": "TransDocs"
+
+
+}

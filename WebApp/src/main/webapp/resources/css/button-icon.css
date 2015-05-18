@@ -1,0 +1,15 @@
+.icon-button-add {
+    background-image:
+        url(../icon/button/add.ico)
+    !important;
+}
+
+.icon-button-remove {
+    background-image:
+        url(../icon/button/remove.ico)
+    !important;
+}
+
+.x-form-person-info-trigger {
+    background-image: url(../icon/triggers/person-info-trigger.gif);
+}

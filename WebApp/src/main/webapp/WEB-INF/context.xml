@@ -1,0 +1,8 @@
+<Context>
+    <Resource name="jcr/repository"
+              auth="Container"
+              type="javax.jcr.Repository"
+              factory="org.apache.jackrabbit.core.jndi.BindableRepositoryFactory"
+              configFilePath="/Users/konstantinchipunov/TransDocs/WebApp/src/main/webapp/WEB-INF/repository/repository.xml"
+              repHomeDir="/Users/konstantinchipunov/TransDocs/WebApp/src/main/webapp/WEB-INF/repository/repository" />
+</Context>

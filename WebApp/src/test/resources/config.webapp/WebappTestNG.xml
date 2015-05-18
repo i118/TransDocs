@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="webapp suite" parallel="classes" thread-count="10">
+    <test name="webapp tests" verbose="1" annotations="JDK" thread-count="10" parallel="classes">
+        <packages>
+            <package name="com.td.webapp.*"/>
+        </packages>
+    </test>
+</suite>
