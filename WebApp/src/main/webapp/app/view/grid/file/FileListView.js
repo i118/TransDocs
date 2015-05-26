@@ -113,40 +113,6 @@ Ext.define("TransDocs.view.grid.file.FileListView", {
         itemdblclick: 'openFile'
     },
 
-//    initComponent: function (config) {
-//        var me = this;
-//        this.store = Ext.create("TransDocs.data.store.file.FileTreeStore", {model: me.getModelClass()});
-//        this.callParent(arguments);
-//    },
-//
-//
-//    loadRecord: function (data) {
-//        this.model = data;
-//        if (!this.isLoaded) {
-//            this.model.getFileStore().set("root", true);
-//            this.model.getFileStore().set("expanded", true);
-//            this.model.getFileStore().set("loaded", true);
-//            this.getStore().setRoot(this.model.getFileStore());
-//            this.getStore().setRootVisible(false);
-//        }
-//
-//        this.isLoaded = true;
-//
-//        if (this.model.isNew()) return;
-//        var me = this;
-//
-//        if (!this.getStore().isLoading()) {
-//            if(!this.getStore().isLoaded()){
-//                this.getStore().reload({
-//                    addRecords : true,
-//                    params: {containerType: this.model.getFileStore().get("objectType")},
-//                    callback: function (records, ooperation, success) {
-//
-//                    }
-//                });
-//            }
-//        }
-//    },
 
     getSelectedFile: function () {
         var selModel = this.getSelectionModel();

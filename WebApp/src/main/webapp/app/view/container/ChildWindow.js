@@ -7,13 +7,13 @@ Ext.define("TransDocs.view.container.ChildWindow",{
         var me = this;
         if(this.parent){
             this.constrainTo = this.parent.getEl();
-            this.on('beforeclose', function(){
-                me.parent.enable();
-            }, this);
-            this.on('beforeshow', function(){
-                me.parent.disable();
-                me.enable();
-            }, this);
+            //this.on('beforeclose', function(){
+            //    me.parent.enable();
+            //}, this);
+            //this.on('beforeshow', function(){
+            //    me.parent.disable();
+            //    me.enable();
+            //}, this);
             this.parent.add(this);
         }
         this.createItems();

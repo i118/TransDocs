@@ -5,21 +5,8 @@ Ext.define("TransDocs.model.dictionary.CustomerModel",{
     ],
 
     fields: [
-        {name: "files", persist:false}
-    ],
-
-    associations: [
-
-        {
-            type: 'hasOne',
-            name:'fileStore',
-            instanceName:'fileStore',
-            model:'TransDocs.model.file.CustomerFileModel',
-            getterName:'getFileStore',
-            setterName:'setFileStore',
-            associationKey:'fileStore',
-            foreignKey:'fileStore'
-        }
+        {name: "files", persist:false},
+        {name: "fileStoreId", reference: 'TransDocs.model.file.CustomerFileModel', unique:true}
     ],
 
     files: function(){

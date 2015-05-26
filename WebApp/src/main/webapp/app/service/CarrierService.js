@@ -6,7 +6,7 @@ Ext.define("TransDocs.service.CarrierService", {
         "TransDocs.model.dictionary.DriverModel",
         "TransDocs.model.dictionary.CarModel",
         "TransDocs.model.dictionary.CarrierModel",
-        "TransDocs.model.dictionary.AccountDetails",
+        "TransDocs.model.dictionary.AccountDetailsInterface",
         "TransDocs.model.file.CarrierFileModel"
     ],
 

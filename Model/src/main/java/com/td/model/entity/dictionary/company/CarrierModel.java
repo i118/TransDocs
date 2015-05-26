@@ -21,6 +21,7 @@ import javax.persistence.Transient;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by konstantinchipunov on 12.11.14.
@@ -90,6 +91,10 @@ public class CarrierModel extends JuridicalPersonModel implements IFileContainer
         this.fileStore = fileStore;
     }
 
+    @Transient
+    public UUID getFileStoreId(){
+        return this.fileStore!=null ? fileStore.getObjectId() : null;
+    }
 
     @Override
     @Transient

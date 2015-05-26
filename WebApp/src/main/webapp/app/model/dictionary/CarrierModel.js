@@ -1,28 +1,15 @@
 Ext.define("TransDocs.model.dictionary.CarrierModel",{
     extend: 'TransDocs.model.dictionary.ContractorModel',
     requires: [
-        'TransDocs.model.dictionary.AccountDetails',
+        'TransDocs.model.dictionary.AccountDetailsInterface',
         'TransDocs.model.file.CarrierFileModel',
         "TransDocs.data.reader.DefaultJsonReader",
         "TransDocs.data.writer.AssociationJsonWriter"
     ],
 
     fields: [
-        {name: "files", persist:false}
-    ],
-
-    associations: [
-
-        {
-            type: 'hasOne',
-            name:'fileStore',
-            instanceName:'fileStore',
-            model:'TransDocs.model.file.CarrierFileModel',
-            getterName:'getFileStore',
-            setterName:'setFileStore',
-            associationKey:'fileStore',
-            foreignKey:'fileStore'
-        }
+        {name: "files", persist:false},
+        {name: "fileStoreId", reference: 'TransDocs.model.file.CarrierFileModel', unique:true}
     ],
 
 

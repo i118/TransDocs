@@ -15,10 +15,9 @@ Ext.define("TransDocs.view.component.file.FileForm", {
             var store = this.lookupViewModel().getStore('fileTreeStore');
 
             store.getRoot().expand();
-
-//            if (store && store.isLoading()) {
-//                this.setLoading(true, true);
-//            }
+            if (store && store.isLoading()) {
+                this.setLoading(true, true);
+            }
         }
     },
 
@@ -41,5 +40,9 @@ Ext.define("TransDocs.view.component.file.FileForm", {
                 this.isLoaded = true;
             }, this);
         }
+    },
+
+    lookupStore: function(){
+        return this.lookupViewModel().getStore('fileTreeStore');
     }
 });
