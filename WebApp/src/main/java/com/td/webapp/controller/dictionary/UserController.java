@@ -30,7 +30,7 @@ import java.util.UUID;
 @RequestMapping("/" + UserController.CONTROLLER_NAME)
 public class UserController extends AbstractDictionaryController<UserModel> {
 
-    public static final String CONTROLLER_NAME = "UserController";
+    public static final String CONTROLLER_NAME = "User";
 
     private UserCRUDService userService;
 

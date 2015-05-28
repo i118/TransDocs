@@ -24,11 +24,24 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
         var viewModel = {
             parent: null,
             session: session,
-            data: {
-                document: document,
-                customer: null,
-                carrier: null
+            links:{
+                document:{
+                    type: "OrderDocument",
+                    create:{
+                        managerId: TransDocs.service.UserService.getCurrentUser().getId(),
+                        companyId: TransDocs.service.CompanyService.getCurrentCompany().getId()
+                    }
+                }
             },
+
+            formulas: {
+                    customer: function (get) {
+                        return get("document").getCustomer();
+                    },
+                    carrier: function (get) {
+                      return  get("document").getCarrier();
+                    }
+            }
             stores:me.getStores(session, orderStore)
         };
         var wndConfig = {
@@ -60,48 +73,57 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
         var session = new Ext.data.Session();
         var orderStore = Ext.create("TransDocs.data.store.document.OrderDocumentStore", {session: session});
         var me = this;
-        orderStore.load({
-            id: record.get("objectId"),
-            callback: function (records, operation, success) {
-                if (success) {
-                    var document = records[0];
-                    if (document.getCustomer())document.getCustomer().persons().complete = true;
-                    if (document.getCarrier())document.getCarrier().persons().complete = true;
-                    var viewModel = {
-                        session: session,
-                        parent: null,
-                        data: {
-                            document: document,
-                            customer: document.getCustomer(),
-                            carrier: document.getCarrier()
-                        },
-                        stores:me.getStores(session, orderStore)
-                    };
-                    var wndConfig = {
+        var viewModel = {
+            session: session,
+            parent: null,
+            links: {
+                document: {
+                    type: 'OrderDocument',
+                    id: record.get("objectId"),
+                    store: {
+                        type: 'orderDocumentStore',
+                        session: session
+                    }
 
-                        viewModel: viewModel,
-                        session: session,
-                        width: 830,
-                        height: 600,
-                        callerComponent: me.getView(),
-                        scroll: 'auto',
-                        controller: 'orderDocumentController',
-                        scope: records[0].getId(),
-                        layout: 'fit',
-                        reference: 'orderWindow',
-                        title: "Заявка № " + document.getOutgoingNumber().get("number") + " от " + document.getOutgoingNumber().getFormatDate()+": Компонент в разработке",
-                        items: [
-                            {
-                                xtype: 'orderDocumentComponent',
-                                reference: 'orderDocumentComponent'
-                            }
-                        ]
-                    };
-
-                    TransDocs.util.WindowManager.openWindow(wndConfig);
                 }
-            }
-        });
+            },
+            data: {
+
+                customer: '{document.customer}',
+                carrier: '{document.carrier}'
+            },
+            formulas: {
+                customer: function (get) {
+                    return get("document").getCustomer();
+                },
+                carrier: function (get) {
+                    return get("document").getCarrier();
+                }
+            },
+            stores:me.getStores(session, orderStore)
+        };
+        var wndConfig = {
+
+            viewModel: viewModel,
+            session: session,
+            width: 830,
+            height: 600,
+            callerComponent: me.getView(),
+            scroll: 'auto',
+            controller: 'orderDocumentController',
+            scope: record.get("objectId"),
+            layout: 'fit',
+            reference: 'orderWindow',
+            title: 'Заявка № '+record.get("outgoingNumber")+': Компонент в разработке',
+            items: [
+                {
+                    xtype: 'orderDocumentComponent',
+                    reference: 'orderDocumentComponent'
+                }
+            ]
+        };
+
+        TransDocs.util.WindowManager.openWindow(wndConfig);
     },
 
     getStores: function(session, orderStore){

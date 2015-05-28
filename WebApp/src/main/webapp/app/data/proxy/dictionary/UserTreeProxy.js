@@ -3,7 +3,7 @@ Ext.define('TransDocs.data.proxy.dictionary.UserTreeProxy', {
     alias: "proxy.userTreeProxy",
 
     config: {
-        controllerName: 'UserController'
+        controllerName: 'User'
     },
     paramsAsJson: true,
     constructor: function () {

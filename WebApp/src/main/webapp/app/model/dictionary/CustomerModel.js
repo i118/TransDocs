@@ -4,6 +4,8 @@ Ext.define("TransDocs.model.dictionary.CustomerModel",{
         'TransDocs.model.file.CustomerFileModel'
     ],
 
+    entityName: "Customer",
+
     fields: [
         {name: "files", persist:false},
         {name: "fileStoreId", reference: 'TransDocs.model.file.CustomerFileModel', unique:true}

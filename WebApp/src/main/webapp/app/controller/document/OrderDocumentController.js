@@ -8,12 +8,12 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         "TransDocs.service.DictionaryService"
     ],
 
-    selectCustomer: function (combo, records, oldValue, eOpts) {
+    selectCustomer: function (combo, record, oldValue, eOpts) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
-        if (records && records.length==1) {
-            var customer = records[0];
+        if (record) {
+            var customer = record;
             var customerStore = viewModel.getStore("customerStore");
             customer.refresh(customerStore, function (records, operation, success) {
                 if (success) {
@@ -40,12 +40,12 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         }
     },
 
-    selectCarrier: function (combo, records, oldValue, eOpts) {
+    selectCarrier: function (combo, record, oldValue, eOpts) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
-        if (records && records.length==1) {
-            var carrier = records[0];
+        if (record) {
+            var carrier = record;
             var carrierStore = viewModel.getStore("carrierStore");
             carrier.refresh(carrierStore, function (records, operation, success) {
                 if (success) {
@@ -73,13 +73,13 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         }
     },
 
-    selectManager: function (combo, records, oldValue, eOpts) {
+    selectManager: function (combo, record, oldValue, eOpts) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
-        if (records && records.length==1) {
+        if (record) {
             var userStore = viewModel.getStore("userStore");
-            var user = records[0];
+            var user = record;
             user.refresh(userStore,  function (records, operation, success) {
                 if (success && records.length > 0) {
                     document.setManager(records[0]);
@@ -145,22 +145,22 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         combo.select(records);
     },
 
-    selectCustomerPerson: function (combo, records, eOpts) {
+    selectCustomerPerson: function (combo, record, eOpts) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
-        var newValue = records[0];
+        var newValue = record;
         if (document.getCustomerPerson() && document.getCustomerPerson().getId() == newValue.getId())return;
         document.setCustomerPerson(newValue);
     },
 
-    selectCarrierPerson: function (combo, records, eOpts) {
+    selectCarrierPerson: function (combo, record, eOpts) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
-        var newValue = records[0];
+        var newValue = record;
         if (document.getCarrierPerson() && document.getCarrierPerson().getId() == newValue.getId())return;
-        document.setCarrierPerson(records[0]);
+        document.setCarrierPerson(newValue);
     },
 
     viewPerson: function (combox, trigger, event) {
@@ -208,6 +208,7 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         view.setLoading(true, true);
         var viewModel = view.lookupViewModel();
         var document = viewModel.get("document");
+        document.setDirty(true);
         if (!document.isDirty()) {
             view.setLoading(false);
             view.close();
@@ -215,7 +216,7 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         }
         var orderStore = viewModel.getStore("orderStore");
         var me = this;
-        orderStore.save({
+        document.save({
             success: function () {
                 view.setLoading(false);
                 me.reloadCallerComponent();

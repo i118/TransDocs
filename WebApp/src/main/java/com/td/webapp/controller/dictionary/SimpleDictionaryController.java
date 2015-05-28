@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequestMapping("/"+SimpleDictionaryController.CONTROLLER_NAME)
 public class SimpleDictionaryController extends AbstractDictionaryController<SimpleDictionary> {
 
-    public static final String CONTROLLER_NAME = "SimpleDictionaryController";
+    public static final String CONTROLLER_NAME = "SimpleDictionary";
 
     @Inject
     @DictionaryCrud

@@ -16,7 +16,7 @@ import javax.inject.Inject;
 @RequestMapping("/"+ CustomerController.CONTROLLER_NAME)
 public class CustomerController extends ContractorController<ICustomerModel> {
 
-    public static final String CONTROLLER_NAME = "CustomerController";
+    public static final String CONTROLLER_NAME = "Customer";
 
     ContractorCRUDService<ICustomerModel, ContractorRepository<ICustomerModel>> customerService;
 

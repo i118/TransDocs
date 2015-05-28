@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequestMapping("/"+CompanyController.CONTROLLER_NAME)
 public class CompanyController extends AbstractDictionaryController<CompanyModel> {
 
-    public static final String CONTROLLER_NAME = "CompanyController";
+    public static final String CONTROLLER_NAME = "Company";
 
     private CompanyService companyService;
 

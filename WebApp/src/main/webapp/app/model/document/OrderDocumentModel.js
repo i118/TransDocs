@@ -1,6 +1,7 @@
 Ext.define("TransDocs.model.document.OrderDocumentModel", {
     extend: "TransDocs.model.document.AbstractDocumentModel",
 
+    entityName: "OrderDocument",
     requires: [
         'TransDocs.model.document.DocumentNumber',
         'TransDocs.model.dictionary.UserModel',
@@ -16,12 +17,12 @@ Ext.define("TransDocs.model.document.OrderDocumentModel", {
         {name: "outgoingNumber", reference: "TransDocs.model.document.DocumentNumber"},
         {name: "transportationType", type: "string"},
         {name: "customerPaymentMethod", type: "string"},
-        {name: "managerId", reference: "TransDocs.model.dictionary.UserModel", mapping: "manager.objectId", unique: true},
-        {name: "customerId", reference: "TransDocs.model.dictionary.CustomerModel", mapping: "customer.objectId", unique: true},
-        {name: "carrierId", reference: "TransDocs.model.dictionary.CarrierModel", mapping: "carrier.objectId", unique: true},
-        {name: "customerPersonId", reference: "TransDocs.model.dictionary.CustomerPersonModel",mapping: "customerPerson.objectId", unique: true},
-        {name: "carrierPersonId", reference: "TransDocs.model.dictionary.CarrierPersonModel", mapping: "carrierPerson.objectId", unique: true},
-        {name: "companyId", reference: "TransDocs.model.dictionary.CompanyModel", mapping: "company.objectId", unique: true},
+        {name: "managerId", reference: "User", mapping: "manager.objectId", unique: true},
+        {name: "customerId", reference: "Customer", mapping: "customer.objectId", unique: true},
+        {name: "carrierId", reference: "Carrier", mapping: "carrier.objectId", unique: true},
+        {name: "customerPersonId", reference: "CustomerPerson",mapping: "customerPerson.objectId", unique: true},
+        {name: "carrierPersonId", reference: "CarrierPerson", mapping: "carrierPerson.objectId", unique: true},
+        {name: "companyId", reference: "Company", mapping: "company.objectId", unique: true},
 
         {name: "customerPhone", type: "string"},
         {name: "customerAddress", type: "string"},
@@ -43,9 +44,9 @@ Ext.define("TransDocs.model.document.OrderDocumentModel", {
     setCustomer: function(customer){
         this.callParent(arguments);
         if(customer) {
-            this.set("customerPhone", customer.get("phone"));
-            this.set("customerAddress", customer.get("legalAddress"));
-            this.set("customerEmail", customer.get("email"));
+            this.set("customerPhone", this.getCustomer().get("phone"));
+            this.set("customerAddress", this.getCustomer().get("legalAddress"));
+            this.set("customerEmail", this.getCustomer().get("email"));
         }else{
             this.set("customerPhone", null);
             this.set("customerAddress", null);
@@ -56,9 +57,9 @@ Ext.define("TransDocs.model.document.OrderDocumentModel", {
     setCarrier: function(carrier){
         this.callParent(arguments);
         if(carrier) {
-            this.set("carrierPhone", carrier.get("phone"));
-            this.set("carrierAddress", carrier.get("email"));
-            this.set("carrierEmail", carrier.get("legalAddress"));
+            this.set("carrierPhone", this.getCarrier().get("phone"));
+            this.set("carrierAddress", this.getCarrier().get("email"));
+            this.set("carrierEmail", this.getCarrier().get("legalAddress"));
         }
     }
 });
