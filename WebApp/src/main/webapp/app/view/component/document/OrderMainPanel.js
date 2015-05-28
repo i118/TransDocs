@@ -115,7 +115,7 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                                 hideTrigger: true,
                                 autoWidth: true,
                                 bind: {
-                                    value: '{document.company}',
+                                    value: '{document.companyId}',
                                     store: '{companyStore}'
                                 }
                             }
@@ -224,7 +224,7 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                                 valueField: 'objectId',
                                 recordType: "com.td.model.entity.dictionary.dataset.UserDataSet",
                                 bind: {
-                                    value: '{document.manager}',
+                                    value: '{document.managerId}',
                                     store: '{userStore}'
                                 },
                                 queryProperty: "description",
@@ -275,7 +275,7 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         queryProperty: "description",
                         searchHandler: "findCustomer",
                         bind: {
-                            value: '{document.customer}',
+                            value: '{document.customerId}',
                             store: '{customerStore}'
                         },
                         listeners: {
@@ -331,7 +331,7 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                     valueField: 'objectId',
                     autoLoadOnValue:true,
                     bind: {
-                        value: '{document.customerPerson}',
+                        value: '{document.customerPersonId}',
                         store: '{customer.persons}',
                         disabled: '{!customer}'
                     },
@@ -480,7 +480,7 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         queryProperty: "description",
                         searchHandler: 'findCarrier',
                         bind: {
-                            value: '{document.carrier}',
+                            value: '{document.carrierId}',
                             store: '{carrierStore}'
                         },
                         listeners: {
@@ -494,7 +494,7 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         displayField: 'description',
                         valueField: 'objectId',
                         bind: {
-                            value: '{document.carrierPerson}',
+                            value: '{document.carrierPersonId}',
                             store: '{carrier.persons}',
                             disabled: '{!carrier}'
                         },

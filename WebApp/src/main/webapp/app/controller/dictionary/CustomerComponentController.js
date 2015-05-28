@@ -22,6 +22,7 @@ Ext.define('TransDocs.controller.dictionary.CustomerComponentController', {
         fileTreeStore.setRootVisible(false);
         fileTreeStore.getProxy().setExtraParam("containerType", fileStore.get("objectType"));
         var viewModel = {
+            parent: null,
             session: config.session,
             data: {
                 contractor: config.record,

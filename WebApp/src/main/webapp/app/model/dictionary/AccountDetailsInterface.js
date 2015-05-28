@@ -13,7 +13,10 @@ Ext.define("TransDocs.model.dictionary.AccountDetailsInterface",{
                 {name: 'director', type: 'string', mapping:"accountDetails.director"},
                 {name: 'chiefAccountant', type: 'string', mapping:"accountDetails.chiefAccountant"},
                 {name: 'account', type: 'string', mapping:"accountDetails.account"},
-                {name: 'correspondentAccount', type: 'string', mapping:"accountDetails.correspondentAccount"}
+                {name: 'correspondentAccount', type: 'string', mapping:"accountDetails.correspondentAccount"},
+                {name: 'accountDetails.objectType', type: 'string', mapping:"accountDetails.objectType", convert: function(value, record){
+                    return 'account_details';
+                }}
             ]);
         }
     }

@@ -90,11 +90,23 @@ Ext.define("TransDocs.model.AbstractModel",{
 
     createActionMap: function(){},
 
-    getAssociatedData: function (result) {
+    getAssociatedData: function (writer,result) {
         var me = this,
             associations = me.associations,
             deep, i, item, items, itemData, length, record, role, roleName;
 
+        var getDataInternal = function(record){
+            var dataInternal;
+            if(writer){
+                 dataInternal = writer.getRecordData(record);
+                if(writer.getExpandData()){
+                    dataInternal = writer.getExpandedData([data])[0]
+                }
+            }else{
+                dataInternal = record.getData(true);
+            }
+            return dataInternal;
+        }
         result = result || {};
 
         me.$gathering = 1;
@@ -122,13 +134,14 @@ Ext.define("TransDocs.model.AbstractModel",{
                     record = items[i];
                     deep = !record.$gathering;
                     record.$gathering = 1;
-                    itemData.push(record.getData(true));
+                    var data = getDataInternal(record);
+                    itemData.push(data);
                     delete record.$gathering;
                 }
 
                 delete item.$gathering;
             } else {
-                itemData = item.getData(true);
+                itemData = getDataInternal(item);
             }
 
             result[roleName] = itemData;

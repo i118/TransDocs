@@ -4,7 +4,7 @@ Ext.define('TransDocs.data.writer.AssociationJsonWriter', {
     getRecordData: function(record) {
         var me = this, i, association, childStore, childRecord, data = {};
         data = me.callParent([record]);
-        var associationData = record.getAssociatedData();
+        var associationData = record.getAssociatedData(this);
         Ext.apply(data , associationData);
         return data;
     }

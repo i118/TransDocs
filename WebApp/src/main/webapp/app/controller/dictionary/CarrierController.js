@@ -39,6 +39,7 @@ Ext.define("TransDocs.controller.dictionary.CarrierController",{
         }
         var viewModel = {
             session: config.session,
+            parent: null,
             data: {
                 contractor: config.record,
                 fileStore: config.record.getFileStore(),

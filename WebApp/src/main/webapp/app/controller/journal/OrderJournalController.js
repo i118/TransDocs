@@ -22,6 +22,7 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
         orderStore.add(document);
         var me = this;
         var viewModel = {
+            parent: null,
             session: session,
             data: {
                 document: document,
@@ -68,7 +69,7 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
                     if (document.getCarrier())document.getCarrier().persons().complete = true;
                     var viewModel = {
                         session: session,
-
+                        parent: null,
                         data: {
                             document: document,
                             customer: document.getCustomer(),
@@ -77,6 +78,7 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
                         stores:me.getStores(session, orderStore)
                     };
                     var wndConfig = {
+
                         viewModel: viewModel,
                         session: session,
                         width: 830,

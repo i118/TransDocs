@@ -3,7 +3,7 @@ Ext.define("TransDocs.model.dictionary.CarModel",{
 
     requires:[
         "TransDocs.model.dictionary.CarrierModel",
-        "TransDocs.model.Passport"
+        "TransDocs.model.PassportInterface"
     ],
 
     fields: [

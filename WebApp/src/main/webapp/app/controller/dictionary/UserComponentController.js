@@ -188,8 +188,7 @@ Ext.define('TransDocs.controller.dictionary.UserComponentController', {
         var session = userForm.lookupSession().spawn();
         Ext.create('TransDocs.view.component.dictionary.RoleComponent', {
             parent: window,
-            reference: "rolecomponent",
-            session:session
+            reference: "rolecomponent"
         }).show();
     },
 
