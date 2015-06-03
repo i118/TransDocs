@@ -6,43 +6,26 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
         "TransDocs.service.OrderDocumentService",
         "TransDocs.view.component.document.OrderDocumentComponent",
         "TransDocs.controller.document.OrderDocumentController",
-        "TransDocs.data.proxy.dictionary.CustomerTreeProxy",
-        "TransDocs.data.store.dictionary.CustomerStore",
-        "TransDocs.data.store.dictionary.UserStore",
-        "TransDocs.data.store.dictionary.CarrierStore",
-        "TransDocs.data.store.document.OrderDocumentStore",
-        "TransDocs.data.store.dictionary.SimpleDictionaryStore",
-        "TransDocs.data.store.dictionary.CompanyStore"
+        "TransDocs.viewmodel.document.OrderDocumentViewModel",
+        "Ext.data.identifier.Uuid"
     ],
 
     createNewDocument: function () {
         var session = new Ext.data.Session();
-        var document = TransDocs.service.OrderDocumentService.createOrder(session);
-        var orderStore = Ext.create("TransDocs.data.store.document.OrderDocumentStore", {session: session});
-        orderStore.add(document);
         var me = this;
         var viewModel = {
+            type: "orderdocument",
             parent: null,
             session: session,
-            links:{
-                document:{
+            links: {
+                document: {
                     type: "OrderDocument",
-                    create:{
+                    create: {
                         managerId: TransDocs.service.UserService.getCurrentUser().getId(),
                         companyId: TransDocs.service.CompanyService.getCurrentCompany().getId()
                     }
                 }
-            },
-
-            formulas: {
-                    customer: function (get) {
-                        return get("document").getCustomer();
-                    },
-                    carrier: function (get) {
-                      return  get("document").getCarrier();
-                    }
             }
-            stores:me.getStores(session, orderStore)
         };
         var wndConfig = {
             viewModel: viewModel,
@@ -54,7 +37,7 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
             scroll: 'auto',
             controller: 'orderDocumentController',
             callerComponent: me.getView(),
-            scope: document.getId(),
+            scope: Ext.data.identifier.Uuid.create().generate(),
             layout: 'fit',
             reference: 'orderWindow',
             title: "Новая заявка: Компонент в разработке",
@@ -71,36 +54,17 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
 
     openDocument: function (grid, record) {
         var session = new Ext.data.Session();
-        var orderStore = Ext.create("TransDocs.data.store.document.OrderDocumentStore", {session: session});
         var me = this;
         var viewModel = {
+            type: "orderdocument",
             session: session,
             parent: null,
             links: {
                 document: {
                     type: 'OrderDocument',
-                    id: record.get("objectId"),
-                    store: {
-                        type: 'orderDocumentStore',
-                        session: session
-                    }
-
+                    id: record.get("objectId")
                 }
-            },
-            data: {
-
-                customer: '{document.customer}',
-                carrier: '{document.carrier}'
-            },
-            formulas: {
-                customer: function (get) {
-                    return get("document").getCustomer();
-                },
-                carrier: function (get) {
-                    return get("document").getCarrier();
-                }
-            },
-            stores:me.getStores(session, orderStore)
+            }
         };
         var wndConfig = {
 
@@ -114,7 +78,7 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
             scope: record.get("objectId"),
             layout: 'fit',
             reference: 'orderWindow',
-            title: 'Заявка № '+record.get("outgoingNumber")+': Компонент в разработке',
+            title: 'Заявка № ' + record.get("outgoingNumber") + ': Компонент в разработке',
             items: [
                 {
                     xtype: 'orderDocumentComponent',
@@ -126,43 +90,10 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
         TransDocs.util.WindowManager.openWindow(wndConfig);
     },
 
-    getStores: function(session, orderStore){
-        return {
-            customerStore: {
-                session: session,
-                type: 'customerStore'
-            },
-            userStore: {
-                type: 'userStore',
-                session: session
-            },
-            carrierStore: {
-                type: 'carrierStore',
-                session: session
-            },
-            orderTitleStore: {
-                type: 'simpleDictionaryStore',
-                session: session
-            },
-            paymentDateStore: {
-                type: 'simpleDictionaryStore',
-                session: session
-            },
-            transportTypeStore: {
-                type: 'simpleDictionaryStore',
-                session: session
-            },
-            companyStore: {
-                type: 'companyStore',
-                session: session
-            },
-            orderStore: orderStore
-        };
-    },
-
     lookupJournalStore: function () {
         var journalViewModel = this.getView().lookupViewModel();
         var journalOrderStore = journalViewModel.getStore("orderStore");
         return journalOrderStore;
     }
+
 });

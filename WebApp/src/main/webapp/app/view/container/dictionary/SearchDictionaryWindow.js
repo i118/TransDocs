@@ -43,7 +43,8 @@ Ext.define("TransDocs.view.container.dictionary.SearchDictionaryWindow",{
                 selections = selected;
             }
         }
-        wnd.selectHandler.call(wnd.scope, wnd.caller, selections);
+        wnd.caller.fireEvent("select", wnd.caller, selections);
+       // wnd.selectHandler.call(wnd.scope, wnd.caller, selections);
         wnd.close();
     }
 });

@@ -8,57 +8,12 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         "TransDocs.service.DictionaryService"
     ],
 
-    selectCustomer: function (combo, record, oldValue, eOpts) {
-        var mainPanel = this.lookupReference("orderMainPanel");
-        var viewModel = mainPanel.lookupViewModel();
-        var document = viewModel.get("document");
-        if (record) {
-            var customer = record;
-            var customerStore = viewModel.getStore("customerStore");
-            customer.refresh(customerStore, function (records, operation, success) {
-                if (success) {
-                    document.setCustomer(records[0]);
-                    document.setCustomerPerson(null);
-                    viewModel.set("customer", document.getCustomer());
-                }
-            });
-        } else {
-            document.setCustomer(null);
-            document.setCustomerPerson(null);
-            viewModel.set("customer", null);
-        }
-    },
-
     changeCustomer: function(combo, newValue, oldValue, eOpts){
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
         if (!newValue) {
-            document.setCustomer(null);
-            document.setCustomerPerson(null);
             viewModel.set("customer", null);
-        }
-    },
-
-    selectCarrier: function (combo, record, oldValue, eOpts) {
-        var mainPanel = this.lookupReference("orderMainPanel");
-        var viewModel = mainPanel.lookupViewModel();
-        var document = viewModel.get("document");
-        if (record) {
-            var carrier = record;
-            var carrierStore = viewModel.getStore("carrierStore");
-            carrier.refresh(carrierStore, function (records, operation, success) {
-                if (success) {
-                    var carrier = records[0];
-                    document.setCarrier(carrier);
-                    document.setCarrierPerson(null);
-                    viewModel.set("carrier", document.getCarrier());
-                }
-            });
-        } else {
-            document.setCarrier(null);
-            document.setCarrierPerson(null);
-            viewModel.set("carrier", null);
         }
     },
 
@@ -67,8 +22,6 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
         if (!newValue) {
-            document.setCarrier(null);
-            document.setCarrierPerson(null);
             viewModel.set("carrier", null);
         }
     },
@@ -184,9 +137,8 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
             view.setLoading(false);
             return;
         }
-        var orderStore = viewModel.getStore("orderStore");
         var me = this;
-        orderStore.save({
+        document.save({
             success: function () {
                 me.reloadCallerComponent();
                 document.refresh(orderStore, function(records, operation, success){

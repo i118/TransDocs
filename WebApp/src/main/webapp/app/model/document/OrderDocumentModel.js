@@ -39,27 +39,5 @@ Ext.define("TransDocs.model.document.OrderDocumentModel", {
 
     getObjectType: function(){
         return"order_document";
-    },
-
-    setCustomer: function(customer){
-        this.callParent(arguments);
-        if(customer) {
-            this.set("customerPhone", this.getCustomer().get("phone"));
-            this.set("customerAddress", this.getCustomer().get("legalAddress"));
-            this.set("customerEmail", this.getCustomer().get("email"));
-        }else{
-            this.set("customerPhone", null);
-            this.set("customerAddress", null);
-            this.set("customerEmail", null);
-        }
-    },
-
-    setCarrier: function(carrier){
-        this.callParent(arguments);
-        if(carrier) {
-            this.set("carrierPhone", this.getCarrier().get("phone"));
-            this.set("carrierAddress", this.getCarrier().get("email"));
-            this.set("carrierEmail", this.getCarrier().get("legalAddress"));
-        }
     }
 });

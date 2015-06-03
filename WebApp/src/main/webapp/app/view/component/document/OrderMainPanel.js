@@ -275,11 +275,10 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         queryProperty: "description",
                         searchHandler: "findCustomer",
                         bind: {
-                            value: '{document.customer}',
+                            value: '{customer}',
                             store: '{customerStore}'
                         },
                         listeners: {
-                            select: 'selectCustomer',
                             change: 'changeCustomer'
                         }
                     }, {
@@ -332,8 +331,8 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                     autoLoadOnValue:true,
                     bind: {
                         value: '{document.customerPersonId}',
-                        store: '{customer.persons}',
-                        disabled: '{!customer}'
+                        store: '{customerPersons}',
+                        disabled: '{!isSelectedCustomer}'
                     },
                     listeners: {
                         select: 'selectCustomerPerson'
@@ -480,11 +479,10 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         queryProperty: "description",
                         searchHandler: 'findCarrier',
                         bind: {
-                            value: '{document.carrier}',
+                            value: '{carrier}',
                             store: '{carrierStore}'
                         },
                         listeners: {
-                            select: 'selectCarrier',
                             change: 'changeCarrier'
                         }
                     }, {
@@ -495,8 +493,8 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         valueField: 'objectId',
                         bind: {
                             value: '{document.carrierPersonId}',
-                            store: '{carrier.persons}',
-                            disabled: '{!carrier}'
+                            store: '{carrierPersons}',
+                            disabled: '{!isSelectedCarrier}'
                         },
                         listeners: {
                             select: 'selectCarrierPerson'
