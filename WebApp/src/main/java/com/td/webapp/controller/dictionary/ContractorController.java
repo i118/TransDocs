@@ -1,5 +1,7 @@
 package com.td.webapp.controller.dictionary;
 
+import com.td.model.entity.dictionary.dataset.DictionaryDataSet;
+import com.td.model.entity.dictionary.dataset.DictionaryDataSetImpl;
 import com.td.model.repository.dictionary.contractor.ContractorRepository;
 import com.td.model.entity.dictionary.company.Contractor;
 import com.td.model.entity.dictionary.company.IContractPerson;
@@ -11,7 +13,9 @@ import com.td.webapp.response.ResponseImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zerotul.specification.Specification;
 
+import javax.inject.Inject;
 import java.util.Map;
 import java.util.UUID;
 
@@ -19,6 +23,7 @@ import java.util.UUID;
  * Created by konstantinchipunov on 12.11.14.
  */
 public abstract class ContractorController<T extends JuridicalPerson & Contractor> extends AbstractDictionaryController<T> {
+
 
     public static class RequestName extends AbstractDictionaryController.RequestName{
         public static final String GET_PERSONS = "get.persons";
@@ -61,6 +66,8 @@ public abstract class ContractorController<T extends JuridicalPerson & Contracto
 
         return response;
     }
+
+
 
     public abstract ContractorCRUDService<T, ContractorRepository<T>> getContractorService();
 

@@ -3,7 +3,7 @@ Ext.define("TransDocs.data.store.dictionary.CustomerTreeStore", {
     alias: "store.customerTree",
     requires: [
         "TransDocs.data.proxy.dictionary.CustomerTreeProxy",
-        'TransDocs.model.dictionary.CustomerModel'
+        'TransDocs.model.tree.SimpleTreeModel'
     ],
 
     proxy: {
@@ -17,7 +17,7 @@ Ext.define("TransDocs.data.store.dictionary.CustomerTreeStore", {
 
     rootVisible:true,
 
-    model: 'TransDocs.model.dictionary.CustomerModel',
+    model: 'TransDocs.model.tree.SimpleTreeModel',
 
     sorters: [{
         property: 'description',

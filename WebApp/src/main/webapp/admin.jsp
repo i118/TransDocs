@@ -3,42 +3,18 @@
 <html>
 <head><title>TransDocs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <style type="text/css">
-    .field-margin {
-      margin-left: 10%;
-      margin-top: 10px;
-    }
-
-    .panel-margin {
-      margin-left: 40%;
-      margin-top: 50px;
-    }
-
-    .x-form-custom-trigger-wrap {
-      display: table;
-      width: 100%;
-      height: 22px;
-    }
-
-    .x-gecko .x-form-custom-trigger-wrap {
-      display: inline-flex;
-      vertical-align: top;
-    }
-
-    .hide-row {
-      display: none
-    }
-  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Type" content="application/json; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css"
+        href="${pageContext.request.contextPath}/extjs/ext-theme-classic/build/resources/ext-theme-classic-all.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/button-icon.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/tree.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/form.css"/>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/extjs/ext-all-debug.js"></script>
 
 </head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="application/json; charset=utf-8"/>
-<link rel="stylesheet" type="text/css"
-      href="${pageContext.request.contextPath}/extjs/ext-theme-classic/build/resources/ext-theme-classic-all.css"/>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/button-icon.css"/>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/tree.css"/>
-<script type="text/javascript" src="${pageContext.request.contextPath}/extjs/ext-all-debug.js"></script>
+
 
 
 <body>

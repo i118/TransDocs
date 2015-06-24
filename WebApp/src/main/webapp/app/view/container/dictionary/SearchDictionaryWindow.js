@@ -38,13 +38,15 @@ Ext.define("TransDocs.view.container.dictionary.SearchDictionaryWindow",{
         var selections;
         if(selected && wnd.caller) {
             if ( wnd.caller.multiSelect) {
-                selections = [selected];
+                selections = [selected]//[selected.isModel ? selected.getId() : selected];
             }else{
-                selections = selected;
+                selections = selected;// selected.isModel ? selected.getId() : selected;
             }
+            wnd.caller.getStore().add(selected);
         }
-        wnd.caller.fireEvent("select", wnd.caller, selections);
-       // wnd.selectHandler.call(wnd.scope, wnd.caller, selections);
+
+        wnd.caller.select( selections);
         wnd.close();
+
     }
 });

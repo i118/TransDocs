@@ -11,13 +11,12 @@ Ext.define("TransDocs.service.DictionaryService",{
         this.callParent(arguments);
     },
 
-    openSearchDictionary: function(dictionaryType, parenWnd, selectionHandler, session, scope, caller){
+    openSearchDictionary: function(dictionaryType, parenWnd,  session, scope, caller){
         var dictionary = TransDocs.service.DictionaryFactory.findByType(dictionaryType);
         if(!dictionary)return;
         var wndConf = TransDocs.service.DictionaryComponentFactory.getDictionaryComponent(dictionary);;
         wndConf.parent = parenWnd;
         wndConf.session = session;
-        wndConf.selectHandler = selectionHandler;
         wndConf.scope = scope;
         wndConf.caller = caller
         var wnd = Ext.create("TransDocs.view.container.dictionary.SearchDictionaryWindow", wndConf);

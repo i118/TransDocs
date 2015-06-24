@@ -23,29 +23,21 @@ Ext.define("TransDocs.controller.journal.AbstractJournalController", {
         var view = this.getView();
         var parentSession = view.lookupSession();
         var session = parentSession ? parentSession.spawn() : new Ext.data.Session();
-        TransDocs.service.DictionaryService.openSearchDictionary("user_dictionary", view, this.dictionaryFindCallback, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("user_dictionary", view,  session, this, combox);
     },
 
     findCustomer: function (combox, trigger, event) {
         var view = this.getView();
         var parentSession = view.lookupSession();
         var session = parentSession ? parentSession.spawn() : new Ext.data.Session();
-        TransDocs.service.DictionaryService.openSearchDictionary("customer_dictionary", view, this.dictionaryFindCallback, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("customer_dictionary", view,  session, this, combox);
     },
 
     findCarrier: function (combox, trigger, event) {
         var view = this.getView();
         var parentSession = view.lookupSession();
         var session = parentSession ? parentSession.spawn() : new Ext.data.Session();
-        TransDocs.service.DictionaryService.openSearchDictionary("carrier_dictionary", view, this.dictionaryFindCallback, session, this, combox);
-    },
-
-    dictionaryFindCallback: function(combo, value){
-        var store = combo.getStore();
-        if(value && value.length>0) {
-            store.add(value[0])
-            combo.select(value[0]);
-        }
+        TransDocs.service.DictionaryService.openSearchDictionary("carrier_dictionary", view, session, this, combox);
     },
 
     findDocuments: function () {

@@ -1,11 +1,13 @@
 package com.td.webapp.controller.dictionary;
 
+import com.td.model.entity.dictionary.dataset.DictionaryDataSet;
 import com.td.model.repository.dictionary.DictionaryJPARepository;
 import com.td.model.entity.dictionary.SimpleDictionary;
 import com.td.service.context.qualifier.DictionaryCrud;
 import com.td.service.crud.dictionary.DictionaryCRUDService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerotul.specification.Specification;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -19,6 +21,7 @@ import java.util.UUID;
 public class SimpleDictionaryController extends AbstractDictionaryController<SimpleDictionary> {
 
     public static final String CONTROLLER_NAME = "SimpleDictionary";
+
 
     @Inject
     @DictionaryCrud
@@ -48,6 +51,8 @@ public class SimpleDictionaryController extends AbstractDictionaryController<Sim
     public SimpleDictionary getDictionary(UUID persistentId, Map<String, String> arguments) {
         return dictionaryService.getModel(persistentId);
     }
+
+
 
     @Override
     public String getControllerName() {

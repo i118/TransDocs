@@ -26,23 +26,6 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         }
     },
 
-    selectManager: function (combo, record, oldValue, eOpts) {
-        var mainPanel = this.lookupReference("orderMainPanel");
-        var viewModel = mainPanel.lookupViewModel();
-        var document = viewModel.get("document");
-        if (record) {
-            var userStore = viewModel.getStore("userStore");
-            var user = record;
-            user.refresh(userStore,  function (records, operation, success) {
-                if (success && records.length > 0) {
-                    document.setManager(records[0]);
-                }
-            });
-        } else {
-            document.setManager(null);
-        }
-    },
-
     changeManager: function(combo, newValue, oldValue, eOpts){
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
@@ -56,46 +39,42 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("user_dictionary", orderWindow, this.selectManager, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("user_dictionary", orderWindow,  session, this, combox);
     },
 
     findCustomer: function (combox, trigger, event) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("customer_dictionary", orderWindow, this.selectCustomer, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("customer_dictionary", orderWindow,  session, this, combox);
     },
 
     findCarrier: function (combox, trigger, event) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("carrier_dictionary", orderWindow, this.selectCarrier, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("carrier_dictionary", orderWindow,  session, this, combox);
     },
 
     findOrderTitle: function(combox, trigger, event){
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("order_title", orderWindow, this.selectSimpleDictionary, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("order_title", orderWindow,  session, this, combox);
     },
 
     findPaymentDate: function(combox, trigger, event){
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("payment_date", orderWindow, this.selectSimpleDictionary, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("payment_date", orderWindow,  session, this, combox);
     },
 
     findTransportType: function(combox, trigger, event){
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("transport_type", orderWindow, this.selectSimpleDictionary, session, this, combox);
-    },
-
-    selectSimpleDictionary: function(combo, records, eOpts){
-        combo.select(records);
+        TransDocs.service.DictionaryService.openSearchDictionary("transport_type", orderWindow,  session, this, combox);
     },
 
     selectCustomerPerson: function (combo, record, eOpts) {

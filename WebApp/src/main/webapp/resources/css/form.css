@@ -1,0 +1,27 @@
+.field-margin {
+    margin-left: 10%;
+    margin-top: 10px;
+}
+
+.panel-margin {
+    margin-left: 40%;
+    margin-top: 50px;
+}
+
+.x-form-custom-trigger-wrap {
+    display: table;
+    width: 100%;
+    height: 22px;
+}
+
+.x-gecko .x-form-custom-trigger-wrap {
+    display: inline-flex;
+    vertical-align: top;
+}
+
+.hide-row {
+    display: none
+}
+.x-form-text {
+    display: inline;
+}

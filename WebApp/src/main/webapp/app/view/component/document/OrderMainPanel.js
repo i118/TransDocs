@@ -105,19 +105,25 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                             autoWidth: true
                         },
                         items: [
+                            //{
+                            //    xtype: 'combobox',
+                            //    fieldLabel: 'Владелец сделки',
+                            //    queryMode: 'remote',
+                            //    displayField: 'description',
+                            //    valueField: 'objectId',
+                            //    editable: false,
+                            //    hideTrigger: true,
+                            //    autoWidth: true,
+                            //    bind: {
+                            //        value: '{document.company}',
+                            //        store: '{companyStore}'
+                            //    }
+                            //}
                             {
-                                xtype: 'combobox',
+                                xtype: "textfield",
                                 fieldLabel: 'Владелец сделки',
-                                queryMode: 'local',
-                                displayField: 'description',
-                                valueField: 'objectId',
                                 editable: false,
-                                hideTrigger: true,
-                                autoWidth: true,
-                                bind: {
-                                    value: '{document.company}',
-                                    store: '{companyStore}'
-                                }
+                                bind: '{document.company.description}'
                             }
                         ]
                     }
@@ -230,7 +236,6 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                                 queryProperty: "description",
                                 searchHandler: 'findManager',
                                 listeners: {
-                                    select: 'selectManager',
                                     change: 'changeManager'
                                 }
                             }

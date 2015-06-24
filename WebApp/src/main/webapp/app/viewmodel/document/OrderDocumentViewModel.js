@@ -118,20 +118,16 @@ Ext.define('TransDocs.viewmodel.document.OrderDocumentViewModel', {
             type: 'carrierStore'
         },
         orderTitleStore: {
-            type: 'simpleDictionaryStore',
-            session: true
+            type: 'simpleDictionaryStore'
         },
         paymentDateStore: {
-            type: 'simpleDictionaryStore',
-            session: true
+            type: 'simpleDictionaryStore'
         },
         transportTypeStore: {
-            type: 'simpleDictionaryStore',
-            session: true
+            type: 'simpleDictionaryStore'
         },
         companyStore: {
-            type: 'companyStore',
-            session: true
+            type: 'companyStore'
         }
     }
 });
