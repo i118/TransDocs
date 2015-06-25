@@ -146,7 +146,7 @@ Ext.define("TransDocs.model.AbstractModel",{
             if(writer){
                 dataInternal = writer.getRecordData(record);
                 if(writer.getExpandData()){
-                    dataInternal = writer.getExpandedData([data])[0]
+                    dataInternal = writer.getExpandedData([dataInternal])[0]
                 }
             }else{
                 dataInternal = record.getData(true);

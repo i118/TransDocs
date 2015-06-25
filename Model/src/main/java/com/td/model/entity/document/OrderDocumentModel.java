@@ -108,7 +108,7 @@ public class OrderDocumentModel extends AbstractDocumentModel {
         public static final String PAYMENT_DATE= "payment_date";
     }
 
-    @Column(name = Columns.INCOMING_NUMBER)
+    @Column(name = Columns.INCOMING_NUMBER, updatable = false)
     @Convert(converter = DocumentNumberConverter.class)
     public DocumentNumber getIncomingNumber() {
         return incomingNumber;
@@ -118,7 +118,7 @@ public class OrderDocumentModel extends AbstractDocumentModel {
         this.incomingNumber = incomingNumber;
     }
 
-    @Column(name = Columns.OUTGOING_NUMBER)
+    @Column(name = Columns.OUTGOING_NUMBER, updatable = false)
     @Convert(converter = DocumentNumberConverter.class)
     public DocumentNumber getOutgoingNumber() {
         return outgoingNumber;
