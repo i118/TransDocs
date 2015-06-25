@@ -5,10 +5,10 @@ Ext.define('TransDocs.data.store.dictionary.UserTreeStore', {
 
     requires: [
         "TransDocs.data.proxy.dictionary.UserTreeProxy",
-        "TransDocs.model.dictionary.UserModel"
+        "TransDocs.model.tree.SimpleTreeModel"
     ],
 
-    model: "TransDocs.model.dictionary.UserModel",
+    model: "TransDocs.model.tree.SimpleTreeModel",
     rootVisible:true,
     proxy: {
         type: "userTreeProxy"

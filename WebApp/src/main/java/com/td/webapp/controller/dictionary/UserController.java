@@ -2,6 +2,8 @@ package com.td.webapp.controller.dictionary;
 
 import com.td.model.context.qualifier.UserQualifier;
 import com.td.model.entity.dictionary.company.CompanyModel;
+import com.td.model.entity.dictionary.dataset.DictionaryDataSet;
+import com.td.model.entity.dictionary.dataset.UserDataSet;
 import com.td.model.entity.dictionary.role.IRoleModel;
 import com.td.model.entity.dictionary.user.IUserModel;
 import com.td.model.entity.dictionary.user.UserModel;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zerotul.specification.Specification;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -30,9 +33,10 @@ import java.util.UUID;
 @RequestMapping("/" + UserController.CONTROLLER_NAME)
 public class UserController extends AbstractDictionaryController<UserModel> {
 
-    public static final String CONTROLLER_NAME = "UserController";
+    public static final String CONTROLLER_NAME = "User";
 
     private UserCRUDService userService;
+
 
     private CompanyService companyService;
 

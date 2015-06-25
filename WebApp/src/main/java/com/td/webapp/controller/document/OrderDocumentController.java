@@ -19,7 +19,7 @@ import java.util.UUID;
 @RequestMapping("/"+OrderDocumentController.CONTROLLER_NAME)
 public class OrderDocumentController extends AbstractDocumentController<OrderDocumentModel> {
 
-    public static final String CONTROLLER_NAME = "OrderDocumentController";
+    public static final String CONTROLLER_NAME = "OrderDocument";
 
     private DocumentService<OrderDocumentModel> documentService;
 

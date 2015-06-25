@@ -1,5 +1,5 @@
 Ext.define("TransDocs.model.file.AbstractFileModel",{
-    extend: "TransDocs.model.AbstractModel",
+    extend: "TransDocs.model.tree.TreeBase",
     fields:[
         {name: 'extension', type:'string'},
         {name: 'fileType', type:'string'},

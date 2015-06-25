@@ -5,7 +5,6 @@ Ext.define("TransDocs.service.CustomerService", {
         "TransDocs.model.file.CustomerFileModel"
     ],
     constructor: function(){
-        Ext.data.NodeInterface.decorate("TransDocs.model.file.CustomerFileModel");
         this.callParent(arguments);
     },
 
@@ -15,8 +14,6 @@ Ext.define("TransDocs.service.CustomerService", {
         newFileStore.set("fileType", "STORE");
         newCustomer.setFileStore(newFileStore);
         newCustomer.persons().blockLoadCounter=1;
-        var accountDetails = session.createRecord('TransDocs.model.dictionary.AccountDetails');
-        newCustomer.setAccountDetails(accountDetails);
         return newCustomer;
     }
 });

@@ -21,6 +21,9 @@ Ext.define("TransDocs.service.SpecificationService", {
         var buildRestriction= function(restrictionName, viewModel){
             var operator = viewModel.get("restrictions."+restrictionName+".operator");
             var value = viewModel.get("restrictions."+restrictionName+".value");
+            if(value && value.isModel){
+                value = value.getId();
+            }
             if(operator==="LIKE"){
                 value = "%"+value+"%";
             }

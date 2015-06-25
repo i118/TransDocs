@@ -3,21 +3,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head><title>TransDocs</title>
-    <style type="text/css">
-        .field-margin {
-            margin-left: 10%;
-            margin-top: 10px;
-        }
-
-        .panel-margin {
-            margin-left: 40%;
-            margin-top: 50px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/extjs/ext-theme-classic/build/resources/ext-theme-classic-all.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/form.css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/extjs/ext-all-debug.js"></script>
 </head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/extjs/ext-theme-classic/build/resources/ext-theme-classic-all.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/extjs/ext-all-debug.js"></script>
+
 
 <body>
 <spring:url var="authUrl" value="/static/j_spring_security_check"/>

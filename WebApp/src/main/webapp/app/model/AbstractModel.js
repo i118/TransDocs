@@ -2,7 +2,9 @@ Ext.define("TransDocs.model.AbstractModel",{
     extend: 'Ext.data.Model',
     idProperty: 'objectId',
     requires: [
-        'Ext.data.identifier.Uuid'
+        'Ext.data.identifier.Uuid',
+        "TransDocs.data.reader.DefaultJsonReader",
+        "TransDocs.data.writer.AssociationJsonWriter"
     ],
     identifier: 'uuid',
     fields: [
@@ -18,6 +20,50 @@ Ext.define("TransDocs.model.AbstractModel",{
 
     actionMapEnabled: false,
     actionMap: undefined,
+
+    schema: {
+        proxy: {
+            type: 'rest',
+            timeout: 180000,
+            appendId: true,
+            idParam: "objectId",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            paramsAsJson: true,
+            actionMethods: {
+                create: 'POST',
+                read: 'POST',
+                update: 'PUT',
+                destroy: 'DELETE'
+            },
+            api:{
+                create: '{entityName}/create.object',
+                update: '{entityName}/update.object',
+                destroy: '{entityName}/delete.object',
+                read: '{entityName}/get.object'
+            },
+            listeners: {
+                exception: function (proxy, response, operation) {
+                    Ext.MessageBox.show({
+                        title: 'Error!',
+                        msg: operation.getError() ? operation.getError() : "Ошибка связи с сервером",
+                        icon: Ext.MessageBox.ERROR,
+                        buttons: Ext.Msg.OK,
+                        resizable: true,
+                        overflowY: 'auto',
+                        overflowX: 'auto'
+                    });
+                }
+            },
+            reader: {
+                type: "defaultjson"
+            },
+            writer: {
+                type: "associationJsonWriter"
+            }
+        }
+    },
 
     getObjectType: function(){
         throw "unimplemented method, class = "+Ext.getClass(this).getName();
@@ -90,11 +136,23 @@ Ext.define("TransDocs.model.AbstractModel",{
 
     createActionMap: function(){},
 
-    getAssociatedData: function (result) {
+    getAssociatedData: function (result, options,writer) {
         var me = this,
             associations = me.associations,
             deep, i, item, items, itemData, length, record, role, roleName;
 
+        var getDataInternal = function(record){
+            var dataInternal;
+            if(writer){
+                dataInternal = writer.getRecordData(record);
+                if(writer.getExpandData()){
+                    dataInternal = writer.getExpandedData([dataInternal])[0]
+                }
+            }else{
+                dataInternal = record.getData(true);
+            }
+            return dataInternal;
+        }
         result = result || {};
 
         me.$gathering = 1;
@@ -122,13 +180,14 @@ Ext.define("TransDocs.model.AbstractModel",{
                     record = items[i];
                     deep = !record.$gathering;
                     record.$gathering = 1;
-                    itemData.push(record.getData(true));
+                    var data = getDataInternal(record);
+                    itemData.push(data);
                     delete record.$gathering;
                 }
 
                 delete item.$gathering;
             } else {
-                itemData = item.getData(true);
+                itemData = getDataInternal(item);
             }
 
             result[roleName] = itemData;

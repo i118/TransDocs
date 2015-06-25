@@ -56,7 +56,7 @@ public class UserComponentTest extends AbstractControllerTest {
 
     @Test
     public void testCreateUser() throws Exception {
-       mockMvc.perform(post("/UserController/create.object?password=1")
+       mockMvc.perform(post("/"+UserController.CONTROLLER_NAME+"/create.object?password=1")
                .content(getUserJson())
                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
        .andExpect(status().isOk())
@@ -70,7 +70,7 @@ public class UserComponentTest extends AbstractControllerTest {
 
     @Test
     public void testUpdateUser() throws Exception {
-       mockMvc.perform(put("/UserController/update.object/{persistentId}", "20b1129a-7728-4d4e-a2d8-8ace92f98362")
+       mockMvc.perform(put("/"+UserController.CONTROLLER_NAME+"/update.object/{persistentId}", "20b1129a-7728-4d4e-a2d8-8ace92f98362")
                .content(getUserJson())
                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
        .andExpect(status().isOk())

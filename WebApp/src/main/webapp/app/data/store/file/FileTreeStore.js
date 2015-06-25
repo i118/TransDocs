@@ -36,6 +36,11 @@ Ext.define('TransDocs.data.store.file.FileTreeStore', {
                 var node = store.getById(id);
                 if (node) {
                     operation.getParams().containerType = node.get("objectType");
+                }else{
+                    var root = store.getRoot();
+                    if(root){
+                        operation.getParams().containerType = root.get("objectType");
+                    }
                 }
             }
         }

@@ -34,3 +34,180 @@
 2015-05-18 13:31:38,396 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 62542
 2015-05-18 13:31:38,412 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 62542
 2015-05-18 13:31:38,448 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 62542 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-26 11:01:10,636 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 60716
+2015-05-26 11:01:10,679 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 60716
+2015-05-26 11:01:10,727 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 60716 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-26 11:11:13,616 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 61188
+2015-05-26 11:11:13,634 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 61188
+2015-05-26 11:11:13,674 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 61188 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-26 15:31:59,072 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 54548
+2015-05-26 15:31:59,087 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 54548
+2015-05-26 15:31:59,092 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 54548 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-26 16:08:14,057 [pool-1-thread-6] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 56146
+2015-05-26 16:08:14,091 [pool-1-thread-6] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 56146
+2015-05-26 16:08:14,095 [pool-1-thread-6] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 56146 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-26 16:34:03,203 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 57254
+2015-05-26 16:34:03,258 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 57254
+2015-05-26 16:34:03,283 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 57254 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-26 18:56:47,951 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 62532
+2015-05-26 18:56:48,191 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 62532
+2015-05-26 18:56:50,961 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 62532 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-26 22:17:55,175 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 49523
+2015-05-26 22:17:55,213 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 49523
+2015-05-26 22:17:55,217 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 49523 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-27 12:02:03,156 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 62624
+2015-05-27 12:02:03,169 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 62624
+2015-05-27 12:02:03,204 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 62624 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-27 12:10:25,017 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 65008
+2015-05-27 12:10:25,054 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 65008
+2015-05-27 12:10:25,108 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 65008 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-27 13:43:34,738 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 54510
+2015-05-27 13:43:34,851 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 54510
+2015-05-27 13:43:34,904 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 54510 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-27 14:39:07,167 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 51472
+2015-05-27 14:39:07,205 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 51472
+2015-05-27 14:39:07,234 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 51472 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-28 10:07:25,648 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 52009
+2015-05-28 10:07:25,704 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 52009
+2015-05-28 10:07:25,784 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 52009 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-28 13:54:19,130 [pool-1-thread-6] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 63164
+2015-05-28 13:54:19,151 [pool-1-thread-6] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 63164
+2015-05-28 13:54:19,190 [pool-1-thread-6] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 63164 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-28 14:18:28,115 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 53308
+2015-05-28 14:18:28,133 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 53308
+2015-05-28 14:18:28,161 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 53308 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-28 14:22:48,881 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 54493
+2015-05-28 14:22:48,902 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 54493
+2015-05-28 14:22:48,931 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 54493 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-28 14:26:26,047 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 55507
+2015-05-28 14:26:26,074 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 55507
+2015-05-28 14:26:26,095 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 55507 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-29 10:00:33,220 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 51623
+2015-05-29 10:00:33,243 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 51623
+2015-05-29 10:00:33,277 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 51623 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-05-29 10:04:28,248 [pool-1-thread-6] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 52706
+2015-05-29 10:04:28,264 [pool-1-thread-6] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 52706
+2015-05-29 10:04:28,304 [pool-1-thread-6] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 52706 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-03 11:48:40,622 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 61865
+2015-06-03 11:48:40,638 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 61865
+2015-06-03 11:48:40,643 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 61865 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-03 14:01:37,439 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 61628
+2015-06-03 14:01:37,483 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 61628
+2015-06-03 14:01:37,487 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 61628 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-03 16:10:40,281 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 60766
+2015-06-03 16:10:40,315 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 60766
+2015-06-03 16:10:40,344 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 60766 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-03 16:27:59,698 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 65150
+2015-06-03 16:27:59,732 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 65150
+2015-06-03 16:27:59,818 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 65150 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-03 18:35:44,620 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 64696
+2015-06-03 18:35:44,658 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 64696
+2015-06-03 18:35:44,663 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 64696 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 10:34:11,307 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 58754
+2015-06-05 10:34:11,321 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 58754
+2015-06-05 10:34:11,365 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 58754 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 10:45:08,819 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 61468
+2015-06-05 10:45:08,839 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 61468
+2015-06-05 10:45:08,873 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 61468 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 11:22:37,863 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 54437
+2015-06-05 11:22:37,900 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 54437
+2015-06-05 11:22:37,906 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 54437 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 13:36:30,509 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 56105
+2015-06-05 13:36:30,527 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 56105
+2015-06-05 13:36:30,570 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 56105 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 13:40:03,751 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 57025
+2015-06-05 13:40:03,801 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 57025
+2015-06-05 13:40:03,807 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 57025 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 13:47:36,123 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 59046
+2015-06-05 13:47:36,163 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 59046
+2015-06-05 13:47:36,171 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 59046 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 14:02:50,222 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 63121
+2015-06-05 14:02:50,244 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 63121
+2015-06-05 14:02:50,266 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 63121 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 14:09:53,010 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 65070
+2015-06-05 14:09:53,034 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 65070
+2015-06-05 14:09:53,040 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 65070 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 14:19:00,725 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 51133
+2015-06-05 14:19:00,752 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 51133
+2015-06-05 14:19:00,757 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 51133 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 17:06:23,998 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 62329
+2015-06-05 17:06:24,015 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 62329
+2015-06-05 17:06:24,021 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 62329 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 17:08:31,255 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 62944
+2015-06-05 17:08:31,260 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 62944
+2015-06-05 17:08:31,289 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 62944 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-05 18:02:00,537 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 60579
+2015-06-05 18:02:00,561 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 60579
+2015-06-05 18:02:00,583 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 60579 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-08 10:10:37,070 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 53666
+2015-06-08 10:10:37,120 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 53666
+2015-06-08 10:10:37,211 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 53666 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-08 10:43:22,792 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 61983
+2015-06-08 10:43:22,820 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 61983
+2015-06-08 10:43:22,825 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 61983 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-11 14:51:28,440 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 49714
+2015-06-11 14:51:28,458 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 49714
+2015-06-11 14:51:28,463 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 49714 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-11 15:14:19,346 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 55583
+2015-06-11 15:14:19,375 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 55583
+2015-06-11 15:14:19,423 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 55583 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-11 15:18:37,492 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 56669
+2015-06-11 15:18:37,510 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 56669
+2015-06-11 15:18:37,536 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 56669 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-11 15:21:08,183 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 57349
+2015-06-11 15:21:08,210 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 57349
+2015-06-11 15:21:08,239 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 57349 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-11 15:23:40,569 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 57997
+2015-06-11 15:23:40,576 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 57997
+2015-06-11 15:23:40,619 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 57997 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-11 16:48:01,882 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 62808
+2015-06-11 16:48:01,939 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 62808
+2015-06-11 16:48:01,945 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 62808 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-11 16:54:52,001 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 64669
+2015-06-11 16:54:52,025 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 64669
+2015-06-11 16:54:52,071 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 64669 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-15 15:34:01,108 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 56898
+2015-06-15 15:34:01,203 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 56898
+2015-06-15 15:34:01,286 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 56898 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-24 13:25:23,920 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 58671
+2015-06-24 13:25:23,931 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 58671
+2015-06-24 13:25:23,954 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 58671 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-24 14:32:14,302 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 60735
+2015-06-24 14:32:14,319 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 60735
+2015-06-24 14:32:14,352 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 60735 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-24 15:58:43,211 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 63593
+2015-06-24 15:58:43,256 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 63593
+2015-06-24 15:58:43,286 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 63593 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-24 16:28:37,023 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 64736
+2015-06-24 16:28:37,049 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 64736
+2015-06-24 16:28:37,071 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 64736 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-24 18:26:41,699 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 52033
+2015-06-24 18:26:41,744 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 52033
+2015-06-24 18:26:41,751 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 52033 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-24 18:48:07,475 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 52746
+2015-06-24 18:48:07,508 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 52746
+2015-06-24 18:48:07,513 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 52746 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-24 22:04:23,738 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 53089
+2015-06-24 22:04:23,766 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 53089
+2015-06-24 22:04:23,775 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 53089 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-24 22:17:41,793 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 54093
+2015-06-24 22:17:41,836 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 54093
+2015-06-24 22:17:41,841 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 54093 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-25 11:22:59,584 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 59473
+2015-06-25 11:22:59,609 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 59473
+2015-06-25 11:22:59,636 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 59473 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-25 11:45:28,344 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 60338
+2015-06-25 11:45:28,402 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 60338
+2015-06-25 11:45:28,422 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 60338 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-25 11:59:13,872 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 60966
+2015-06-25 11:59:13,893 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 60966
+2015-06-25 11:59:13,898 [pool-1-thread-1] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 60966 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-25 14:03:32,571 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 63989
+2015-06-25 14:03:32,625 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 63989
+2015-06-25 14:03:32,629 [pool-1-thread-2] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 63989 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-25 15:03:27,502 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 49601
+2015-06-25 15:03:27,536 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 49601
+2015-06-25 15:03:27,544 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 49601 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+2015-06-25 15:25:12,385 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 50389
+2015-06-25 15:25:12,409 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 50389
+2015-06-25 15:25:12,413 [pool-1-thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 50389 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService

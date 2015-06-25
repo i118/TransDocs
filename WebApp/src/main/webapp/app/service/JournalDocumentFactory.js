@@ -30,8 +30,6 @@ Ext.define("TransDocs.service.JournalDocumentFactory",{
     },
 
     orderJournalComponent: function(record, customConfig){
-        var currentUser = TransDocs.service.UserService.getCurrentUser();
-
         var wndConf = {title: record.get("description"),
             width: 620, height: 500, controller: "orderJournalController",maximized:true,
             viewModel: {

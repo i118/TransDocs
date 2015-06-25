@@ -105,19 +105,25 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                             autoWidth: true
                         },
                         items: [
+                            //{
+                            //    xtype: 'combobox',
+                            //    fieldLabel: 'Владелец сделки',
+                            //    queryMode: 'remote',
+                            //    displayField: 'description',
+                            //    valueField: 'objectId',
+                            //    editable: false,
+                            //    hideTrigger: true,
+                            //    autoWidth: true,
+                            //    bind: {
+                            //        value: '{document.company}',
+                            //        store: '{companyStore}'
+                            //    }
+                            //}
                             {
-                                xtype: 'combobox',
+                                xtype: "textfield",
                                 fieldLabel: 'Владелец сделки',
-                                queryMode: 'local',
-                                displayField: 'description',
-                                valueField: 'objectId',
                                 editable: false,
-                                hideTrigger: true,
-                                autoWidth: true,
-                                bind: {
-                                    value: '{document.company}',
-                                    store: '{companyStore}'
-                                }
+                                bind: '{document.company.description}'
                             }
                         ]
                     }
@@ -230,7 +236,6 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                                 queryProperty: "description",
                                 searchHandler: 'findManager',
                                 listeners: {
-                                    select: 'selectManager',
                                     change: 'changeManager'
                                 }
                             }
@@ -275,11 +280,10 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         queryProperty: "description",
                         searchHandler: "findCustomer",
                         bind: {
-                            value: '{document.customer}',
+                            value: '{customer}',
                             store: '{customerStore}'
                         },
                         listeners: {
-                            select: 'selectCustomer',
                             change: 'changeCustomer'
                         }
                     }, {
@@ -331,9 +335,9 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                     valueField: 'objectId',
                     autoLoadOnValue:true,
                     bind: {
-                        value: '{document.customerPerson}',
-                        store: '{customer.persons}',
-                        disabled: '{!customer}'
+                        value: '{document.customerPersonId}',
+                        store: '{customerPersons}',
+                        disabled: '{!isSelectedCustomer}'
                     },
                     listeners: {
                         select: 'selectCustomerPerson'
@@ -480,11 +484,10 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         queryProperty: "description",
                         searchHandler: 'findCarrier',
                         bind: {
-                            value: '{document.carrier}',
+                            value: '{carrier}',
                             store: '{carrierStore}'
                         },
                         listeners: {
-                            select: 'selectCarrier',
                             change: 'changeCarrier'
                         }
                     }, {
@@ -494,9 +497,9 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         displayField: 'description',
                         valueField: 'objectId',
                         bind: {
-                            value: '{document.carrierPerson}',
-                            store: '{carrier.persons}',
-                            disabled: '{!carrier}'
+                            value: '{document.carrierPersonId}',
+                            store: '{carrierPersons}',
+                            disabled: '{!isSelectedCarrier}'
                         },
                         listeners: {
                             select: 'selectCarrierPerson'

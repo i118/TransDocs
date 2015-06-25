@@ -1,5 +1,6 @@
 package com.td.model.entity.usertype;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.td.model.entity.usertype.converter.DocumentNumberConverter;
@@ -19,6 +20,7 @@ public class DocumentNumber implements Serializable {
     private String number;
 
     @JsonSerialize
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate numberDate;
 
     public String getNumber() {

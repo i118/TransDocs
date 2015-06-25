@@ -53,11 +53,7 @@ Ext.define("TransDocs.view.component.dictionary.UserInfoComponent", {
                         boxLabel: 'Удаленные пользователи',
                         labelAlign: 'right',
                         action: 'ShowDeletedUsers',
-                        handler: "showDeletedDictionary",
-                        initComponent: function () {
-                            this.hidden = !TransDocs.service.PermitActionService.isPermitAction(this.action);
-                            this.callParent(arguments);
-                        }
+                        handler: "showDeletedDictionary"
                     }
                 ]
             }

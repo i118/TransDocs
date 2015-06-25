@@ -18,10 +18,6 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
         close: 'closeDriverForm'
     },
 
-    defaults: {
-        cls: 'field-margin'
-    },
-
     bbar: [
         '->', {
             xtype: 'button',
@@ -113,7 +109,7 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
                     xtype: 'textfield',
                     fieldLabel: 'Серия паспорта',
                     bind: {
-                        value: '{record.passport.serial}',
+                        value: '{record.serial}',
                         editable: '{isEditMode}'
                     },
                     labelAlign: 'left',
@@ -123,7 +119,7 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
                     xtype: 'textfield',
                     fieldLabel: 'Номер паспорта',
                     bind: {
-                        value: '{record.passport.number}',
+                        value: '{record.number}',
                         editable: '{isEditMode}'
                     },
                     labelAlign: 'left',
@@ -133,7 +129,7 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
                     xtype: 'textfield',
                     fieldLabel: 'Кем выдан',
                     bind: {
-                        value: '{record.passport.issuedPassport}',
+                        value: '{record.issuedPassport}',
                         editable: '{isEditMode}'
                     },
                     labelAlign: 'left',
@@ -144,7 +140,7 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
                     xtype: 'textfield',
                     fieldLabel: 'Адрес регистрации',
                     bind: {
-                        value: '{record.passport.registrationAddress}',
+                        value: '{record.registrationAddress}',
                         editable: '{isEditMode}'
                     },
                     labelAlign: 'left',
@@ -183,7 +179,7 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
                     xtype: 'combobox',
                     name: 'car',
                     bind: {
-                        value: '{record.car}',
+                        value: '{record.defaultCarId}',
                         store: '{contractor.cars}',
                         editable: '{isEditMode}',
                         hideTrigger: '{!isEditMode}'

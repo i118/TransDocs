@@ -13,7 +13,7 @@ Ext.define("TransDocs.controller.dictionary.CarrierController",{
         var fileStore = config.record.getFileStore();
         fileStore.set("root", true);
         fileStore.set("expanded", false);
-        fileStore.set("loaded", false);
+        fileStore.set("loaded", fileStore.isNew());
         var fileTreeStore = Ext.create("TransDocs.data.store.file.FileTreeStore",{
             model: Ext.getClass(fileStore).getName()
         });
@@ -39,6 +39,7 @@ Ext.define("TransDocs.controller.dictionary.CarrierController",{
         }
         var viewModel = {
             session: config.session,
+            parent: null,
             data: {
                 contractor: config.record,
                 fileStore: config.record.getFileStore(),
