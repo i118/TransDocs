@@ -36,8 +36,17 @@ Ext.define("TransDocs.view.container.dictionary.SearchDictionaryWindow",{
         if(typeof(controller.getSelected) != "function")throw "unimplemented method \"getSelected\" in controller " + Ext.getClass(controller).getName();;
         var selected = controller.getSelected()
         var selections;
-        if(selected)selections = [selected]
-        wnd.selectHandler.call(wnd.scope, wnd.caller, selections);
+        if(selected && wnd.caller) {
+            if ( wnd.caller.multiSelect) {
+                selections = [selected]//[selected.isModel ? selected.getId() : selected];
+            }else{
+                selections = selected;// selected.isModel ? selected.getId() : selected;
+            }
+            wnd.caller.getStore().add(selected);
+        }
+
+        wnd.caller.select( selections);
         wnd.close();
+
     }
 });

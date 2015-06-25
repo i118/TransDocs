@@ -26,7 +26,7 @@ import java.util.UUID;
 @RequestMapping("/"+CarrierController.CONTROLLER_NAME)
 public class CarrierController extends ContractorController<CarrierModel> {
 
-    public static final String CONTROLLER_NAME = "CarrierController";
+    public static final String CONTROLLER_NAME = "Carrier";
 
     private ContractorCRUDService<CarrierModel, ContractorRepository<CarrierModel>> contractorService;
 

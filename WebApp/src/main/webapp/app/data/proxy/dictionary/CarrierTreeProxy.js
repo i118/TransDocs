@@ -3,6 +3,6 @@ Ext.define("TransDocs.data.proxy.dictionary.CarrierTreeProxy",{
     alias: "proxy.carrierTree",
 
     config:{
-        controllerName: 'CarrierController'
+        controllerName: 'Carrier'
     }
 });

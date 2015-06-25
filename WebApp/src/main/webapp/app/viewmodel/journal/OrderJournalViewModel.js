@@ -13,7 +13,7 @@ Ext.define("TransDocs.viewmodel.journal.OrderJournalViewModel", {
     constructor: function () {
         this.callParent(arguments);
         this.getStore("userStore").add(TransDocs.service.UserService.getCurrentUser());
-        this.set("restrictions.manager.value", TransDocs.service.UserService.getCurrentUser());
+        this.set("restrictions.manager.value", TransDocs.service.UserService.getCurrentUser().getId());
     },
 
     data: {

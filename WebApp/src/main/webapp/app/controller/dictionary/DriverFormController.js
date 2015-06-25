@@ -32,10 +32,10 @@ Ext.define("TransDocs.controller.dictionary.DriverFormController", {
         view.close();
     },
 
-    selectCar: function(combo, records, eOpts){
+    selectCar: function(combo, car, eOpts){
         var driverForm = this.lookupReference("driverForm");
         var driver = driverForm.lookupViewModel().get("record");
-        records[0].drivers().add(driver);
-        driver.setCar(records[0]);
+        car.drivers().add(driver);
+        driver.setCar(car);
     }
 });

@@ -22,6 +22,7 @@ import javax.persistence.Transient;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by konstantinchipunov on 13.08.14.
@@ -82,6 +83,11 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
 
     public void setFileStore(IAttachment<ICustomerModel> fileStore) {
         this.fileStore = fileStore;
+    }
+
+    @Transient
+    public UUID getFileStoreId(){
+        return this.fileStore!=null ? fileStore.getObjectId() : null;
     }
 
 

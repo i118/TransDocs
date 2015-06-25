@@ -1,9 +1,10 @@
 Ext.define("TransDocs.model.dictionary.DriverModel", {
     extend: 'TransDocs.model.AbstractModel',
 
+    entityName: "Driver",
     requires: [
         "TransDocs.model.dictionary.CarrierModel",
-        "TransDocs.model.Passport",
+        "TransDocs.model.PassportInterface",
         "TransDocs.model.dictionary.CarModel"
     ],
 
@@ -15,19 +16,18 @@ Ext.define("TransDocs.model.dictionary.DriverModel", {
         {name: 'phone', type: 'string'},
         {name: 'registrationAddress', type: 'string'},
         {name: 'drivingLicense', type: 'string'},
-        {name: 'passport', reference: 'TransDocs.model.Passport', unique: true},
         {
             name: 'defaultCarId', reference: {
-            type: 'TransDocs.model.dictionary.CarModel',
-            association: 'DriverModelByCarModel',
+            type: 'Car',
+            association: 'DriverByCar',
             role: 'car',
             inverse: 'drivers'
         }
         },
         {
             name: 'carrierId', reference: {
-            type: 'TransDocs.model.dictionary.CarrierModel',
-            association: 'DriverByContractorModel',
+            type: 'Carrier',
+            association: 'DriverByContractor',
             role: 'carrier',
             inverse: 'drivers'
         }
@@ -37,7 +37,10 @@ Ext.define("TransDocs.model.dictionary.DriverModel", {
     proxy: {
         type: 'rest',
         api: {
-            read: 'CarrierController/get.drivers'
+            read: 'Carrier/get.drivers'
+        },
+        actionMethods: {
+            read: 'get'
         },
         reader: {type: 'defaultjson'},
         listeners: {

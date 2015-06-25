@@ -8,57 +8,12 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         "TransDocs.service.DictionaryService"
     ],
 
-    selectCustomer: function (combo, records, oldValue, eOpts) {
-        var mainPanel = this.lookupReference("orderMainPanel");
-        var viewModel = mainPanel.lookupViewModel();
-        var document = viewModel.get("document");
-        if (records && records.length==1) {
-            var customer = records[0];
-            var customerStore = viewModel.getStore("customerStore");
-            customer.refresh(customerStore, function (records, operation, success) {
-                if (success) {
-                    document.setCustomer(records[0]);
-                    document.setCustomerPerson(null);
-                    viewModel.set("customer", document.getCustomer());
-                }
-            });
-        } else {
-            document.setCustomer(null);
-            document.setCustomerPerson(null);
-            viewModel.set("customer", null);
-        }
-    },
-
     changeCustomer: function(combo, newValue, oldValue, eOpts){
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
         if (!newValue) {
-            document.setCustomer(null);
-            document.setCustomerPerson(null);
             viewModel.set("customer", null);
-        }
-    },
-
-    selectCarrier: function (combo, records, oldValue, eOpts) {
-        var mainPanel = this.lookupReference("orderMainPanel");
-        var viewModel = mainPanel.lookupViewModel();
-        var document = viewModel.get("document");
-        if (records && records.length==1) {
-            var carrier = records[0];
-            var carrierStore = viewModel.getStore("carrierStore");
-            carrier.refresh(carrierStore, function (records, operation, success) {
-                if (success) {
-                    var carrier = records[0];
-                    document.setCarrier(carrier);
-                    document.setCarrierPerson(null);
-                    viewModel.set("carrier", document.getCarrier());
-                }
-            });
-        } else {
-            document.setCarrier(null);
-            document.setCarrierPerson(null);
-            viewModel.set("carrier", null);
         }
     },
 
@@ -67,26 +22,7 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
         if (!newValue) {
-            document.setCarrier(null);
-            document.setCarrierPerson(null);
             viewModel.set("carrier", null);
-        }
-    },
-
-    selectManager: function (combo, records, oldValue, eOpts) {
-        var mainPanel = this.lookupReference("orderMainPanel");
-        var viewModel = mainPanel.lookupViewModel();
-        var document = viewModel.get("document");
-        if (records && records.length==1) {
-            var userStore = viewModel.getStore("userStore");
-            var user = records[0];
-            user.refresh(userStore,  function (records, operation, success) {
-                if (success && records.length > 0) {
-                    document.setManager(records[0]);
-                }
-            });
-        } else {
-            document.setManager(null);
         }
     },
 
@@ -103,64 +39,60 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("user_dictionary", orderWindow, this.selectManager, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("user_dictionary", orderWindow,  session, this, combox);
     },
 
     findCustomer: function (combox, trigger, event) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("customer_dictionary", orderWindow, this.selectCustomer, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("customer_dictionary", orderWindow,  session, this, combox);
     },
 
     findCarrier: function (combox, trigger, event) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("carrier_dictionary", orderWindow, this.selectCarrier, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("carrier_dictionary", orderWindow,  session, this, combox);
     },
 
     findOrderTitle: function(combox, trigger, event){
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("order_title", orderWindow, this.selectSimpleDictionary, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("order_title", orderWindow,  session, this, combox);
     },
 
     findPaymentDate: function(combox, trigger, event){
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("payment_date", orderWindow, this.selectSimpleDictionary, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("payment_date", orderWindow,  session, this, combox);
     },
 
     findTransportType: function(combox, trigger, event){
         var mainPanel = this.lookupReference("orderMainPanel");
         var orderWindow = mainPanel.up('window');
         var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("transport_type", orderWindow, this.selectSimpleDictionary, session, this, combox);
+        TransDocs.service.DictionaryService.openSearchDictionary("transport_type", orderWindow,  session, this, combox);
     },
 
-    selectSimpleDictionary: function(combo, records, eOpts){
-        combo.select(records);
-    },
-
-    selectCustomerPerson: function (combo, records, eOpts) {
+    selectCustomerPerson: function (combo, record, eOpts) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
-        var newValue = records[0];
+        var newValue = record;
         if (document.getCustomerPerson() && document.getCustomerPerson().getId() == newValue.getId())return;
         document.setCustomerPerson(newValue);
     },
 
-    selectCarrierPerson: function (combo, records, eOpts) {
+    selectCarrierPerson: function (combo, record, eOpts) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();
         var document = viewModel.get("document");
-        var newValue = records[0];
+        var newValue = record;
         if (document.getCarrierPerson() && document.getCarrierPerson().getId() == newValue.getId())return;
-        document.setCarrierPerson(records[0]);
+        document.setCarrierPerson(newValue);
     },
 
     viewPerson: function (combox, trigger, event) {
@@ -184,9 +116,8 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
             view.setLoading(false);
             return;
         }
-        var orderStore = viewModel.getStore("orderStore");
         var me = this;
-        orderStore.save({
+        document.save({
             success: function () {
                 me.reloadCallerComponent();
                 document.refresh(orderStore, function(records, operation, success){
@@ -208,6 +139,7 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         view.setLoading(true, true);
         var viewModel = view.lookupViewModel();
         var document = viewModel.get("document");
+        document.setDirty(true);
         if (!document.isDirty()) {
             view.setLoading(false);
             view.close();
@@ -215,7 +147,7 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         }
         var orderStore = viewModel.getStore("orderStore");
         var me = this;
-        orderStore.save({
+        document.save({
             success: function () {
                 view.setLoading(false);
                 me.reloadCallerComponent();

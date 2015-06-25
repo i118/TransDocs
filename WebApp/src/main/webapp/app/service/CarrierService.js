@@ -6,19 +6,19 @@ Ext.define("TransDocs.service.CarrierService", {
         "TransDocs.model.dictionary.DriverModel",
         "TransDocs.model.dictionary.CarModel",
         "TransDocs.model.dictionary.CarrierModel",
-        "TransDocs.model.dictionary.AccountDetails",
-        "TransDocs.model.file.CarrierFileModel"
+        "TransDocs.model.dictionary.AccountDetailsInterface",
+        "TransDocs.model.file.CarrierFileModel",
+        'TransDocs.model.PassportInterface'
     ],
 
     constructor: function () {
         Ext.data.NodeInterface.decorate("TransDocs.model.file.CarrierFileModel");
+        TransDocs.model.PassportInterface.decorate("TransDocs.model.dictionary.DriverModel");
         this.callParent(arguments);
     },
 
     newCarrier: function (session) {
         var newCarrier = session.createRecord('TransDocs.model.dictionary.CarrierModel');
-        var accountDetails = session.createRecord('TransDocs.model.dictionary.AccountDetails');
-        newCarrier.setAccountDetails(accountDetails);
         var carrierFileStore = session.createRecord('TransDocs.model.file.CarrierFileModel');
         carrierFileStore.set("fileType", "STORE");
         newCarrier.setFileStore(carrierFileStore);
@@ -29,9 +29,7 @@ Ext.define("TransDocs.service.CarrierService", {
     },
 
     newDriver: function (session ,driverClass) {
-        var newDriver = session.createRecord(driverClass);
-        var passport = session.createRecord("TransDocs.model.Passport");
-        newDriver.setPassport(passport);
+        var newDriver = session.createRecord(driverClass);;
         return newDriver;
     },
 

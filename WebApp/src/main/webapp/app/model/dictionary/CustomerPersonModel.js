@@ -1,6 +1,7 @@
 Ext.define("TransDocs.model.dictionary.CustomerPersonModel", {
     extend: 'TransDocs.model.dictionary.AbstractContractPersonModel',
 
+    entityName: "CustomerPerson",
     requires: [
         "TransDocs.model.dictionary.CustomerModel",
         'TransDocs.data.reader.DefaultJsonReader'
@@ -9,8 +10,8 @@ Ext.define("TransDocs.model.dictionary.CustomerPersonModel", {
     fields: [
         {
             name: 'contractorId', reference: {
-            type: 'TransDocs.model.dictionary.CustomerModel',
-            association: 'CustomerPersonModelByContractorModel',
+            type: 'Customer',
+            association: 'CustomerByContractor',
             role: 'contractor',
             inverse: 'persons'
         }
@@ -20,7 +21,10 @@ Ext.define("TransDocs.model.dictionary.CustomerPersonModel", {
     proxy: {
         type: 'rest',
         api: {
-            read: 'CustomerController/get.persons'
+            read: 'Customer/get.persons'
+        },
+        actionMethods: {
+            read: 'get'
         },
         reader: {type: 'defaultjson'},
         listeners: {

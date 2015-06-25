@@ -4,7 +4,7 @@ Ext.define("TransDocs.data.store.dictionary.CarrierTreeStore", {
     alias: "store.carrierTree",
     requires: [
         "TransDocs.data.proxy.dictionary.CarrierTreeProxy",
-        'TransDocs.model.dictionary.CarrierModel'
+        'TransDocs.model.tree.SimpleTreeModel'
     ],
 
     proxy: {
@@ -16,7 +16,7 @@ Ext.define("TransDocs.data.store.dictionary.CarrierTreeStore", {
         direction: 'ASC'
     }],
     rootVisible:true,
-    model: 'TransDocs.model.dictionary.CarrierModel',
+    model: 'TransDocs.model.tree.SimpleTreeModel',
 
     sorters: [{
         property: 'description',

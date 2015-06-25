@@ -1,9 +1,5 @@
 Ext.define("TransDocs.data.store.document.OrderJournalStore",{
     extend: 'TransDocs.data.store.AbstractFormStore',
-    config:{
-        controllerName: "OrderDocumentController"
-    },
-
     alias: 'store.orderJournalStore',
 
     remoteSort: true,
@@ -20,16 +16,42 @@ Ext.define("TransDocs.data.store.document.OrderJournalStore",{
         {name: "managerFullName", type: "string"}
     ],
 
-
-    initApi: function () {
-        var me = this;
-        this.getProxy().setApi({
-            read: me.controllerName + '/find.dataset'
-        });
-        this.getProxy().setActionMethods({create: 'POST', read: 'POST', update: 'PUT', destroy: 'DELETE'});
-        this.getProxy().setParamsAsJson(true);
-        if(me.extraParams){
-            this.getProxy().setExtraParams(me.extraParams);
+    proxy: {
+        type: 'rest',
+        timeout: 180000,
+        appendId: true,
+        idParam: "objectId",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        paramsAsJson: true,
+        actionMethods: {
+            create: 'POST',
+            read: 'POST',
+            update: 'PUT',
+            destroy: 'DELETE'
+        },
+        api:{
+            read: 'OrderDocument/find.dataset'
+        },
+        listeners: {
+            exception: function (proxy, response, operation) {
+                Ext.MessageBox.show({
+                    title: 'Error!',
+                    msg: operation.getError() ? operation.getError() : "Ошибка связи с сервером",
+                    icon: Ext.MessageBox.ERROR,
+                    buttons: Ext.Msg.OK,
+                    resizable: true,
+                    overflowY: 'auto',
+                    overflowX: 'auto'
+                });
+            }
+        },
+        reader: {
+            type: "defaultjson"
+        },
+        writer: {
+            type: "associationJsonWriter"
         }
     },
 

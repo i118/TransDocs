@@ -1,5 +1,6 @@
 Ext.define('TransDocs.model.dictionary.UserModel', {
     extend: 'TransDocs.model.AbstractModel',
+    entityName: "User",
     fields:[
         {name: 'mail', type: 'string'},
         {name: 'phone', type: 'string'},
@@ -11,7 +12,7 @@ Ext.define('TransDocs.model.dictionary.UserModel', {
         {name: 'description', type: 'string'},
         {
             name: 'companyId', reference: {
-            type: 'TransDocs.model.dictionary.CompanyModel',
+            type: 'Company',
             association: 'CompanyModelByUserModel',
             role: 'company',
             inverse: 'users'
@@ -33,31 +34,6 @@ Ext.define('TransDocs.model.dictionary.UserModel', {
             type: 'TransDocs.model.dictionary.RoleModel',
             role: 'roleModels',
             field: 'objectId'
-        }
-    },
-
-    //TODO будет время надо будет переделать
-    proxy: {
-        type: 'rest',
-        api: {
-            read: 'UserController/find.byCompany'
-        },
-        reader: {type: 'defaultjson'},
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        listeners: {
-            exception: function (proxy, response, operation) {
-                Ext.MessageBox.show({
-                    title: 'Error!',
-                    msg: operation.getError() ? operation.getError() : "Ошибка связи с сервером",
-                    icon: Ext.MessageBox.ERROR,
-                    buttons: Ext.Msg.OK,
-                    resizable: true,
-                    overflowY: 'auto',
-                    overflowX: 'auto'
-                });
-            }
         }
     },
 

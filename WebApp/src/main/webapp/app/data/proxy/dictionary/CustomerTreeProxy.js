@@ -3,6 +3,6 @@ Ext.define("TransDocs.data.proxy.dictionary.CustomerTreeProxy",{
     alias: "proxy.customerTree",
 
     config:{
-        controllerName: 'CustomerController'
+        controllerName: 'Customer'
     }
 });

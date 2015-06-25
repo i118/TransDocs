@@ -43,8 +43,7 @@ Ext.define("TransDocs.controller.dictionary.SimpleDictionaryController", {
         var dictionary = viewModel.get("dictionary");
         var store = this.lookupDictionaryStore();
         if(dictionary.isDirty()){
-            store.add(dictionary);
-            store.save({
+            dictionary.save({
                 success: function (batch) {
                     dictionaryWnd.close();
                     store.reload();

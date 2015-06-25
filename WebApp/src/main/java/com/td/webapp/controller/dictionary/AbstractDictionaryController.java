@@ -19,6 +19,7 @@ import org.zerotul.specification.Specification;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -60,6 +61,7 @@ public abstract class AbstractDictionaryController<T extends Dictionary> extends
     @RequestMapping(value = "/"+ RequestName.GET_OBJECT, method = RequestMethod.POST,
             headers = CONTENT_TYPE)
     public @ResponseBody IResponse findObjects(@RequestBody Specification<DictionaryDataSet> specification){
+
         PagingList<DictionaryDataSet> dictionaries = findDictionaries(specification);
         IResponse response = new PagingResponseImpl(dictionaries.getTotalCount());
         response.addResults(dictionaries);
@@ -85,6 +87,7 @@ public abstract class AbstractDictionaryController<T extends Dictionary> extends
     public abstract void updateDictionary(T persistent, Map<String, String> arguments);
 
     public abstract T  getDictionary(UUID persistentId, Map<String, String> arguments);
+
 
     public PagingList<DictionaryDataSet> findDictionaries(Specification<DictionaryDataSet> specification){
         return getDictionaryService().findDataSet(specification);
