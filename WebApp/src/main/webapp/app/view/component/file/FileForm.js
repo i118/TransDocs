@@ -14,6 +14,7 @@ Ext.define("TransDocs.view.component.file.FileForm", {
         activate: function () {
             var store = this.lookupViewModel().getStore('fileTreeStore');
 
+
             store.getRoot().expand();
             if (store && store.isLoading()) {
                 this.setLoading(true, true);

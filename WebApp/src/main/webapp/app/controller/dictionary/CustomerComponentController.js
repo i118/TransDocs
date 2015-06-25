@@ -13,8 +13,9 @@ Ext.define('TransDocs.controller.dictionary.CustomerComponentController', {
         config.reference = "customerinfo";
         var fileStore = config.record.getFileStore();
         fileStore.set("root", true);
+        fileStore.set("text", "fileStore");
         fileStore.set("expanded", false);
-        fileStore.set("loaded", false);
+        fileStore.set("loaded", fileStore.isNew());
         var fileTreeStore = Ext.create("TransDocs.data.store.file.FileTreeStore",{
             model: Ext.getClass(fileStore).getName()
         });
@@ -35,11 +36,11 @@ Ext.define('TransDocs.controller.dictionary.CustomerComponentController', {
             }
         };
         config.viewModel = viewModel;
-       return Ext.create('TransDocs.view.component.dictionary.CustomerInfoComponent', config);
+        return Ext.create('TransDocs.view.component.dictionary.CustomerInfoComponent', config);
     },
 
     createNewContractor: function(session){
-       return  TransDocs.service.CustomerService.newCustomer(session);
+        return  TransDocs.service.CustomerService.newCustomer(session);
     },
 
     lookupContractorInfo: function(){
@@ -51,11 +52,11 @@ Ext.define('TransDocs.controller.dictionary.CustomerComponentController', {
     },
 
     lookupContractContainer: function(){
-       return this.lookupReference('customerContainer');
+        return this.lookupReference('customerContainer');
     },
 
     lookupDictionaryPanel: function(){
-       return this.lookupReference("customerDictionaryPanel");
+        return this.lookupReference("customerDictionaryPanel");
     },
 
     lookupStore: function(session){
@@ -63,6 +64,6 @@ Ext.define('TransDocs.controller.dictionary.CustomerComponentController', {
     },
 
     lookupTreeStore: function(){
-       return this.getViewModel().getStore("customerTree");
+        return this.getViewModel().getStore("customerTree");
     }
 });

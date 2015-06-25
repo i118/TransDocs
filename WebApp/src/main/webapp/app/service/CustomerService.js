@@ -5,7 +5,6 @@ Ext.define("TransDocs.service.CustomerService", {
         "TransDocs.model.file.CustomerFileModel"
     ],
     constructor: function(){
-        Ext.data.NodeInterface.decorate("TransDocs.model.file.CustomerFileModel");
         this.callParent(arguments);
     },
 
