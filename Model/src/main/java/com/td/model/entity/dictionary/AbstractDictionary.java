@@ -25,7 +25,7 @@ public abstract class AbstractDictionary extends AbstractModel implements Dictio
 
     @Override
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = Columns.OWNER_ID, referencedColumnName = UserModel.Columns.OBJECT_ID)
+    @JoinColumn(name = Columns.OWNER_ID, referencedColumnName = UserModel.Columns.OBJECT_ID, nullable = false, updatable = false)
     public UserModel getOwner() {
         return owner;
     }

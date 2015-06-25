@@ -18,10 +18,6 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
         close: 'closeDriverForm'
     },
 
-    defaults: {
-        cls: 'field-margin'
-    },
-
     bbar: [
         '->', {
             xtype: 'button',
