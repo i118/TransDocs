@@ -46,6 +46,8 @@ public class CollectionRepositoryContext {
         dictionaryModels.add(new DictionaryModel(env.getProperty("Dictionary.description.transportType"), DictionaryType.TRANSPORT_TYPE, Category.ORDER));
         dictionaryModels.add(new DictionaryModel(env.getProperty("Dictionary.description.orderTitle"), DictionaryType.ORDER_TITLE, Category.ORDER));
         dictionaryModels.add(new DictionaryModel(env.getProperty("Dictionary.description.paymentDate"), DictionaryType.PAYMENT_DATE, Category.ORDER));
+        dictionaryModels.add(new DictionaryModel(env.getProperty("Dictionary.description.borderCrossing"), DictionaryType.BORDER_CROSSING, Category.ORDER));
+        dictionaryModels.add(new DictionaryModel(env.getProperty("Dictionary.description.additionalService"), DictionaryType.ADDITIONAL_SERVICE, Category.ORDER));
         return dictionaryModels;
     }
 

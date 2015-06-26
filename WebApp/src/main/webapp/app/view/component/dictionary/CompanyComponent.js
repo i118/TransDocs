@@ -5,7 +5,7 @@ Ext.define("TransDocs.view.component.dictionary.CompanyComponent",{
         'TransDocs.view.component.dictionary.CompanyForm',
         'TransDocs.view.component.dictionary.AccountDetailsForm',
         'TransDocs.model.dictionary.CompanyModel',
-        'TransDocs.model.dictionary.AccountDetailsInterface',
+        'TransDocs.model.dictionary.AccountDetails',
         "TransDocs.view.component.dictionary.CompanyUserPanel"
     ],
     layout: 'fit',

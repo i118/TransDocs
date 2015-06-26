@@ -3,6 +3,17 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
     alias: 'widget.orderAdditionalPanel',
     title: 'Дополнительно',
 
+    requires: [
+        "TransDocs.viewmodel.document.OrderAdditionalViewModel",
+        "TransDocs.controller.document.OrderAdditionalController"
+    ],
+
+    controller: "orderadditional",
+
+    viewModel: {
+        type: "orderAdditional"
+    },
+
     layout: {
         type: 'vbox',
         align: 'stretch'
@@ -31,6 +42,7 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                 flex: 1,
                 autoWidth: true
             },
+
             border: false,
             items: [{
                 xtype: 'comboSearch',
@@ -50,19 +62,29 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                     }
                 ],
                 bind: {
-                    value: '{document.transportType}',
-                    store: '{transportTypeStore}'
+                    value: '{orderAdditional.transportType}',
+                    store: '{simpleDictionaryStore}'
                 }
             }, {
-                xtype: 'combobox',
+                xtype: 'comboSearch',
                 fieldLabel: 'Погранпереход',
-                queryMode: 'local',
-                displayField: 'name',
-                valueField: 'key',
-                store: {
-                    xtype: 'store',
-                    fields: ['key', 'name'],
-                    data: []
+                queryMode: 'remote',
+                displayField: 'description',
+                valueField: 'description',
+                queryProperty: "description",
+                autoWidth: true,
+                recordType: "com.td.model.entity.dictionary.dataset.SimpleDictionaryDataSet",
+                searchHandler: 'findBorderCrossing',
+                globalRestrictions: [
+                    {
+                        propertyName: "dictionaryType",
+                        value: "BORDER_CROSSING",
+                        operator: "="
+                    }
+                ],
+                bind: {
+                    value: '{orderAdditional.borderCrossing}',
+                    store: '{simpleDictionaryStore}'
                 }
             }
             ]
@@ -80,17 +102,28 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                 border: false,
                 items: [{
                     xtype: 'textfield',
-                    fieldLabel: 'Темп. режим'
+                    fieldLabel: 'Темп. режим',
+                    bind: '{orderAdditional.temperatureRegime}'
                 }, {
-                    xtype: 'combobox',
+                    xtype: 'comboSearch',
                     fieldLabel: 'Доп. услуги',
-                    queryMode: 'local',
-                    displayField: 'name',
-                    valueField: 'key',
-                    store: {
-                        xtype: 'store',
-                        fields: ['key', 'name'],
-                        data: []
+                    queryMode: 'remote',
+                    displayField: 'description',
+                    valueField: 'description',
+                    queryProperty: "description",
+                    autoWidth: true,
+                    recordType: "com.td.model.entity.dictionary.dataset.SimpleDictionaryDataSet",
+                    searchHandler: 'findAdditionalService',
+                    globalRestrictions: [
+                        {
+                            propertyName: "dictionaryType",
+                            value: "ADDITIONAL_SERVICE",
+                            operator: "="
+                        }
+                    ],
+                    bind: {
+                        value: '{orderAdditional.additionalService}',
+                        store: '{simpleDictionaryStore}'
                     }
                 }
                 ]
@@ -124,13 +157,16 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
             items: [
                 {
                     xtype: 'textfield',
-                    fieldLabel: 'Тягач'
+                    fieldLabel: 'Тягач',
+                    bind: '{orderTransport.car.carBrand}'
                 }, {
                     xtype: 'textfield',
-                    fieldLabel: 'Прицепы'
+                    fieldLabel: 'Прицепы',
+                    bind: '{orderTransport.trailer}'
                 }, {
                     xtype: 'textfield',
-                    fieldLabel: 'Пасп. выд.'
+                    fieldLabel: 'Пасп. выд.',
+                    bind: '{orderTransport.driverPassport.issuedPassport}'
                 }
             ]
         },
@@ -148,17 +184,24 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                 items: [{
                     xtype: 'combobox',
                     fieldLabel: 'Водитель',
-                    queryMode: 'local',
-                    displayField: 'name',
-                    valueField: 'key',
-                    store: {
-                        xtype: 'store',
-                        fields: ['key', 'name'],
-                        data: []
+                    queryMode: 'remote',
+                    displayField: 'description',
+                    valueField: 'objectId',
+                    bind: {
+                        value: '{driver}',
+                        store: '{transportDrivers}',
+                        disabled: '{!isSelectedCarrier}'
                     }
+                    //triggers:{
+                    //    info: {
+                    //        type: 'personInfoTrigger',
+                    //        handler: 'viewPerson'
+                    //    }
+                    //}
                 }, {
                     xtype: 'textfield',
-                    fieldLabel: 'Пасп. номер'
+                    fieldLabel: 'Пасп. номер',
+                    bind: '{orderTransport.driverPassport.number}'
                 }, {
                     xtype: 'textfield',
                     fieldLabel: 'Моб. тел.'

@@ -9,7 +9,10 @@ Ext.define("TransDocs.model.document.OrderDocumentModel", {
         'TransDocs.model.dictionary.CustomerModel',
         'TransDocs.model.dictionary.CustomerPersonModel',
         'TransDocs.model.dictionary.CarrierPersonModel',
-        'TransDocs.model.dictionary.CompanyModel'
+        'TransDocs.model.dictionary.CompanyModel',
+        'TransDocs.model.document.OrderTransport',
+        'TransDocs.model.document.OrderAdditional',
+        'TransDocs.model.document.OrderAdditionalCondition'
     ],
 
     fields:[
@@ -34,7 +37,12 @@ Ext.define("TransDocs.model.document.OrderDocumentModel", {
         {name: "carrierPaymentMethod", type: "string"},
 
         {name: "title", type: "string"},
-        {name: "paymentDate", type: "string"}
+        {name: "paymentDate", type: "string"},
+
+        {name: "orderTransportId", reference: "OrderTransport", unique: true, mapping: "orderTransport.objectId"},
+        {name: "orderAdditional", reference: "OrderAdditional"},
+        {name: "customerAdditionalConditionId", reference: "OrderAdditionalCondition", unique: true, mapping: "customerAdditionalCondition.objectId"},
+        {name: "carrierAdditionalConditionId", reference: "OrderAdditionalCondition", unique: true, mapping: "carrierAdditionalCondition.objectId"}
     ],
 
     getObjectType: function(){

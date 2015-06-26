@@ -109,7 +109,7 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
                     xtype: 'textfield',
                     fieldLabel: 'Серия паспорта',
                     bind: {
-                        value: '{record.serial}',
+                        value: '{record.passport.serial}',
                         editable: '{isEditMode}'
                     },
                     labelAlign: 'left',
@@ -119,7 +119,7 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
                     xtype: 'textfield',
                     fieldLabel: 'Номер паспорта',
                     bind: {
-                        value: '{record.number}',
+                        value: '{record.passport.number}',
                         editable: '{isEditMode}'
                     },
                     labelAlign: 'left',
@@ -129,7 +129,7 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
                     xtype: 'textfield',
                     fieldLabel: 'Кем выдан',
                     bind: {
-                        value: '{record.issuedPassport}',
+                        value: '{record.passport.issuedPassport}',
                         editable: '{isEditMode}'
                     },
                     labelAlign: 'left',

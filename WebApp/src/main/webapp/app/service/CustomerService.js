@@ -14,6 +14,8 @@ Ext.define("TransDocs.service.CustomerService", {
         newFileStore.set("fileType", "STORE");
         newCustomer.setFileStore(newFileStore);
         newCustomer.persons().blockLoadCounter=1;
+        var accountDetails = session.createRecord('TransDocs.model.dictionary.AccountDetails');
+        newCustomer.setAccountDetails(accountDetails);
         return newCustomer;
     }
 });

@@ -184,5 +184,10 @@ public class DriverModel extends AbstractModel implements IPerson {
     public UUID getDefaultCarId(){
         return getCar()!=null ? getCar().getObjectId() : null;
     }
+
+    @Transient
+    public String getDescription(){
+        return getFullName();
+    }
 }
 

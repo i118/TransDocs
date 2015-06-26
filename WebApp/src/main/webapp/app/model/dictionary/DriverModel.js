@@ -4,7 +4,7 @@ Ext.define("TransDocs.model.dictionary.DriverModel", {
     entityName: "Driver",
     requires: [
         "TransDocs.model.dictionary.CarrierModel",
-        "TransDocs.model.PassportInterface",
+        "TransDocs.model.Passport",
         "TransDocs.model.dictionary.CarModel"
     ],
 
@@ -12,10 +12,12 @@ Ext.define("TransDocs.model.dictionary.DriverModel", {
         {name: 'firstName', type: 'string'},
         {name: 'lastName', type: 'string'},
         {name: 'patronymic', type: 'string'},
+        {name: 'description', type: 'string'},
         {name: 'gender', type: 'string'},
         {name: 'phone', type: 'string'},
         {name: 'registrationAddress', type: 'string'},
         {name: 'drivingLicense', type: 'string'},
+        {name: "passport", reference: "TransDocs.model.Passport"},
         {
             name: 'defaultCarId', reference: {
             type: 'Car',

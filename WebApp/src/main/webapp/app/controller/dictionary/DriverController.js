@@ -67,6 +67,10 @@ Ext.define("TransDocs.controller.dictionary.DriverController",{
         var me = this;
         var contractor = this.getView().lookupViewModel().get("contractor");
         var isEditMode = this.getView().lookupViewModel().get("isEditMode");
+        if(!record.getPassport()) {
+            var passport = view.lookupSession().createRecord("TransDocs.model.Passport");
+            record.setPassport(passport);
+        }
         var viewModel =  {
             data:{
                 record: record,

@@ -4,11 +4,9 @@ Ext.define("TransDocs.service.ContractorService",{
 
     requires: [
         "TransDocs.model.dictionary.ContractorModel",
-        "TransDocs.model.dictionary.AccountDetailsInterface"
     ],
 
     constructor: function () {
-        TransDocs.model.dictionary.AccountDetailsInterface.decorate("TransDocs.model.dictionary.ContractorModel")
         this.callParent(arguments);
     },
 

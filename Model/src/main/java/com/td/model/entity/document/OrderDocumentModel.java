@@ -1,6 +1,8 @@
 package com.td.model.entity.document;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.td.model.entity.AbstractModel;
 import com.td.model.entity.dictionary.company.*;
@@ -66,6 +68,13 @@ public class OrderDocumentModel extends AbstractDocumentModel {
 
     private String paymentDate;
 
+    private OrderAdditional orderAdditional;
+
+    private OrderTransport orderTransport;
+
+    private OrderAdditionalCondition customerAdditionalCondition;
+    private OrderAdditionalCondition carrierAdditionalCondition;
+
     public static class Columns extends AbstractModel.Columns{
         public static final String INCOMING_NUMBER = "incoming_number";
 
@@ -106,6 +115,12 @@ public class OrderDocumentModel extends AbstractDocumentModel {
         public static final String TITLE= "title";
 
         public static final String PAYMENT_DATE= "payment_date";
+
+        public static final String TRANSPORT_ID= "transport_id";
+
+        public static final String CUSTOMER_ADDITIONAL_CONDITION= "customer_additional_condition_id";
+
+        public static final String CARRIER_ADDITIONAL_CONDITION= "carrier_additional_condition_id";
     }
 
     @Column(name = Columns.INCOMING_NUMBER, updatable = false)
@@ -300,6 +315,47 @@ public class OrderDocumentModel extends AbstractDocumentModel {
 
     public void setPaymentDate(String paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    @Embedded
+    @Basic(fetch = FetchType.LAZY)
+    public OrderAdditional getOrderAdditional() {
+        return orderAdditional;
+    }
+
+    public void setOrderAdditional(OrderAdditional orderAdditional) {
+        this.orderAdditional = orderAdditional;
+    }
+
+    @JsonManagedReference("transport-order")
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = Columns.TRANSPORT_ID, updatable = false, unique = true)
+    public OrderTransport getOrderTransport() {
+        return orderTransport;
+    }
+
+    public void setOrderTransport(OrderTransport orderTransport) {
+        this.orderTransport = orderTransport;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = Columns.CUSTOMER_ADDITIONAL_CONDITION, unique = true, updatable = false)
+    public OrderAdditionalCondition getCustomerAdditionalCondition() {
+        return customerAdditionalCondition;
+    }
+
+    public void setCustomerAdditionalCondition(OrderAdditionalCondition customerAdditionalCondition) {
+        this.customerAdditionalCondition = customerAdditionalCondition;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = Columns.CARRIER_ADDITIONAL_CONDITION, unique = true, updatable = false)
+    public OrderAdditionalCondition getCarrierAdditionalCondition() {
+        return carrierAdditionalCondition;
+    }
+
+    public void setCarrierAdditionalCondition(OrderAdditionalCondition carrierAdditionalCondition) {
+        this.carrierAdditionalCondition = carrierAdditionalCondition;
     }
 
     @Override
