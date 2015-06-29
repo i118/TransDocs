@@ -2,6 +2,7 @@ package com.td.webapp.controller.document;
 
 import com.td.model.context.qualifier.DocumentQualifier;
 import com.td.model.entity.document.OrderDocumentModel;
+import com.td.model.entity.document.OrderTransport;
 import com.td.service.crud.document.DocumentService;
 import com.td.webapp.response.IResponse;
 import com.td.webapp.response.ResponseImpl;
@@ -24,6 +25,9 @@ public class OrderDocumentController extends AbstractDocumentController<OrderDoc
     private DocumentService<OrderDocumentModel> documentService;
 
 
+    public static class RequestName extends AbstractDocumentController.RequestName{
+        public static final String GET_TRANSPORT = "get.transport";
+    }
 
     @RequestMapping(value = "/"+ RequestName.CREATE_OBJECT, method = RequestMethod.POST,
             headers = CONTENT_TYPE)
@@ -53,6 +57,17 @@ public class OrderDocumentController extends AbstractDocumentController<OrderDoc
         IResponse<OrderDocumentModel> response = new ResponseImpl();
         OrderDocumentModel order = getDocumentService().getDocument(objectId);
         response.addResult(order);
+        response.setSuccess(true);
+        return response;
+    }
+
+    @RequestMapping(value = "/"+RequestName.GET_TRANSPORT+"/{transportId}", method = {RequestMethod.GET}, headers = CONTENT_TYPE)
+    public @ResponseBody IResponse<OrderTransport> getOrderTransport(@PathVariable UUID transportId){
+        IResponse<OrderTransport> response = new ResponseImpl();
+        OrderTransport orderTransport = getDocumentService().getModel(transportId, OrderTransport.class);
+        if(orderTransport!=null){
+            response.addResult(orderTransport);
+        }
         response.setSuccess(true);
         return response;
     }

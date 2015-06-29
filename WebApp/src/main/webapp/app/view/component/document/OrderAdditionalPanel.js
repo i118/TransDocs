@@ -156,9 +156,22 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
             border: false,
             items: [
                 {
-                    xtype: 'textfield',
+                    xtype: 'combobox',
                     fieldLabel: 'Тягач',
-                    bind: '{orderTransport.car.carBrand}'
+                    queryMode: 'remote',
+                    displayField: 'carBrand',
+                    valueField: 'objectId',
+                    bind: {
+                        value: '{car}',
+                        store: '{transportCars}',
+                        disabled: '{!isSelectedCarrier}'
+                    }
+                    //triggers:{
+                    //    info: {
+                    //        type: 'personInfoTrigger',
+                    //        handler: 'viewPerson'
+                    //    }
+                    //}
                 }, {
                     xtype: 'textfield',
                     fieldLabel: 'Прицепы',
@@ -204,7 +217,8 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                     bind: '{orderTransport.driverPassport.number}'
                 }, {
                     xtype: 'textfield',
-                    fieldLabel: 'Моб. тел.'
+                    fieldLabel: 'Моб. тел.',
+                    bind: '{orderTransport.driverPhone}'
                 }
                 ]
             }

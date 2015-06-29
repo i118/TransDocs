@@ -14,6 +14,7 @@ import com.td.model.entity.usertype.converter.MoneyConverter;
 import org.joda.money.Money;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 /**
  * Created by zerotul on 26.01.15.
@@ -318,7 +319,6 @@ public class OrderDocumentModel extends AbstractDocumentModel {
     }
 
     @Embedded
-    @Basic(fetch = FetchType.LAZY)
     public OrderAdditional getOrderAdditional() {
         return orderAdditional;
     }
@@ -329,9 +329,14 @@ public class OrderDocumentModel extends AbstractDocumentModel {
 
     @JsonManagedReference("transport-order")
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = Columns.TRANSPORT_ID, updatable = false, unique = true)
+    @JoinColumn(name = Columns.TRANSPORT_ID,  unique = true)
     public OrderTransport getOrderTransport() {
         return orderTransport;
+    }
+
+    @Transient
+    public UUID getOrderTransportId(){
+        return getOrderTransport()!=null ? getOrderTransport().getObjectId() : null;
     }
 
     public void setOrderTransport(OrderTransport orderTransport) {

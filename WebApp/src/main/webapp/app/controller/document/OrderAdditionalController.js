@@ -6,6 +6,21 @@ Ext.define('TransDocs.controller.document.OrderAdditionalController', {
     alias: 'controller.orderadditional',
 
 
+    initViewModel: function(viewModel){
+        var document = viewModel.get("document");
+        if(!document.isNew()){
+            document.getOrderTransport({reload:true});
+        }
+
+        if(!document.getOrderTransport()){
+            var orderTransport = this.getSession().createRecord("OrderTransport");
+            document.setOrderTransport(orderTransport);
+        }
+        if(!document.getOrderAdditional()){
+            var additional = this.getSession().createRecord("OrderAdditional");
+            document.setOrderAdditional(additional);
+        }
+    },
 
     findTransportType: function(combox, trigger, event){
         var view = this.getView();

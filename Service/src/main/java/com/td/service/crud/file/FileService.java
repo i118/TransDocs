@@ -13,7 +13,7 @@ import java.util.UUID;
 /**
  * Created by konstantinchipunov on 10.09.14.
  */
-public interface FileService extends CRUDService<IFileModel,FileRepository> {
+public interface FileService extends CRUDService<IFileModel> {
 
     public IFileModel getFileByPath(String path);
 

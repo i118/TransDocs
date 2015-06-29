@@ -33,6 +33,8 @@ public class DriverDTO extends AbstractModelDTO {
 
     private UUID carrierId;
 
+    private String description;
+
     public DriverDTO(DriverModel driver) {
         super(driver);
         build(driver);
@@ -45,6 +47,7 @@ public class DriverDTO extends AbstractModelDTO {
         this.passport = driver.getPassport();
         this.gender = driver.getGender();
         this.phone = driver.getPhone();
+        this.description = driver.getDescription();
         this.registrationAddress = driver.getRegistrationAddress();
         this.drivingLicense = driver.getDrivingLicense();
         if (driver.getCar() != null) {
@@ -92,5 +95,9 @@ public class DriverDTO extends AbstractModelDTO {
 
     public UUID getCarrierId() {
         return carrierId;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

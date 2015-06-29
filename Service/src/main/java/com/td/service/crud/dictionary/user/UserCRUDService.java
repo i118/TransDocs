@@ -14,7 +14,7 @@ import com.td.service.crud.dictionary.DictionaryCRUDService;
  * Time: 23:12
  * To change this template use File | Settings | File Templates.
  */
-public interface UserCRUDService extends DictionaryCRUDService<UserModel, UserRepository>, CRUDService<UserModel, UserRepository> {
+public interface UserCRUDService extends DictionaryCRUDService<UserModel>, CRUDService<UserModel> {
 
 
     public IUserModel getUserByName(String userName);

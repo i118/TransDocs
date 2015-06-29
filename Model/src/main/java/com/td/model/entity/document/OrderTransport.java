@@ -31,6 +31,8 @@ public class OrderTransport extends AbstractModel{
 
     private Passport driverPassport;
 
+    private String driverPhone;
+
     private OrderDocumentModel orderDocument;
 
     public static class Columns extends AbstractModel.Columns{
@@ -41,9 +43,11 @@ public class OrderTransport extends AbstractModel{
         public static final String DRIVER_PASSPORT_NUMBER = "driver_passport_number";
         public static final String DRIVER_PASSPORT_SERIAL = "driver_passport_serial";
         public static final String DRIVER_ISSUED_PASSPORT = "driver_issued_passport";
+        public static final String DRIVER_PHONE = "driver_phone";
     }
 
-    @Column(name = Columns.DRIVER_ID)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = Columns.DRIVER_ID)
     public DriverModel getDriver() {
         return driver;
     }
@@ -52,7 +56,8 @@ public class OrderTransport extends AbstractModel{
         this.driver = driver;
     }
 
-    @Column(name = Columns.CAR_ID)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = Columns.CAR_ID)
     public CarModel getCar() {
         return car;
     }
@@ -98,5 +103,14 @@ public class OrderTransport extends AbstractModel{
     @Transient
     public String getTableName() {
         return TABLE_NAME;
+    }
+
+    @Column(name = Columns.DRIVER_PHONE)
+    public String getDriverPhone() {
+        return driverPhone;
+    }
+
+    public void setDriverPhone(String driverPhone) {
+        this.driverPhone = driverPhone;
     }
 }

@@ -16,7 +16,7 @@ import java.util.UUID;
  * Time: 22:15
  * To change this template use File | Settings | File Templates.
  */
-public abstract class AbstractCRUDService<T extends IPersistent, D extends IRepository> implements CRUDService<T, D> {
+public abstract class AbstractCRUDService<T extends IPersistent, D extends IRepository> implements CRUDService<T> {
 
     protected D repository;
 
@@ -93,7 +93,7 @@ public abstract class AbstractCRUDService<T extends IPersistent, D extends IRepo
 
     @Override
     public void save(T persistent) {
-
+        getRepository().save(persistent);
     }
 
     @Override

@@ -78,7 +78,7 @@ public abstract class AbstractDictionaryController<T extends Dictionary> extends
         return response;
     }
 
-    public abstract DictionaryCRUDService<T, ? extends DictionaryRepository<T>> getDictionaryService();
+    public abstract DictionaryCRUDService<T> getDictionaryService();
 
     public abstract void deleteDictionary(T persistent, Map<String, String> arguments);
 

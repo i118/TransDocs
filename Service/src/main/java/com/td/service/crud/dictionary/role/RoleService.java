@@ -12,7 +12,7 @@ import com.td.service.crud.dictionary.DictionaryCRUDService;
  * Time: 19:23
  * To change this template use File | Settings | File Templates.
  */
-public interface RoleService extends DictionaryCRUDService<IRoleModel, RoleRepository> {
+public interface RoleService extends DictionaryCRUDService<IRoleModel> {
     public IRoleModel getRoleByName(String roleName);
 
     public boolean hasRole(IUserModel userModel, String roleName);
