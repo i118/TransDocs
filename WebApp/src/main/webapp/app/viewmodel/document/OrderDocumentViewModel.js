@@ -11,8 +11,10 @@ Ext.define('TransDocs.viewmodel.document.OrderDocumentViewModel', {
         "TransDocs.data.store.dictionary.CarrierStore",
         "TransDocs.data.store.document.OrderDocumentStore",
         "TransDocs.data.store.dictionary.SimpleDictionaryStore",
-        "TransDocs.data.store.dictionary.CompanyStore"
+        "TransDocs.data.store.dictionary.CompanyStore",
+        "Ext.mixin.Observable"
     ],
+
     formulas:{
         isSelectedCustomer: function (get) {
             return get("document").getCustomer() != null;
@@ -83,6 +85,12 @@ Ext.define('TransDocs.viewmodel.document.OrderDocumentViewModel', {
                     me.set("isSelectedCarrier", carrier!=null);
                     me.set("carrierPersons", carrier.persons());
                     document.setCarrierPerson(null);
+                    var orderTransport = document.getOrderTransport();
+                    if(orderTransport){
+                        var transport = me.getSession().createRecord("OrderTransport");
+                        document.setOrderTransport(transport);
+                        transport.setDriverPassport(me.getSession().createRecord("Passport"));
+                    }
                 }
                 if(newValue && !newValue.isModel){
                     var rec = this.getSession().peekRecord("Carrier", newValue);

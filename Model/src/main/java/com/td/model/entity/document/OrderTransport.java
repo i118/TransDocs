@@ -33,8 +33,6 @@ public class OrderTransport extends AbstractModel{
 
     private String driverPhone;
 
-    private OrderDocumentModel orderDocument;
-
     public static class Columns extends AbstractModel.Columns{
 
         public static final String DRIVER_ID = "driver_id";
@@ -73,16 +71,6 @@ public class OrderTransport extends AbstractModel{
 
     public void setTrailer(String trailer) {
         this.trailer = trailer;
-    }
-
-    @OneToOne(mappedBy = "orderTransport")
-    @JsonBackReference("transport-order")
-    public OrderDocumentModel getOrderDocument() {
-        return orderDocument;
-    }
-
-    public void setOrderDocument(OrderDocumentModel orderDocument) {
-        this.orderDocument = orderDocument;
     }
 
     @Embedded

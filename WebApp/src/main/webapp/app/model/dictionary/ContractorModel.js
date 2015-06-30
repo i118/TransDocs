@@ -16,6 +16,7 @@ Ext.define("TransDocs.model.dictionary.ContractorModel", {
         {name: 'shortName', type: 'string'},
         {name: 'fullName', type: 'string'},
         {name: 'accountDetails', reference: 'TransDocs.model.dictionary.AccountDetails'},
+        {name: 'owner', persist: false}
     ],
 
     getObjectType: function () {

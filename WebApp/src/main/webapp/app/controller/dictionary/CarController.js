@@ -15,25 +15,7 @@ Ext.define("TransDocs.controller.dictionary.CarController", {
         var contractor = view.lookupViewModel().get("contractor");
         contractor.cars().add(car);
         var isEditMode = view.lookupViewModel().get("isEditMode");
-        var viewModel= {
-          data: {
-              car: car,
-              isEditMode: isEditMode
-          }
-        };
-        var wnd = Ext.create("TransDocs.view.container.dictionary.CarWindow", {
-            autoWidth: true,
-            autoHeight: true,
-            parent: parentWnd,
-            contractor: view.getModel(),
-            reference: 'carWindow',
-            parentController: me,
-            modelClass: view.getModelClass(),
-            viewModel: viewModel,
-            session:view.lookupSession().spawn(),
-            createMode: true
-        });
-        wnd.show();
+        TransDocs.service.CarrierService.openCar(car,parentWnd, view.lookupSession().spawn(), isEditMode, true)
     },
 
     deleteCar: function(){
@@ -65,26 +47,7 @@ Ext.define("TransDocs.controller.dictionary.CarController", {
     openCar: function(grid, record){
         var parentWnd = grid.up('window');
         var view = this.getView();
-        var me = this;
         var isEditMode = view.lookupViewModel().get("isEditMode");
-        var viewModel = {
-           data: {
-               car: record,
-               isEditMode: isEditMode
-           }
-        }
-        var wnd = Ext.create("TransDocs.view.container.dictionary.CarWindow", {
-            autoWidth: true,
-            autoHeight: true,
-            parent: parentWnd,
-            contractor: view.getModel(),
-            reference: 'carWindow',
-            parentController: me,
-            viewModel: viewModel,
-            modelClass: view.getModelClass(),
-            session: view.lookupSession().spawn()
-        });
-        wnd.getViewModel().setData();
-        wnd.show();
+        TransDocs.service.CarrierService.openCar(record, parentWnd, view.lookupSession().spawn(), isEditMode);
     }
 });

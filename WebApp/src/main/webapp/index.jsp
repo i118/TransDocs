@@ -38,7 +38,7 @@
             "TransDocs.service.RenderFactory",
             "TransDocs.service.UserService",
             "TransDocs.overrides.SessionOverride",
-            "TransDocs.view.trigger.PersonInfoTrigger",
+            "TransDocs.view.trigger.ObjectInfoTrigger",
             "TransDocs.view.trigger.SearchTrigger",
             "TransDocs.service.DictionaryFactory",
             "TransDocs.view.component.ComboSearch"

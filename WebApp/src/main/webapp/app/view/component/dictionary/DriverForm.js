@@ -192,6 +192,12 @@ Ext.define("TransDocs.view.component.dictionary.DriverForm", {
                     valueField: 'objectId',
                     listeners: {
                         select: 'selectCar'
+                    },
+                    triggers:{
+                        info: {
+                            type: 'objectInfoTrigger',
+                            handler: 'viewCar'
+                        }
                     }
                 }
 

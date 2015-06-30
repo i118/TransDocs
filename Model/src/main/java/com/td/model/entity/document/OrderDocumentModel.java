@@ -327,24 +327,18 @@ public class OrderDocumentModel extends AbstractDocumentModel {
         this.orderAdditional = orderAdditional;
     }
 
-    @JsonManagedReference("transport-order")
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name = Columns.TRANSPORT_ID,  unique = true)
     public OrderTransport getOrderTransport() {
         return orderTransport;
-    }
-
-    @Transient
-    public UUID getOrderTransportId(){
-        return getOrderTransport()!=null ? getOrderTransport().getObjectId() : null;
     }
 
     public void setOrderTransport(OrderTransport orderTransport) {
         this.orderTransport = orderTransport;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = Columns.CUSTOMER_ADDITIONAL_CONDITION, unique = true, updatable = false)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = Columns.CUSTOMER_ADDITIONAL_CONDITION, unique = true)
     public OrderAdditionalCondition getCustomerAdditionalCondition() {
         return customerAdditionalCondition;
     }
@@ -353,8 +347,8 @@ public class OrderDocumentModel extends AbstractDocumentModel {
         this.customerAdditionalCondition = customerAdditionalCondition;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = Columns.CARRIER_ADDITIONAL_CONDITION, unique = true, updatable = false)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = Columns.CARRIER_ADDITIONAL_CONDITION, unique = true)
     public OrderAdditionalCondition getCarrierAdditionalCondition() {
         return carrierAdditionalCondition;
     }

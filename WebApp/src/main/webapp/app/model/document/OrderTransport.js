@@ -14,7 +14,7 @@ Ext.define('TransDocs.model.document.OrderTransport', {
         {name: "driverId", reference: "Driver", mapping: "driver.objectId", unique: true},
         {name: "carId", reference: "Car", mapping: "car.objectId", unique: true},
         {name: "trailer", type: "string"},
-        {name: "driverPassport", reference: "TransDocs.model.Passport"},
+        {name: "driverPassport", reference: "Passport"},
         {name: "driverPhone", type: "string"}
     ],
 

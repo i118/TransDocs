@@ -1,6 +1,7 @@
 package com.td.webapp.controller.document;
 
 import com.td.model.context.qualifier.DocumentQualifier;
+import com.td.model.entity.document.OrderAdditionalCondition;
 import com.td.model.entity.document.OrderDocumentModel;
 import com.td.model.entity.document.OrderTransport;
 import com.td.service.crud.document.DocumentService;
@@ -27,6 +28,7 @@ public class OrderDocumentController extends AbstractDocumentController<OrderDoc
 
     public static class RequestName extends AbstractDocumentController.RequestName{
         public static final String GET_TRANSPORT = "get.transport";
+        public static final String GET_ADDITIONAL_CONDITION = "get.additionalCondition";
     }
 
     @RequestMapping(value = "/"+ RequestName.CREATE_OBJECT, method = RequestMethod.POST,
@@ -65,6 +67,17 @@ public class OrderDocumentController extends AbstractDocumentController<OrderDoc
     public @ResponseBody IResponse<OrderTransport> getOrderTransport(@PathVariable UUID transportId){
         IResponse<OrderTransport> response = new ResponseImpl();
         OrderTransport orderTransport = getDocumentService().getModel(transportId, OrderTransport.class);
+        if(orderTransport!=null){
+            response.addResult(orderTransport);
+        }
+        response.setSuccess(true);
+        return response;
+    }
+
+    @RequestMapping(value = "/"+RequestName.GET_ADDITIONAL_CONDITION+"/{conditionId}", method = {RequestMethod.GET}, headers = CONTENT_TYPE)
+    public @ResponseBody IResponse<OrderAdditionalCondition> getAdditionalCondition(@PathVariable UUID conditionId){
+        IResponse<OrderAdditionalCondition> response = new ResponseImpl();
+        OrderAdditionalCondition orderTransport = getDocumentService().getModel(conditionId, OrderAdditionalCondition.class);
         if(orderTransport!=null){
             response.addResult(orderTransport);
         }

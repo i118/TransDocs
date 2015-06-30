@@ -17,7 +17,7 @@ Ext.define("TransDocs.model.dictionary.DriverModel", {
         {name: 'phone', type: 'string'},
         {name: 'registrationAddress', type: 'string'},
         {name: 'drivingLicense', type: 'string'},
-        {name: "passport", reference: "TransDocs.model.Passport"},
+        {name: "passport", reference: "Passport"},
         {
             name: 'defaultCarId', reference: {
             type: 'Car',

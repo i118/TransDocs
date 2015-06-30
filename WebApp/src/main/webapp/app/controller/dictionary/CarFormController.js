@@ -11,7 +11,7 @@ Ext.define("TransDocs.controller.dictionary.CarFormController", {
 
             if (!car.isNew()) {
                 car.reject();
-            } else if (view.createMode) {
+            } else if (viewModel.get("isCreateMode")) {
                 var contractor = car.getCarrier();
                 contractor.cars().remove(car);
             }

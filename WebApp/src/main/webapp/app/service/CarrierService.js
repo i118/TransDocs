@@ -36,5 +36,64 @@ Ext.define("TransDocs.service.CarrierService", {
 
     newCar: function (session, carClass) {
         return session.createRecord(carClass);
+    },
+
+    openCar: function(car, parentWnd, session, isEditMode, isCreateMode){
+        var viewModel = {
+            data: {
+                car: car,
+                isEditMode: isEditMode,
+                isCreateMode: isCreateMode
+            }
+        }
+        var wnd = Ext.create("TransDocs.view.container.dictionary.CarWindow", {
+            autoWidth: true,
+            autoHeight: true,
+            parent: parentWnd,
+            reference: 'carWindow',
+            viewModel: viewModel,
+            session:session
+        });
+        wnd.getViewModel().setData();
+        wnd.show();
+    },
+
+    openDriver: function(driver, parentWnd, session, carrier, isEditMode, isCreateMode){
+        var viewModel =  {
+            data:{
+                record: driver,
+                contractor: carrier,
+                isEditMode:isEditMode,
+                isCreateMode: isCreateMode
+            }
+        };
+
+        var carLoadCallback = function(){
+            wnd.setLoading(false);
+        };
+
+        carrier.cars().setRemoteFilter(false);
+        carrier.cars().filter("deleted", false);
+        carrier.cars().on("load",carLoadCallback);
+        var wnd = Ext.create("TransDocs.view.container.dictionary.DriverWindow", {
+            autoWidth: true,
+            autoHeight: true,
+            parent: parentWnd,
+            reference: 'driverWindow',
+            session: session,
+            viewModel: viewModel,
+            listeners:{
+                close: function(){
+                    carrier.cars().clearFilter();
+                    carrier.cars().removeListener("load", carLoadCallback);
+                },
+                activate: function(){
+                    if(carrier.cars().isLoading()){
+                        wnd.setLoading(true, true);
+                    }
+                }
+            }
+        });
+        wnd.show();
     }
 });
