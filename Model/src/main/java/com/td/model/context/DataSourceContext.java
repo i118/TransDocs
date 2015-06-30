@@ -1,5 +1,6 @@
 package com.td.model.context;
 
+import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 import com.googlecode.flyway.core.Flyway;
 import com.td.jcr.*;
 import com.td.jcr.jca.XAConnectionManager;
@@ -10,11 +11,14 @@ import com.td.model.multitenant.SchemaProvider;
 import com.td.model.multitenant.SchemaProviderImpl;
 import org.apache.commons.dbcp2.managed.BasicManagedDataSource;
 import org.apache.jackrabbit.jca.JCAManagedConnectionFactory;
+import org.hibernate.cfg.*;
+import org.hibernate.internal.SessionFactoryImpl;
 import org.postgresql.xa.PGXADataSource;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jca.support.LocalConnectionFactoryBean;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -171,6 +175,14 @@ public class DataSourceContext {
         jpaPropertyMap.put("javax.persistence.validation.group.pre-persist", "com.td.model.validation.group.PrePersistGroup,javax.validation.groups.Default");
         factoryBean.setJpaPropertyMap(jpaPropertyMap);
         return factoryBean;
+    }
+
+    @Bean
+    public Hibernate4Module hibernateJacksonModule(LocalContainerEntityManagerFactoryBean entityManagerFactory){
+        Hibernate4Module module = new Hibernate4Module(entityManagerFactory.getNativeEntityManagerFactory().unwrap(SessionFactoryImpl.class));
+        module.disable(Hibernate4Module.Feature.USE_TRANSIENT_ANNOTATION);
+        module.enable(Hibernate4Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS);
+        return module;
     }
 
     @Bean

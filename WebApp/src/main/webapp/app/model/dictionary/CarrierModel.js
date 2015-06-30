@@ -1,7 +1,7 @@
 Ext.define("TransDocs.model.dictionary.CarrierModel",{
     extend: 'TransDocs.model.dictionary.ContractorModel',
     requires: [
-        'TransDocs.model.dictionary.AccountDetailsInterface',
+        'TransDocs.model.dictionary.AccountDetails',
         'TransDocs.model.file.CarrierFileModel'
     ],
     entityName:"Carrier",

@@ -16,7 +16,7 @@ import java.util.Map;
  * Time: 19:43
  * To change this template use File | Settings | File Templates.
  */
-public interface DictionaryCRUDService<T extends Dictionary, D extends DictionaryRepository<? extends T>>  extends CRUDService<T,  D>{
+public interface DictionaryCRUDService<T extends Dictionary>  extends CRUDService<T>{
 
     public <U extends DictionaryDataSet> PagingList<U> findDataSet(Specification<? super U> specification);
 

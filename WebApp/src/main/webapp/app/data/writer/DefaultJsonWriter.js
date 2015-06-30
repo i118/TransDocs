@@ -3,6 +3,6 @@ Ext.define('TransDocs.data.writer.DefaultJsonWriter',{
     alias: 'writer.defaultjson',
     writeAllFields: true,
     encode: false,
-    expandData: true,
+   // expandData: true,
     nameProperty: "mapping"
 });

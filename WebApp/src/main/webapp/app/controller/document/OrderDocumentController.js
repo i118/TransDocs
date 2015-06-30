@@ -70,13 +70,6 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         TransDocs.service.DictionaryService.openSearchDictionary("payment_date", orderWindow,  session, this, combox);
     },
 
-    findTransportType: function(combox, trigger, event){
-        var mainPanel = this.lookupReference("orderMainPanel");
-        var orderWindow = mainPanel.up('window');
-        var session = mainPanel.lookupSession().spawn();
-        TransDocs.service.DictionaryService.openSearchDictionary("transport_type", orderWindow,  session, this, combox);
-    },
-
     selectCustomerPerson: function (combo, record, eOpts) {
         var mainPanel = this.lookupReference("orderMainPanel");
         var viewModel = mainPanel.lookupViewModel();

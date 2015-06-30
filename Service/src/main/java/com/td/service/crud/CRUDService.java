@@ -14,7 +14,7 @@ import java.util.UUID;
  * Time: 12:54
  * To change this template use File | Settings | File Templates.
  */
-public interface CRUDService<T extends IPersistent, D extends IRepository>  extends IService{
+public interface CRUDService<T extends IPersistent>  extends IService{
 
     public T saveOrUpdate(T model);
 

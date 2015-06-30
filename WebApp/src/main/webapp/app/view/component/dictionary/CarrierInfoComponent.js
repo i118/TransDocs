@@ -5,7 +5,7 @@ Ext.define("TransDocs.view.component.dictionary.CarrierInfoComponent", {
         'TransDocs.view.component.dictionary.ContractorForm',
         'TransDocs.view.component.dictionary.AccountDetailsForm',
         'TransDocs.view.component.dictionary.ContractPersonPanel',
-        'TransDocs.model.dictionary.AccountDetailsInterface',
+        'TransDocs.model.dictionary.AccountDetails',
         'TransDocs.model.dictionary.CarrierPersonModel',
         'TransDocs.model.dictionary.CarrierModel',
         'TransDocs.model.dictionary.DriverModel',

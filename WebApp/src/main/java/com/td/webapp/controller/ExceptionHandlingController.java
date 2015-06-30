@@ -44,7 +44,7 @@ public class ExceptionHandlingController {
     }
 
     @ExceptionHandler(OptimisticLockException.class)
-    public @ResponseBody IResponse lockException(){
+    public @ResponseBody IResponse lockException(Throwable e){
         IResponse response = new ResponseImpl<>();
         response.setSuccess(false);
         response.setMessage("Объект изменен другим пользователем");

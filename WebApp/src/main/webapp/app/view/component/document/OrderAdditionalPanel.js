@@ -3,6 +3,17 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
     alias: 'widget.orderAdditionalPanel',
     title: 'Дополнительно',
 
+    requires: [
+        "TransDocs.viewmodel.document.OrderAdditionalViewModel",
+        "TransDocs.controller.document.OrderAdditionalController"
+    ],
+
+    controller: "orderadditional",
+
+    viewModel: {
+        type: "orderAdditional"
+    },
+
     layout: {
         type: 'vbox',
         align: 'stretch'
@@ -31,6 +42,7 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                 flex: 1,
                 autoWidth: true
             },
+
             border: false,
             items: [{
                 xtype: 'comboSearch',
@@ -50,19 +62,29 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                     }
                 ],
                 bind: {
-                    value: '{document.transportType}',
-                    store: '{transportTypeStore}'
+                    value: '{orderAdditional.transportType}',
+                    store: '{simpleDictionaryStore}'
                 }
             }, {
-                xtype: 'combobox',
+                xtype: 'comboSearch',
                 fieldLabel: 'Погранпереход',
-                queryMode: 'local',
-                displayField: 'name',
-                valueField: 'key',
-                store: {
-                    xtype: 'store',
-                    fields: ['key', 'name'],
-                    data: []
+                queryMode: 'remote',
+                displayField: 'description',
+                valueField: 'description',
+                queryProperty: "description",
+                autoWidth: true,
+                recordType: "com.td.model.entity.dictionary.dataset.SimpleDictionaryDataSet",
+                searchHandler: 'findBorderCrossing',
+                globalRestrictions: [
+                    {
+                        propertyName: "dictionaryType",
+                        value: "BORDER_CROSSING",
+                        operator: "="
+                    }
+                ],
+                bind: {
+                    value: '{orderAdditional.borderCrossing}',
+                    store: '{simpleDictionaryStore}'
                 }
             }
             ]
@@ -80,17 +102,28 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                 border: false,
                 items: [{
                     xtype: 'textfield',
-                    fieldLabel: 'Темп. режим'
+                    fieldLabel: 'Темп. режим',
+                    bind: '{orderAdditional.temperatureRegime}'
                 }, {
-                    xtype: 'combobox',
+                    xtype: 'comboSearch',
                     fieldLabel: 'Доп. услуги',
-                    queryMode: 'local',
-                    displayField: 'name',
-                    valueField: 'key',
-                    store: {
-                        xtype: 'store',
-                        fields: ['key', 'name'],
-                        data: []
+                    queryMode: 'remote',
+                    displayField: 'description',
+                    valueField: 'description',
+                    queryProperty: "description",
+                    autoWidth: true,
+                    recordType: "com.td.model.entity.dictionary.dataset.SimpleDictionaryDataSet",
+                    searchHandler: 'findAdditionalService',
+                    globalRestrictions: [
+                        {
+                            propertyName: "dictionaryType",
+                            value: "ADDITIONAL_SERVICE",
+                            operator: "="
+                        }
+                    ],
+                    bind: {
+                        value: '{orderAdditional.additionalService}',
+                        store: '{simpleDictionaryStore}'
                     }
                 }
                 ]
@@ -123,14 +156,34 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
             border: false,
             items: [
                 {
-                    xtype: 'textfield',
-                    fieldLabel: 'Тягач'
+                    xtype: 'combobox',
+                    fieldLabel: 'Тягач',
+                    queryMode: 'remote',
+                    displayField: 'description',
+                    valueField: 'objectId',
+                    reference: "carComboBox",
+                    bind: {
+                        value: '{document.orderTransport.carId}',
+                        store: '{document.carrier.cars}',
+                        disabled: '{!isSelectedCarrier}'
+                    },
+                    listeners: {
+                        select: "selectCar"
+                    },
+                    triggers:{
+                        info: {
+                            type: 'objectInfoTrigger',
+                            handler: 'viewCar'
+                        }
+                    }
                 }, {
                     xtype: 'textfield',
-                    fieldLabel: 'Прицепы'
+                    fieldLabel: 'Прицепы',
+                    bind: '{document.orderTransport.trailer}'
                 }, {
                     xtype: 'textfield',
-                    fieldLabel: 'Пасп. выд.'
+                    fieldLabel: 'Пасп. выд.',
+                    bind: '{document.orderTransport.driverPassport.issuedPassport}'
                 }
             ]
         },
@@ -148,20 +201,31 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                 items: [{
                     xtype: 'combobox',
                     fieldLabel: 'Водитель',
-                    queryMode: 'local',
-                    displayField: 'name',
-                    valueField: 'key',
-                    store: {
-                        xtype: 'store',
-                        fields: ['key', 'name'],
-                        data: []
+                    queryMode: 'remote',
+                    displayField: 'description',
+                    valueField: 'objectId',
+                    bind: {
+                        value: '{document.orderTransport.driverId}',
+                        store: '{document.carrier.drivers}',
+                        disabled: '{!isSelectedCarrier}'
+                    },
+                    listeners: {
+                        select: "selectDriver"
+                    },
+                    triggers:{
+                        info: {
+                            type: 'objectInfoTrigger',
+                            handler: 'viewDriver'
+                        }
                     }
                 }, {
                     xtype: 'textfield',
-                    fieldLabel: 'Пасп. номер'
+                    fieldLabel: 'Пасп. номер',
+                    bind: '{document.orderTransport.driverPassport.number}'
                 }, {
                     xtype: 'textfield',
-                    fieldLabel: 'Моб. тел.'
+                    fieldLabel: 'Моб. тел.',
+                    bind: '{document.orderTransport.driverPhone}'
                 }
                 ]
             }
@@ -202,23 +266,18 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                             {
                                 xtype: 'textarea',
                                 fieldLabel: 'Дополнительные условия',
-                                style: "margin-left: 10px; margin-right: 10px; margin-top: 10px;"
+                                style: "margin-left: 10px; margin-right: 10px; margin-top: 10px;",
+                                bind: '{document.carrierAdditionalCondition.additionalCondition}'
                             }, {
-                                xtype: 'combobox',
+                                xtype: 'textfield',
                                 fieldLabel: 'Штрафные санкции',
-                                queryMode: 'local',
-                                displayField: 'name',
-                                valueField: 'key',
-                                store: {
-                                    xtype: 'store',
-                                    fields: ['key', 'name'],
-                                    data: []
-                                }
+                                bind: '{document.carrierAdditionalCondition.penalty}'
                             }, {
                                 xtype: 'textarea',
                                 fieldLabel: 'Текст договора с перевозчиком',
                                 labelAlign: 'top',
                                 autoScroll: true,
+                                bind: '{document.carrierAdditionalCondition.agreementContent}',
                                 flex:3
                             }
                         ]
@@ -239,21 +298,16 @@ Ext.define("TransDocs.view.component.document.OrderAdditionalPanel", {
                             {
                                 xtype: 'textarea',
                                 fieldLabel: 'Дополнительные условия',
-                                style: "margin-left: 10px; margin-right: 10px; margin-top: 10px;"
+                                style: "margin-left: 10px; margin-right: 10px; margin-top: 10px;",
+                                bind: '{document.customerAdditionalCondition.additionalCondition}'
                             }, {
-                                xtype: 'combobox',
+                                xtype: 'textfield',
                                 fieldLabel: 'Штрафные санкции',
-                                queryMode: 'local',
-                                displayField: 'name',
-                                valueField: 'key',
-                                store: {
-                                    xtype: 'store',
-                                    fields: ['key', 'name'],
-                                    data: []
-                                }
+                                bind: '{document.customerAdditionalCondition.penalty}'
                             }, {
                                 xtype: 'textarea',
                                 fieldLabel: 'Текст договора с заказчиком',
+                                bind: '{document.customerAdditionalCondition.agreementContent}',
                                 labelAlign: 'top',
                                 autoScroll: true,
                                 flex:3

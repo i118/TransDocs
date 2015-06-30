@@ -9,7 +9,7 @@ import com.td.service.crud.dictionary.DictionaryCRUDService;
 /**
  * Created by konstantinchipunov on 23.08.14.
  */
-public interface ContractorCRUDService<T extends Contractor & Dictionary & JuridicalPerson, D extends ContractorRepository<T>>  extends DictionaryCRUDService<T, D> {
+public interface ContractorCRUDService<T extends Contractor & Dictionary & JuridicalPerson, D extends ContractorRepository<T>>  extends DictionaryCRUDService<T> {
 
 
 }

@@ -15,34 +15,7 @@ Ext.define("TransDocs.controller.dictionary.DriverController",{
         var contractor = view.lookupViewModel().get("contractor");
         var isEditMode = this.getView().lookupViewModel().get("isEditMode");
         contractor.drivers().add(driver);
-        var viewModel =  {
-            data:{
-                contractor: contractor,
-                record:driver,
-                isEditMode: isEditMode
-            }
-        }
-        var wnd = Ext.create("TransDocs.view.container.dictionary.DriverWindow", {
-            autoWidth: true,
-            autoHeight: true,
-            parent: parentWnd,
-            contractor: view.getModel(),
-            reference: 'driverWindow',
-            parentController: me,
-            modelClass: view.getModelClass(),
-            session: view.lookupSession().spawn(),
-            viewModel: viewModel,
-            createMode: true,
-            listeners:{
-                close: function(){
-                    contractor.cars().clearFilter();
-                }
-            }
-        });
-
-        contractor.cars().setRemoteFilter(false);
-        contractor.cars().filter("deleted", false);
-        wnd.show();
+        TransDocs.service.CarrierService.openDriver(driver, parentWnd, view.lookupSession().spawn(), contractor, isEditMode, true);
     },
 
     deleteDriver: function(){
@@ -67,46 +40,11 @@ Ext.define("TransDocs.controller.dictionary.DriverController",{
         var me = this;
         var contractor = this.getView().lookupViewModel().get("contractor");
         var isEditMode = this.getView().lookupViewModel().get("isEditMode");
-        var viewModel =  {
-            data:{
-                record: record,
-                contractor: contractor,
-                isEditMode:isEditMode
-            }
-        };
-
-        var carLoadCallback = function(){
-            wnd.setLoading(false);
-        };
-
-        contractor.cars().setRemoteFilter(false);
-        contractor.cars().filter("deleted", false);
-        contractor.cars().on("load",carLoadCallback);
-        var wnd = Ext.create("TransDocs.view.container.dictionary.DriverWindow", {
-            autoWidth: true,
-            autoHeight: true,
-            parent: parentWnd,
-            contractor: view.getModel(),
-            reference: 'driverWindow',
-            parentController: me,
-            modelClass: view.getModelClass(),
-            session: view.lookupSession().spawn(),
-            viewModel: viewModel,
-            listeners:{
-                close: function(){
-                    contractor.cars().clearFilter();
-                    contractor.cars().removeListener("load", carLoadCallback);
-                },
-                activate: function(){
-                    if(contractor.cars().isLoading()){
-                        wnd.setLoading(true, true);
-                    }
-                }
-            }
-        });
-
-
-        wnd.show();
+        if(!record.getPassport()) {
+            var passport = view.lookupSession().createRecord("Passport");
+            record.setPassport(passport);
+        }
+        TransDocs.service.CarrierService.openDriver(record, parentWnd, view.lookupSession().spawn(), contractor, isEditMode);
     }
 
 });

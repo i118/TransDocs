@@ -12,7 +12,7 @@ Ext.define("TransDocs.controller.dictionary.DriverFormController", {
 
             if (!driver.isNew()) {
                 driver.reject();
-            } else if (view.createMode) {
+            } else if (viewModel.get("isCreateMode")) {
                 contractor.drivers().remove(driver);
             }
         }
@@ -37,5 +37,14 @@ Ext.define("TransDocs.controller.dictionary.DriverFormController", {
         var driver = driverForm.lookupViewModel().get("record");
         car.drivers().add(driver);
         driver.setCar(car);
+    },
+
+    viewCar: function(combox, trigger, event){
+        var selection = combox.getSelection();
+        if (selection) {
+            var parentWnd = this.getView();
+            var session = parentWnd.lookupSession().spawn();
+            TransDocs.service.CarrierService.openCar(selection, this.getView(), session, false);
+        }
     }
 });

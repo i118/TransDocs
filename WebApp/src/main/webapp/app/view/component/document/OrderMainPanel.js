@@ -344,7 +344,7 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                     },
                     triggers:{
                         info: {
-                            type: 'personInfoTrigger',
+                            type: 'objectInfoTrigger',
                             handler: 'viewPerson'
                         }
                     }
@@ -506,7 +506,7 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         },
                         triggers:{
                             info: {
-                                type: 'personInfoTrigger',
+                                type: 'objectInfoTrigger',
                                 handler: 'viewPerson'
                             }
                         }

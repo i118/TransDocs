@@ -26,6 +26,8 @@ Ext.define("TransDocs.service.DictionaryComponentFactory", {
         this.builders.add("transport_type", this.getSimpleDictionaryComponentBuilder);
         this.builders.add("order_title", this.getSimpleDictionaryComponentBuilder);
         this.builders.add("payment_date", this.getSimpleDictionaryComponentBuilder);
+        this.builders.add("border_crossing", this.getSimpleDictionaryComponentBuilder);
+        this.builders.add("additional_service", this.getSimpleDictionaryComponentBuilder);
     },
 
     getDictionaryComponent: function (dictionary, customConfig) {

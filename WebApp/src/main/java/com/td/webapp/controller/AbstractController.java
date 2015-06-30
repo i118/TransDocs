@@ -5,7 +5,7 @@ package com.td.webapp.controller;
  */
 public abstract class AbstractController {
 
-    public static final String CONTENT_TYPE = "Content-Type=application/json";
+    public static final String CONTENT_TYPE = "Content-Type=application/json;charset=UTF-8";
 
     public static class RequestName{
         public static final String CREATE_OBJECT = "create.object";

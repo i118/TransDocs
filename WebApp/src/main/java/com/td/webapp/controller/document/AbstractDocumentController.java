@@ -16,7 +16,7 @@ import org.zerotul.specification.Specification;
  */
 public abstract class AbstractDocumentController<T extends AbstractDocumentModel> extends AbstractController{
 
-    public static final class RequestName extends AbstractController.RequestName{
+    public static class RequestName extends AbstractController.RequestName{
         public static final String FIND_DATA_SET = "find.dataset";
     }
 

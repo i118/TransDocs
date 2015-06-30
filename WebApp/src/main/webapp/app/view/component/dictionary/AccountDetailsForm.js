@@ -10,7 +10,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'ИНН',
             name: 'inn',
             bind: {
-                value:'{contractor.inn}',
+                value:'{contractor.accountDetails.inn}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',
@@ -20,7 +20,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'КПП',
             name: 'kpp',
             bind: {
-                value: '{contractor.kpp}',
+                value: '{contractor.accountDetails.kpp}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',
@@ -30,7 +30,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'БИК',
             name: 'bic',
             bind: {
-                value: '{contractor.bic}',
+                value: '{contractor.accountDetails.bic}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',
@@ -40,7 +40,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'ОКПО',
             name: 'okpo',
             bind: {
-                value: '{contractor.okpo}',
+                value: '{contractor.accountDetails.okpo}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',
@@ -50,7 +50,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'ОГРН',
             name: 'ogrn',
             bind: {
-                value: '{contractor.ogrn}',
+                value: '{contractor.accountDetails.ogrn}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',
@@ -60,7 +60,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'ОКВЭД',
             name: 'okved',
             bind: {
-                value: '{contractor.okved}',
+                value: '{contractor.accountDetails.okved}',
                 editable: '{isEditMode}',
             },
             labelAlign: 'left',
@@ -70,7 +70,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'Банк',
             name: 'bank',
             bind: {
-                value: '{contractor.bank}',
+                value: '{contractor.accountDetails.bank}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',
@@ -80,7 +80,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'Директор',
             name: 'director',
             bind: {
-                value: '{contractor.director}',
+                value: '{contractor.accountDetails.director}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',
@@ -90,7 +90,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'Гл. Бухгалтер',
             name: 'chiefAccountant',
             bind: {
-                value: '{contractor.chiefAccountant}',
+                value: '{contractor.accountDetails.chiefAccountant}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',
@@ -100,7 +100,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'Р/С',
             name: 'account',
             bind: {
-                value: '{contractor.account}',
+                value: '{contractor.accountDetails.account}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',
@@ -110,7 +110,7 @@ Ext.define("TransDocs.view.component.dictionary.AccountDetailsForm",{
             fieldLabel: 'К/С',
             name: 'correspondentAccount',
             bind: {
-                value: '{contractor.correspondentAccount}',
+                value: '{contractor.accountDetails.correspondentAccount}',
                 editable: '{isEditMode}'
             },
             labelAlign: 'left',

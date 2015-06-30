@@ -4,7 +4,7 @@ Ext.define("TransDocs.model.dictionary.CarModel",{
     entityName: "Car",
     requires:[
         "TransDocs.model.dictionary.CarrierModel",
-        "TransDocs.model.PassportInterface"
+        "TransDocs.model.Passport"
     ],
 
     fields: [

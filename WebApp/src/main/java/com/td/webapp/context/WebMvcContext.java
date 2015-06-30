@@ -1,9 +1,9 @@
 package com.td.webapp.context;
 
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.td.webapp.controller.file.FileUpload;
-import com.td.webapp.mapper.HibernateAwareObjectMapper;
-import org.springframework.beans.factory.annotation.Configurable;
+import com.td.webapp.mapper.CustomerObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +17,11 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.zerotul.specificaion.jackson.SpecificationModule;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,6 +39,9 @@ public class WebMvcContext extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("resources/**").addResourceLocations("/resources/");
     }
 
+    @Inject
+    private Collection<Module> modules;
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
@@ -48,14 +54,16 @@ public class WebMvcContext extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ObjectMapper hibernateObjectMapper(){
-        return new HibernateAwareObjectMapper();
+    @Inject
+    public ObjectMapper customerObjectMapper(){
+        return new CustomerObjectMapper(modules);
     }
 
     @Bean
+    @Inject
     protected MappingJackson2HttpMessageConverter jackson2HttpMessageConverter(){
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setObjectMapper(hibernateObjectMapper());
+        converter.setObjectMapper(customerObjectMapper());
         return converter;
     }
 
@@ -79,6 +87,11 @@ public class WebMvcContext extends WebMvcConfigurerAdapter {
     @Scope("prototype")
     public FileUpload fileUpload(){
         return new FileUpload();
+    }
+
+    @Bean
+    public Module specificationJacksonModule(){
+        return  new SpecificationModule();
     }
 
 }

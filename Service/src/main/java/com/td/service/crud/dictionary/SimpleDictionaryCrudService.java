@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @Service
 @DictionaryCrud
-public class SimpleDictionaryCrudService extends AbstractCRUDService<SimpleDictionary, DictionaryRepository<SimpleDictionary>> implements DictionaryCRUDService<SimpleDictionary, DictionaryRepository<SimpleDictionary>> {
+public class SimpleDictionaryCrudService extends AbstractCRUDService<SimpleDictionary, DictionaryRepository<SimpleDictionary>> implements DictionaryCRUDService<SimpleDictionary> {
 
     private static final String PRE_AUTHORIZE = "hasAnyRole('"+ RoleNames.ROLE_SUPER_ADMIN+","+RoleNames.ROLE_ADMIN+","+RoleNames.ROLE_MANAGER+"')";
 

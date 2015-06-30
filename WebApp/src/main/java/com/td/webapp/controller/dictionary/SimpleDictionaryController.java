@@ -25,10 +25,10 @@ public class SimpleDictionaryController extends AbstractDictionaryController<Sim
 
     @Inject
     @DictionaryCrud
-    private DictionaryCRUDService<SimpleDictionary, DictionaryJPARepository<SimpleDictionary>> dictionaryService;
+    private DictionaryCRUDService<SimpleDictionary> dictionaryService;
 
     @Override
-    public DictionaryCRUDService<SimpleDictionary, DictionaryJPARepository<SimpleDictionary>> getDictionaryService() {
+    public DictionaryCRUDService<SimpleDictionary> getDictionaryService() {
         return dictionaryService;
     }
 
