@@ -9,13 +9,13 @@ import java.util.UUID;
 /**
  * Created by konstantinchipunov on 25.07.14.
  */
-public class AbstractModel_<T extends IPersistent & Dictionary> {
+public class AbstractModel_<T extends Persistent & Dictionary> {
 
-    public static volatile SingularAttribute<IPersistent, UUID> objectId;
-    public static volatile SingularAttribute<IPersistent, Date> creationDate;
-    public static volatile SingularAttribute<IPersistent, Date> modifyDate;
-    public static volatile SingularAttribute<IPersistent, Long> version;
-    public static volatile SingularAttribute<IPersistent, String> objectType;
-    public static volatile SingularAttribute<IPersistent, Boolean> deleted;
+    public static volatile SingularAttribute<Persistent, UUID> objectId;
+    public static volatile SingularAttribute<Persistent, Date> creationDate;
+    public static volatile SingularAttribute<Persistent, Date> modifyDate;
+    public static volatile SingularAttribute<Persistent, Long> version;
+    public static volatile SingularAttribute<Persistent, String> objectType;
+    public static volatile SingularAttribute<Persistent, Boolean> deleted;
 
 }

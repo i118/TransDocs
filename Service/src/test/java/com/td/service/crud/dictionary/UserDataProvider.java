@@ -1,6 +1,6 @@
 package com.td.service.crud.dictionary;
 
-import com.td.model.entity.dictionary.IPerson;
+import com.td.model.entity.dictionary.Person;
 import com.td.model.entity.dictionary.company.CompanyModel;
 import com.td.model.entity.dictionary.role.IRoleModel;
 import com.td.model.entity.dictionary.role.RoleModel;
@@ -78,7 +78,7 @@ public class UserDataProvider {
         userModel.setPatronymic(UUID.randomUUID().toString());
         userModel.setMail(UUID.randomUUID().toString());
         userModel.setPhone(UUID.randomUUID().toString());
-        userModel.setGender(IPerson.Gender.MAN);
+        userModel.setGender(Person.Gender.MAN);
         userModel.setCompany(new CompanyModel());
         Set<IRoleModel> roleModels = new HashSet<>();
         roleModels.add(new RoleModel());

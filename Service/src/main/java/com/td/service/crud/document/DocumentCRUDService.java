@@ -1,10 +1,11 @@
 package com.td.service.crud.document;
 
+import com.td.model.repository.IRepository;
 import com.td.model.repository.document.DocumentRepository;
 import com.td.model.entity.document.AbstractDocumentModel;
 import com.td.model.entity.document.dataset.DocumentDataSet;
 import com.td.model.utils.PagingList;
-import com.td.service.crud.AbstractCRUDService;
+import com.td.service.crud.GenericCRUDService;
 import com.td.service.crud.LazyInitVisiter;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerotul.specification.Specification;
@@ -14,10 +15,10 @@ import java.util.UUID;
 /**
  * Created by zerotul on 28.01.15.
  */
-public abstract class AbstractDocumentCRUDService<T extends AbstractDocumentModel, D extends DocumentRepository<T>> extends AbstractCRUDService<T, D> implements DocumentService<T> {
+public class DocumentCRUDService<T extends AbstractDocumentModel> extends GenericCRUDService<T> implements DocumentService<T> {
 
-    public AbstractDocumentCRUDService(D dao) {
-        super(dao);
+    public DocumentCRUDService(DocumentRepository<T> repository) {
+        super(repository);
     }
 
     @Transactional
@@ -28,7 +29,7 @@ public abstract class AbstractDocumentCRUDService<T extends AbstractDocumentMode
 
     @Transactional
     public T getDocument(UUID documentId){
-        return getModel(documentId);
+        return findById(documentId);
     }
 
     @Transactional
@@ -46,4 +47,8 @@ public abstract class AbstractDocumentCRUDService<T extends AbstractDocumentMode
         return getRepository().findDataSet(specification);
     }
 
+    @Override
+    protected DocumentRepository<T> getRepository() {
+        return (DocumentRepository<T>) super.getRepository();
+    }
 }

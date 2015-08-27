@@ -14,5 +14,5 @@ import com.td.model.entity.dictionary.role.RoleModel;
  */
 public interface RoleRepository extends DictionaryRepository<RoleModel>, IRepository<RoleModel> {
 
-    public IRoleModel getRoleByName(String roleName);
+    public RoleModel getRoleByName(String roleName);
 }

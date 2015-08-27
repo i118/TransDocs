@@ -3,8 +3,6 @@ package com.td.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.td.model.listener.ModelModificationListener;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -23,7 +21,7 @@ import java.util.UUID;
 
 @MappedSuperclass
 @EntityListeners({ModelModificationListener.class})
-public abstract class AbstractModel implements IPersistent {
+public abstract class AbstractModel implements Persistent {
 
     {
         generateId();

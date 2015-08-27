@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.td.model.entity.file.CustomerFileModel;
-import com.td.model.entity.file.IAttachment;
+import com.td.model.entity.file.Attachment;
 import com.td.model.entity.file.IFileModel;
 import com.td.model.listener.ContractorListener;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.Filters;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
@@ -37,9 +35,9 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
 
     public static final String TABLE_NAME = "td_customer";
 
-    private Set<IContractPerson> persons;
+    private Set<ContractPerson> persons;
 
-    private IAttachment<ICustomerModel> fileStore;
+    private Attachment<ICustomerModel> fileStore;
 
     public static class Columns extends JuridicalPersonModel.Columns {
 
@@ -57,16 +55,16 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
             cascade = CascadeType.ALL
     )
     @JsonManagedReference("persons")
-    public Set<IContractPerson> getPersons() {
+    public Set<ContractPerson> getPersons() {
         return persons;
     }
 
-    public void setPersons(Set<IContractPerson> persons) {
+    public void setPersons(Set<ContractPerson> persons) {
         this.persons = persons;
     }
 
     @Override
-    public void addPerson(IContractPerson person) {
+    public void addPerson(ContractPerson person) {
         if (persons == null) {
             persons = new HashSet<>();
         }
@@ -77,11 +75,11 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
 
     @OneToOne(fetch = FetchType.EAGER, targetEntity = CustomerFileModel.class, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     @JsonManagedReference("fileStore")
-    public IAttachment<ICustomerModel> getFileStore() {
+    public Attachment<ICustomerModel> getFileStore() {
         return fileStore;
     }
 
-    public void setFileStore(IAttachment<ICustomerModel> fileStore) {
+    public void setFileStore(Attachment<ICustomerModel> fileStore) {
         this.fileStore = fileStore;
     }
 

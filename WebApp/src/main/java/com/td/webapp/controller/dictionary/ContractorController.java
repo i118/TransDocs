@@ -1,10 +1,7 @@
 package com.td.webapp.controller.dictionary;
 
-import com.td.model.entity.dictionary.dataset.DictionaryDataSet;
-import com.td.model.entity.dictionary.dataset.DictionaryDataSetImpl;
-import com.td.model.repository.dictionary.contractor.ContractorRepository;
 import com.td.model.entity.dictionary.company.Contractor;
-import com.td.model.entity.dictionary.company.IContractPerson;
+import com.td.model.entity.dictionary.company.ContractPerson;
 import com.td.model.entity.dictionary.company.JuridicalPerson;
 import com.td.service.crud.dictionary.contractor.ContractorCRUDService;
 import com.td.webapp.mapper.Filter;
@@ -13,9 +10,7 @@ import com.td.webapp.response.ResponseImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.zerotul.specification.Specification;
 
-import javax.inject.Inject;
 import java.util.Map;
 import java.util.UUID;
 
@@ -46,7 +41,7 @@ public abstract class ContractorController<T extends JuridicalPerson & Contracto
 
     @Override
     public T getDictionary(UUID  persistentId, Map<String, String> arguments){
-        return getContractorService().getModel(persistentId);
+        return getContractorService().findById(persistentId);
     }
 
     @RequestMapping(value = "/" + RequestName.GET_PERSONS)
@@ -57,7 +52,7 @@ public abstract class ContractorController<T extends JuridicalPerson & Contracto
         if(contractorId ==null) throw new IllegalArgumentException("company filter not found");
         IResponse response = new ResponseImpl();
         getContractorService().getReference(UUID.fromString(contractorId), (T customer) -> {
-            customer.getPersons().stream().filter((IContractPerson person) -> !person.isDeleted()).forEach((IContractPerson person) -> {
+            customer.getPersons().stream().filter((ContractPerson person) -> !person.isDeleted()).forEach((ContractPerson person) -> {
                 person.getEmail();
                 response.addResult(person);
             });
@@ -69,12 +64,12 @@ public abstract class ContractorController<T extends JuridicalPerson & Contracto
 
 
 
-    public abstract ContractorCRUDService<T, ContractorRepository<T>> getContractorService();
+    public abstract ContractorCRUDService<T> getContractorService();
 
     @Override
-    public ContractorCRUDService<T, ContractorRepository<T>> getDictionaryService() {
+    public ContractorCRUDService<T> getDictionaryService() {
         return getContractorService();
     }
 
-    public abstract void setContractorService(ContractorCRUDService<T, ContractorRepository<T>> customerService);
+    public abstract void setContractorService(ContractorCRUDService<T> customerService);
 }

@@ -23,7 +23,7 @@ import javax.persistence.Transient;
 @Table(name = CarrierFileModel.TABLE_NAME)
 @PrimaryKeyJoinColumn(name= AbstractModel.Columns.OBJECT_ID, referencedColumnName= AbstractModel.Columns.OBJECT_ID)
 @EntityListeners({AttachmentListener.class})
-public class CarrierFileModel extends FileModel implements IAttachment<CarrierModel>  {
+public class CarrierFileModel extends FileModel implements Attachment<CarrierModel> {
 
     public static final String TABLE_NAME = "td_carrier_file";
 
@@ -50,8 +50,8 @@ public class CarrierFileModel extends FileModel implements IAttachment<CarrierMo
     @Override
     public void addFile(IFileModel fileModel) {
         super.addFile(fileModel);
-        if(fileModel instanceof IAttachment){
-            ((IAttachment) fileModel).setOwner(getOwner());
+        if(fileModel instanceof Attachment){
+            ((Attachment) fileModel).setOwner(getOwner());
         }
     }
 }

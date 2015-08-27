@@ -24,7 +24,7 @@ public class RoleJPARepository extends DictionaryJPARepository<RoleModel> implem
     }
 
     @Override
-    public IRoleModel getRoleByName(String roleName) {
+    public RoleModel getRoleByName(String roleName) {
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<RoleModel> query = cb.createQuery(getModelClass());
         Root<RoleModel> root = query.from(getModelClass());

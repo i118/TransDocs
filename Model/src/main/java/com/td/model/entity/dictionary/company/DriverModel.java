@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.td.model.entity.AbstractModel;
 import com.td.model.entity.Passport;
-import com.td.model.entity.dictionary.IPerson;
+import com.td.model.entity.dictionary.Person;
 import com.td.model.validation.annotation.NotEmpty;
 
 import javax.persistence.Column;
@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
@@ -27,7 +26,7 @@ import java.util.UUID;
 @JsonTypeName(DriverModel.TABLE_NAME)
 @Table(name = DriverModel.TABLE_NAME)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DriverModel extends AbstractModel implements IPerson {
+public class DriverModel extends AbstractModel implements Person {
 
     private static final long serialVersionUID = -1682907088202994166L;
 

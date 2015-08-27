@@ -3,7 +3,7 @@ package com.td.service.permit.file;
 import com.td.model.context.qualifier.FileQualifier;
 import com.td.model.context.qualifier.LockQualifier;
 import com.td.model.entity.file.IFileModel;
-import com.td.model.entity.lock.ILockable;
+import com.td.model.entity.lock.Lockable;
 import com.td.service.lock.LockService;
 import com.td.service.permit.AbstractPermitAction;
 import com.td.service.crud.file.FileService;
@@ -31,16 +31,16 @@ public class ChangeFilePermitAction extends AbstractPermitAction<IFileModel> {
 
     @Override
     public boolean hasPermission(Authentication authentication, IFileModel targetDomainObject, Object permission) {
-        if(!(targetDomainObject instanceof ILockable)) return true;
-        return !getLockService().isLocked((ILockable) targetDomainObject);
+        if(!(targetDomainObject instanceof Lockable)) return true;
+        return !getLockService().isLocked((Lockable) targetDomainObject);
     }
 
     @Override
     public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType, Object permission) {
         if(targetId==null)return false;
-        IFileModel fileModel = getFileService().getModel((UUID) targetId);
-        if(!(fileModel instanceof ILockable)) return true;
-        return !getLockService().isLocked((ILockable) fileModel);
+        IFileModel fileModel = getFileService().findById((UUID) targetId);
+        if(!(fileModel instanceof Lockable)) return true;
+        return !getLockService().isLocked((Lockable) fileModel);
     }
 
     public LockService getLockService() {

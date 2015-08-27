@@ -1,6 +1,6 @@
 package com.td.model.listener;
 
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -18,16 +18,16 @@ import java.util.Set;
 public class ModelValidateListener {
 
     @PrePersist
-    public void persist(IPersistent persistent){
+    public void persist(Persistent persistent){
         validate(persistent);
     }
 
     @PreUpdate
-    public void update(IPersistent persistent){
+    public void update(Persistent persistent){
         validate(persistent);
     }
 
-    protected void validate(IPersistent persistent) {
+    protected void validate(Persistent persistent) {
         ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
         Validator validator = vf.getValidator();
         Set<ConstraintViolation<Object>> constraintViolations = validator

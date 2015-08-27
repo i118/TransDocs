@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 import com.td.model.entity.dictionary.Dictionary;
 
 /**
@@ -16,7 +16,7 @@ import com.td.model.entity.dictionary.Dictionary;
         @JsonSubTypes.Type(value = CustomerModel.class, name = CustomerModel.TABLE_NAME),
         @JsonSubTypes.Type(value = CarrierModel.class, name = CarrierModel.TABLE_NAME)
 })
-public interface JuridicalPerson extends Dictionary, IPersistent{
+public interface JuridicalPerson extends Dictionary, Persistent {
 
     /**
      * Полное наименование

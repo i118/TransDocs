@@ -6,7 +6,6 @@ import com.td.model.entity.dictionary.AbstractDictionary;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 import java.util.UUID;
 
@@ -15,7 +14,7 @@ import java.util.UUID;
  */
 @MappedSuperclass
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class ContractPersonModel<T extends Contractor> extends AbstractModel implements IContractPerson<T> {
+public abstract class ContractPersonModel<T extends Contractor> extends AbstractModel implements ContractPerson<T> {
 
     private static final long serialVersionUID = 1518957946766246802L;
 

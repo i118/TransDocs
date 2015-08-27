@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * Created by konstantinchipunov on 02.01.14.
  */
-public abstract class AbstractTransientModel implements IModel {
+public abstract class AbstractTransientModel implements Model {
 
     private UUID objectId;
 

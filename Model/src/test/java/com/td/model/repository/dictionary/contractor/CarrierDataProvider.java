@@ -1,12 +1,12 @@
 package com.td.model.repository.dictionary.contractor;
 
 import com.td.model.entity.Passport;
-import com.td.model.entity.dictionary.IPerson;
+import com.td.model.entity.dictionary.Person;
 import com.td.model.entity.dictionary.company.CarModel;
 import com.td.model.entity.dictionary.company.CarrierModel;
 import com.td.model.entity.dictionary.company.CarrierPersonModel;
 import com.td.model.entity.dictionary.company.DriverModel;
-import com.td.model.entity.dictionary.company.IContractPerson;
+import com.td.model.entity.dictionary.company.ContractPerson;
 import com.td.model.entity.dictionary.company.JuridicalPerson;
 import com.td.model.entity.dictionary.company.LegalAccountDetails;
 import org.testng.annotations.DataProvider;
@@ -47,19 +47,19 @@ public class CarrierDataProvider {
 
         carrierModel.setAccountDetails(builder.build());
 
-        IContractPerson contractPerson =new CarrierPersonModel();
+        ContractPerson contractPerson =new CarrierPersonModel();
         contractPerson.setFirstName("Дарт");
         contractPerson.setLastName("Вейдер");
         contractPerson.setPhone("11111");
         contractPerson.setEmail("test@mail.com");
-        contractPerson.setGender(IPerson.Gender.MAN);
+        contractPerson.setGender(Person.Gender.MAN);
 
         carrierModel.addPerson(contractPerson);
         DriverModel driverModel = new DriverModel();
         driverModel.setFirstName("Иван");
         driverModel.setLastName("Иванов");
         driverModel.setPatronymic("Иваныч");
-        driverModel.setGender(IPerson.Gender.MAN);
+        driverModel.setGender(Person.Gender.MAN);
         driverModel.setPhone("11111");
         driverModel.setRegistrationAddress("город Иркутск");
         Passport.PassportBuilder passportBuilder = Passport.PassportBuilder.getBuilder("2222","444444","РОВД");

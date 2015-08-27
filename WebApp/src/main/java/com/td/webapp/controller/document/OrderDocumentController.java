@@ -66,7 +66,7 @@ public class OrderDocumentController extends AbstractDocumentController<OrderDoc
     @RequestMapping(value = "/"+RequestName.GET_TRANSPORT+"/{transportId}", method = {RequestMethod.GET}, headers = CONTENT_TYPE)
     public @ResponseBody IResponse<OrderTransport> getOrderTransport(@PathVariable UUID transportId){
         IResponse<OrderTransport> response = new ResponseImpl();
-        OrderTransport orderTransport = getDocumentService().getModel(transportId, OrderTransport.class);
+        OrderTransport orderTransport = getDocumentService().findById(transportId, OrderTransport.TABLE_NAME);
         if(orderTransport!=null){
             response.addResult(orderTransport);
         }
@@ -77,7 +77,7 @@ public class OrderDocumentController extends AbstractDocumentController<OrderDoc
     @RequestMapping(value = "/"+RequestName.GET_ADDITIONAL_CONDITION+"/{conditionId}", method = {RequestMethod.GET}, headers = CONTENT_TYPE)
     public @ResponseBody IResponse<OrderAdditionalCondition> getAdditionalCondition(@PathVariable UUID conditionId){
         IResponse<OrderAdditionalCondition> response = new ResponseImpl();
-        OrderAdditionalCondition orderTransport = getDocumentService().getModel(conditionId, OrderAdditionalCondition.class);
+        OrderAdditionalCondition orderTransport = getDocumentService().findById(conditionId, OrderAdditionalCondition.TABLE_NAME);
         if(orderTransport!=null){
             response.addResult(orderTransport);
         }

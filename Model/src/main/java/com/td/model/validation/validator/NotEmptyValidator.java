@@ -1,6 +1,6 @@
 package com.td.model.validation.validator;
 
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 import com.td.model.validation.annotation.NotEmpty;
 import org.springframework.util.StringUtils;
 
@@ -28,8 +28,8 @@ public class NotEmptyValidator implements ConstraintValidator<NotEmpty, Object> 
 
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext constraintValidatorContext) {
-        if(obj instanceof IPersistent){
-            IPersistent persistent = (IPersistent) obj;
+        if(obj instanceof Persistent){
+            Persistent persistent = (Persistent) obj;
             try {
               if(fieldName == null) throw new IllegalStateException("field not determined");
 

@@ -3,9 +3,8 @@ package com.td.model.entity.dictionary.company;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.td.model.entity.IModel;
+import com.td.model.entity.Model;
 
-import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -16,18 +15,18 @@ import java.util.Set;
         @JsonSubTypes.Type(value = CustomerModel.class, name = CustomerModel.TABLE_NAME),
         @JsonSubTypes.Type(value = CarrierModel.class, name = CarrierModel.TABLE_NAME)
 })
-public interface Contractor extends IModel {
+public interface Contractor extends Model {
     /**
      * Контактные лица
      * @return  Контактные лица контрагента
      */
     @JsonManagedReference("persons")
-    public Set<IContractPerson> getPersons();
+    public Set<ContractPerson> getPersons();
 
     /**
      * Добовляет контактное лицо контрагенту
      * @param person контактное лицо
      */
-    public void addPerson(IContractPerson person);
+    public void addPerson(ContractPerson person);
 
 }

@@ -1,5 +1,7 @@
 package com.td.service.crud.dictionary.role;
 
+import com.td.model.entity.dictionary.role.RoleModel;
+import com.td.model.entity.dictionary.user.UserModel;
 import com.td.model.repository.dictionary.role.RoleRepository;
 import com.td.model.entity.dictionary.role.IRoleModel;
 import com.td.model.entity.dictionary.user.IUserModel;
@@ -16,10 +18,10 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by konstantinchipunov on 04.08.14.
  */
-public class RoleTransactServiceTest {
+public class RoleCRUDServiceTest {
 
     @InjectMocks
-    private RoleServiceImpl roleTransactService;
+    private RoleCRUDService roleTransactService;
 
     @Mock
     private RoleRepository roleModelDao;
@@ -31,14 +33,14 @@ public class RoleTransactServiceTest {
     }
 
     @Test(dataProvider = RoleModelDataProvider.DataProviders.ROLE_MODEL_DATA, dataProviderClass = RoleModelDataProvider.class)
-    public void testGetRoleByName(IRoleModel roleModel) {
+    public void testGetRoleByName(RoleModel roleModel) {
         when(roleModelDao.getRoleByName(roleModel.getRoleName())).thenReturn(roleModel);
         IRoleModel roleByName = roleTransactService.getRoleByName(roleModel.getRoleName());
         assertEquals(roleModel, roleByName);
     }
 
     @Test(dataProvider = RoleModelDataProvider.DataProviders.HAS_ROLE_MODEL_DATA, dataProviderClass = RoleModelDataProvider.class)
-    public void testHasRole(IUserModel userModel, String roleName, boolean hasRole) {
+    public void testHasRole(UserModel userModel, String roleName, boolean hasRole) {
        boolean result = roleTransactService.hasRole(userModel, roleName);
        assertEquals(result, hasRole);
     }

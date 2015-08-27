@@ -63,7 +63,7 @@ public class UserModel extends AbstractDictionary implements IUserModel {
     @Valid
     private IPassword password;
 
-    private Set<IRoleModel> roleModels = new HashSet<IRoleModel>();
+    private Set<RoleModel> roleModels = new HashSet<RoleModel>();
 
    private CompanyModel company;
 
@@ -167,15 +167,15 @@ public class UserModel extends AbstractDictionary implements IUserModel {
             joinColumns ={ @JoinColumn(name=Relations.USER_ID, nullable=false)},
             inverseJoinColumns = {@JoinColumn(name = Relations.ROLE_ID, nullable = false)}
     )
-    public Set<IRoleModel> getRoleModels() {
+    public Set<RoleModel> getRoleModels() {
         return roleModels;
     }
 
-    public void setRoleModels(Set<IRoleModel> roleModels) {
+    public void setRoleModels(Set<RoleModel> roleModels) {
         this.roleModels = roleModels;
     }
 
-    public void addRoleModel(IRoleModel roleModel){
+    public void addRoleModel(RoleModel roleModel){
         roleModels.add(roleModel);
     }
 

@@ -2,7 +2,7 @@ package com.td.model.entity.lock;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 
 import java.util.UUID;
 
@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 @JsonSubTypes({ @JsonSubTypes.Type(value = Lock.class, name = Lock.TABLE_NAME)})
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.PROPERTY, property="objectType", visible = true)
-public interface ILock extends IPersistent {
+public interface ILock extends Persistent {
 
     public String getLockOwner();
 

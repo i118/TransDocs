@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -18,7 +18,7 @@ import java.io.OutputStream;
         @JsonSubTypes.Type(value = CarrierFileModel.class, name = CarrierFileModel.TABLE_NAME)
 })
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.PROPERTY, property="objectType" , visible = true)
-public interface IFileModel extends IPersistent{
+public interface IFileModel extends Persistent {
 
     public  String getName();
 
@@ -49,9 +49,9 @@ public interface IFileModel extends IPersistent{
     public long getSize();
 
     @JsonBackReference("file-container")
-    public IFileContainer getContainer();
+    public FileContainer getContainer();
 
-    public void setContainer(IFileContainer container);
+    public void setContainer(FileContainer container);
 
 
     public enum FileType{

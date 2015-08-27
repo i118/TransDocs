@@ -19,9 +19,9 @@ public class RoleModelDataProvider {
 
     @DataProvider
     public static Object[][] roleModelData(){
-        IRoleModel adminRole = new RoleModel();
+        RoleModel adminRole = new RoleModel();
         adminRole.setRoleName(RoleNames.ROLE_ADMIN);
-        IRoleModel managerRole = new RoleModel();
+        RoleModel managerRole = new RoleModel();
         managerRole.setRoleName(RoleNames.ROLE_MANAGER);
         return new Object[][]{
                 {adminRole},{managerRole}
@@ -30,14 +30,14 @@ public class RoleModelDataProvider {
 
     @DataProvider
     public static Object[][] hasRoleModelData(){
-        IRoleModel adminRole = new RoleModel();
+        RoleModel adminRole = new RoleModel();
         adminRole.setRoleName(RoleNames.ROLE_ADMIN);
-        IUserModel admin = new UserModel();
+        UserModel admin = new UserModel();
         admin.addRoleModel(adminRole);
 
-        IRoleModel managerRole = new RoleModel();
+        RoleModel managerRole = new RoleModel();
         managerRole.setRoleName(RoleNames.ROLE_MANAGER);
-        IUserModel manager = new UserModel();
+        UserModel manager = new UserModel();
         manager.addRoleModel(managerRole);
         return new Object[][]{
                 {admin, RoleNames.ROLE_ADMIN, true},

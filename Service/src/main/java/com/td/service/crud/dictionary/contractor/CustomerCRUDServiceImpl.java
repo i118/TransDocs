@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Service
 @ContractorCrud(ContractorCrud.Type.CUSTOMER)
-public class CustomerCRUDServiceImpl extends ContractorCRUDServiceImpl<CustomerModel, ContractorRepository<CustomerModel>> {
+public class CustomerCRUDServiceImpl extends ContractorCRUDServiceImpl<CustomerModel> {
 
     @Inject
     public CustomerCRUDServiceImpl(@ContractorQualifier(Type.CUSTOMER) ContractorRepository<CustomerModel> dao) {

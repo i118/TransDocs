@@ -28,7 +28,7 @@ public class CarrierController extends ContractorController<CarrierModel> {
 
     public static final String CONTROLLER_NAME = "Carrier";
 
-    private ContractorCRUDService<CarrierModel, ContractorRepository<CarrierModel>> contractorService;
+    private ContractorCRUDService<CarrierModel> contractorService;
 
     public static class RequestName extends ContractorController.RequestName{
         public static final String GET_DRIVERS = "get.drivers";
@@ -57,7 +57,7 @@ public class CarrierController extends ContractorController<CarrierModel> {
     protected @ResponseBody
     IResponse getCar(@PathVariable UUID carId) {
         IResponse response = new ResponseImpl();
-        CarModel carModel = getContractorService().getModel(carId, CarModel.class);
+        CarModel carModel = getContractorService().findById(carId, CarModel.TABLE_NAME);
         response.addResult(carModel);
         response.setSuccess(true);
         return response;
@@ -83,7 +83,7 @@ public class CarrierController extends ContractorController<CarrierModel> {
     }
 
     @Override
-    public ContractorCRUDService<CarrierModel, ContractorRepository<CarrierModel>> getContractorService() {
+    public ContractorCRUDService<CarrierModel> getContractorService() {
         return contractorService;
     }
 
@@ -91,7 +91,7 @@ public class CarrierController extends ContractorController<CarrierModel> {
     @Inject
     @Override
     @ContractorCrud(ContractorCrud.Type.CARRIER)
-    public void setContractorService(ContractorCRUDService<CarrierModel, ContractorRepository<CarrierModel>> carrierService) {
+    public void setContractorService(ContractorCRUDService<CarrierModel> carrierService) {
         this.contractorService = carrierService;
     }
 

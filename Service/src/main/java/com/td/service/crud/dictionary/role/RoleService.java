@@ -1,5 +1,7 @@
 package com.td.service.crud.dictionary.role;
 
+import com.td.model.entity.dictionary.role.RoleModel;
+import com.td.model.entity.dictionary.user.UserModel;
 import com.td.model.repository.dictionary.role.RoleRepository;
 import com.td.model.entity.dictionary.role.IRoleModel;
 import com.td.model.entity.dictionary.user.IUserModel;
@@ -12,10 +14,10 @@ import com.td.service.crud.dictionary.DictionaryCRUDService;
  * Time: 19:23
  * To change this template use File | Settings | File Templates.
  */
-public interface RoleService extends DictionaryCRUDService<IRoleModel> {
-    public IRoleModel getRoleByName(String roleName);
+public interface RoleService extends DictionaryCRUDService<RoleModel> {
+    public RoleModel getRoleByName(String roleName);
 
-    public boolean hasRole(IUserModel userModel, String roleName);
+    public boolean hasRole(UserModel userModel, String roleName);
 
-    public boolean hasAnyRole(IUserModel userModel, String... roleName);
+    public boolean hasAnyRole(UserModel userModel, String... roleName);
 }

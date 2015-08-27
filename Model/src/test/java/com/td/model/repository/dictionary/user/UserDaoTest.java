@@ -7,7 +7,7 @@ import com.td.model.repository.GenericJPARepository;
 import com.td.model.repository.AbstractDaoTest;
 import com.td.model.repository.dictionary.CompanyRepository;
 import com.td.model.repository.dictionary.role.RoleRepository;
-import com.td.model.entity.dictionary.IPerson;
+import com.td.model.entity.dictionary.Person;
 import com.td.model.entity.dictionary.role.IRoleModel;
 import com.td.model.entity.dictionary.role.RoleModel;
 import com.td.model.entity.dictionary.user.IUserModel;
@@ -86,7 +86,7 @@ public class UserDaoTest extends AbstractDaoTest {
         userModel.setLastName(UUID.randomUUID().toString());
         userModel.setFirstName(UUID.randomUUID().toString());
         userModel.setPhone(UUID.randomUUID().toString());
-        userModel.setGender(IPerson.Gender.MAN);
+        userModel.setGender(Person.Gender.MAN);
         userModel.setMail(UUID.randomUUID().toString());
         userModelDao.saveOrUpdate((UserModel) userModel);
         ((GenericJPARepository)getDao()).getEntityManager().flush();
@@ -109,7 +109,7 @@ public class UserDaoTest extends AbstractDaoTest {
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((GenericJPARepository)getDao()).getEntityManager().clear();
 
-        Collection<IRoleModel> roleModels = userModel.getRoleModels();
+        Collection<RoleModel> roleModels = userModel.getRoleModels();
         userModelDao.delete((UserModel) userModel);
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((GenericJPARepository)getDao()).getEntityManager().clear();

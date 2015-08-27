@@ -1,7 +1,6 @@
 package com.td.service.crud.file;
 
-import com.td.model.repository.file.FileRepository;
-import com.td.model.entity.file.IFileContainer;
+import com.td.model.entity.file.FileContainer;
 import com.td.model.entity.file.IFileModel;
 import com.td.service.lock.LockException;
 import com.td.service.crud.CRUDService;
@@ -31,7 +30,7 @@ public interface FileService extends CRUDService<IFileModel> {
 
     public IFileModel cancelCheckout(UUID id) throws LockException;
 
-    public void saveFiles(IFileContainer fileContainer);
+    public void saveFiles(FileContainer fileContainer);
 
     public IFileModel createFile(String fileType);
 }

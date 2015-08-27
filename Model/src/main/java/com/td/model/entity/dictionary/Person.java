@@ -16,7 +16,7 @@ import static com.td.model.utils.EntityUtils.buildPersonDescription;
  *
  * Интерфейс представляющий человека
  */
-public interface IPerson {
+public interface Person {
 
     enum Gender {
         MAN, WOMAN;

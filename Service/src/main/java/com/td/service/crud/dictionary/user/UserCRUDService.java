@@ -14,13 +14,13 @@ import com.td.service.crud.dictionary.DictionaryCRUDService;
  * Time: 23:12
  * To change this template use File | Settings | File Templates.
  */
-public interface UserCRUDService extends DictionaryCRUDService<UserModel>, CRUDService<UserModel> {
+public interface UserCRUDService extends DictionaryCRUDService<UserModel> {
 
 
-    public IUserModel getUserByName(String userName);
+    public UserModel getUserByName(String userName);
 
     public UserModel getCurrentUser();
 
 
-    public IUserModel getUserByName(String userName, LazyInitVisiter<IUserModel> lazyInitVisiter);
+    public UserModel getUserByName(String userName, LazyInitVisiter<UserModel> lazyInitVisiter);
 }

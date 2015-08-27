@@ -1,6 +1,6 @@
 package com.td.model.repository;
 
-import com.td.model.entity.IModel;
+import com.td.model.entity.Model;
 
 import java.util.UUID;
 
@@ -13,7 +13,7 @@ import java.util.UUID;
  *
  *Базовый интерфейс ДАО
  */
-public interface IRepository<T extends IModel> {
+public interface IRepository<T extends Model> {
 
     public T saveOrUpdate(T persistent);
 

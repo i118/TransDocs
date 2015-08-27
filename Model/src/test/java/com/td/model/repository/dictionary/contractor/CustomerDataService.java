@@ -1,10 +1,10 @@
 package com.td.model.repository.dictionary.contractor;
 
 import com.td.model.repository.dictionary.IDataService;
-import com.td.model.entity.dictionary.IPerson;
+import com.td.model.entity.dictionary.Person;
 import com.td.model.entity.dictionary.company.CustomerModel;
 import com.td.model.entity.dictionary.company.CustomerPersonModel;
-import com.td.model.entity.dictionary.company.IContractPerson;
+import com.td.model.entity.dictionary.company.ContractPerson;
 import com.td.model.entity.dictionary.company.JuridicalPerson;
 import com.td.model.entity.dictionary.company.ICustomerModel;
 
@@ -57,12 +57,12 @@ public class CustomerDataService implements IDataService<JuridicalPerson> {
 
         customerModel.setAccountDetails(builder.build());
 
-        IContractPerson contractPerson =new CustomerPersonModel();
+        ContractPerson contractPerson =new CustomerPersonModel();
         contractPerson.setFirstName("Дарт");
         contractPerson.setLastName("Вейдер");
         contractPerson.setPhone("11111");
         contractPerson.setEmail("test@mail.com");
-        contractPerson.setGender(IPerson.Gender.MAN);
+        contractPerson.setGender(Person.Gender.MAN);
 
         customerModel.addPerson(contractPerson);
 
