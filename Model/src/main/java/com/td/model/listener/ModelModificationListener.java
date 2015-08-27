@@ -1,6 +1,6 @@
 package com.td.model.listener;
 
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -13,14 +13,14 @@ import java.util.Date;
 public class ModelModificationListener {
 
     @PrePersist
-    public void persist(IPersistent persistent){
+    public void persist(Persistent persistent){
         Date creationDate = new Date();
         persistent.setCreationDate(creationDate);
         persistent.setModifyDate(creationDate);
     }
 
     @PreUpdate
-    public void update(IPersistent persistent){
+    public void update(Persistent persistent){
         persistent.setCreationDate(new Date());
     }
 }

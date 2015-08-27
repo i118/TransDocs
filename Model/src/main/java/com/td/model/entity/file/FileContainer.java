@@ -3,8 +3,7 @@ package com.td.model.entity.file;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.td.model.entity.IModel;
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 import com.td.model.entity.dictionary.company.CarrierModel;
 import com.td.model.entity.dictionary.company.CustomerModel;
 
@@ -20,7 +19,7 @@ import java.util.List;
         @JsonSubTypes.Type(value = CarrierModel.class, name = CarrierModel.TABLE_NAME),
 })
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.PROPERTY, property="objectType" , visible = true)
-public interface IFileContainer extends IPersistent {
+public interface FileContainer extends Persistent {
 
     @JsonManagedReference("file-container")
     public List<IFileModel> getFiles();

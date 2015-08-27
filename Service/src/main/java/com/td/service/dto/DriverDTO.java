@@ -1,7 +1,7 @@
 package com.td.service.dto;
 
 import com.td.model.entity.Passport;
-import com.td.model.entity.dictionary.IPerson;
+import com.td.model.entity.dictionary.Person;
 import com.td.model.entity.dictionary.company.DriverModel;
 
 import java.util.UUID;
@@ -19,7 +19,7 @@ public class DriverDTO extends AbstractModelDTO {
 
     private String patronymic;
 
-    private IPerson.Gender gender;
+    private Person.Gender gender;
 
     private Passport passport;
 
@@ -69,7 +69,7 @@ public class DriverDTO extends AbstractModelDTO {
         return patronymic;
     }
 
-    public IPerson.Gender getGender() {
+    public Person.Gender getGender() {
         return gender;
     }
 

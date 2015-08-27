@@ -3,8 +3,8 @@ package com.td.model.entity.dictionary.company;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.td.model.entity.IPersistent;
-import com.td.model.entity.dictionary.IPerson;
+import com.td.model.entity.Persistent;
+import com.td.model.entity.dictionary.Person;
 
 /**
  * Created by konstantinchipunov on 20.08.14.
@@ -14,7 +14,7 @@ import com.td.model.entity.dictionary.IPerson;
         @JsonSubTypes.Type(value = CustomerPersonModel.class, name = CustomerPersonModel.TABLE_NAME),
         @JsonSubTypes.Type(value = CarrierPersonModel.class, name = CarrierPersonModel.TABLE_NAME)
 })
-public interface IContractPerson<T extends Contractor> extends IPerson, IPersistent {
+public interface ContractPerson<T extends Contractor> extends Person, Persistent {
 
     /**
      * Телефон контактного лица

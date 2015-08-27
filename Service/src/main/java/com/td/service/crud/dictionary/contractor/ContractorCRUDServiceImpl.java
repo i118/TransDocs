@@ -1,5 +1,6 @@
 package com.td.service.crud.dictionary.contractor;
 
+import com.td.model.repository.IRepository;
 import com.td.model.repository.dictionary.contractor.ContractorRepository;
 import com.td.model.entity.dictionary.company.Contractor;
 import com.td.model.entity.dictionary.company.JuridicalPerson;
@@ -7,7 +8,7 @@ import com.td.model.entity.dictionary.dataset.DictionaryDataSet;
 import com.td.model.entity.dictionary.role.RoleNames;
 import com.td.model.utils.PagingList;
 import com.td.service.context.qualifier.UserCrud;
-import com.td.service.crud.AbstractCRUDService;
+import com.td.service.crud.GenericCRUDService;
 import com.td.service.crud.dictionary.user.UserCRUDService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +20,7 @@ import java.util.Map;
 /**
  * Created by konstantinchipunov on 23.08.14.
  */
-public class ContractorCRUDServiceImpl<T extends JuridicalPerson & Contractor, D extends ContractorRepository<T>> extends AbstractCRUDService<T, D> implements ContractorCRUDService<T, D> {
+public class ContractorCRUDServiceImpl<T extends JuridicalPerson & Contractor> extends GenericCRUDService<T> implements ContractorCRUDService<T> {
 
     protected static final String PRE_AUTHORIZE = "hasAnyRole('" + RoleNames.ROLE_SUPER_ADMIN + "," + RoleNames.ROLE_ADMIN + "," + RoleNames.ROLE_MANAGER + "')";
 
@@ -27,7 +28,7 @@ public class ContractorCRUDServiceImpl<T extends JuridicalPerson & Contractor, D
     @UserCrud
     private UserCRUDService userCRUDService;
 
-    public ContractorCRUDServiceImpl(D dao) {
+    public ContractorCRUDServiceImpl(ContractorRepository<T> dao) {
         super(dao);
     }
 
@@ -58,5 +59,10 @@ public class ContractorCRUDServiceImpl<T extends JuridicalPerson & Contractor, D
     @Transactional(rollbackFor = Throwable.class)
     public void updateDictionaryObject(T object, Map<String, String> args) {
         getRepository().saveOrUpdate(object);
+    }
+
+    @Override
+    protected ContractorRepository<T> getRepository() {
+        return (ContractorRepository<T>) super.getRepository();
     }
 }

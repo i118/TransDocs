@@ -1,7 +1,7 @@
 package com.td.model.repository;
 
 
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * User: Zerotul
  */
-public class GenericJPARepository<T extends IPersistent> implements IRepository<T> {
+public class GenericJPARepository<T extends Persistent> implements IRepository<T> {
 
     @PersistenceContext(name = "TDPersistenceUnit")
     private EntityManager entityManager;

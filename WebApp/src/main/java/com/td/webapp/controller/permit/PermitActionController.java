@@ -1,6 +1,6 @@
 package com.td.webapp.controller.permit;
 
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 import com.td.service.context.qualifier.PermissionEvaluatorQualifier;
 import com.td.service.permit.PermissionEvaluatorAdapter;
 import com.td.webapp.controller.AbstractController;
@@ -36,7 +36,7 @@ public class PermitActionController extends AbstractController {
 
     @RequestMapping(value = "/"+ RequestName.IS_PERMIT_ACTION, method = RequestMethod.POST,
             headers = "Content-Type=application/json")
-    public @ResponseBody boolean isPermitAction(String actionName, @RequestBody(required = false) IPersistent targetObject){
+    public @ResponseBody boolean isPermitAction(String actionName, @RequestBody(required = false) Persistent targetObject){
        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
        return getPermissionEvaluator().hasPermission(authentication, targetObject, actionName);
     }

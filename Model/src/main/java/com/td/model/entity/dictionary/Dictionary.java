@@ -1,16 +1,11 @@
 package com.td.model.entity.dictionary;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.td.model.entity.IModel;
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 import com.td.model.entity.dictionary.company.*;
 import com.td.model.entity.dictionary.role.RoleModel;
 import com.td.model.entity.dictionary.user.UserModel;
-
-import java.util.Set;
 
 /**
  * Created by konstantinchipunov on 14.08.14.
@@ -23,7 +18,7 @@ import java.util.Set;
         @JsonSubTypes.Type(value = CarrierModel.class, name = CarrierModel.TABLE_NAME),
         @JsonSubTypes.Type(value = SimpleDictionary.class, name = SimpleDictionary.TABLE_NAME)
       })
-public interface Dictionary extends IPersistent {
+public interface Dictionary extends Persistent {
 
     public String getDescription();
 

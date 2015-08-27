@@ -4,14 +4,13 @@ import com.td.model.annotation.SchemaAware;
 import com.td.model.configuration.CompanyInstaller;
 import com.td.model.context.qualifier.CompanyInstallQualifier;
 import com.td.model.context.qualifier.CompanyQualifier;
+import com.td.model.entity.dictionary.role.RoleModel;
 import com.td.model.repository.dictionary.CompanyRepository;
-import com.td.model.entity.IPersistent;
-import com.td.model.entity.dictionary.IPerson;
+import com.td.model.entity.Persistent;
+import com.td.model.entity.dictionary.Person;
 import com.td.model.entity.dictionary.company.CompanyModel;
 import com.td.model.entity.dictionary.dataset.DictionaryDataSet;
-import com.td.model.entity.dictionary.role.IRoleModel;
 import com.td.model.entity.dictionary.role.RoleNames;
-import com.td.model.entity.dictionary.user.IUserModel;
 import com.td.model.entity.dictionary.user.Password;
 import com.td.model.entity.dictionary.user.UserModel;
 import com.td.model.utils.PagingList;
@@ -19,7 +18,7 @@ import com.td.model.validation.ValidationService;
 import com.td.service.context.qualifier.CompanyCrud;
 import com.td.service.context.qualifier.RoleServiceQualifier;
 import com.td.service.context.qualifier.UserCrud;
-import com.td.service.crud.AbstractCRUDService;
+import com.td.service.crud.GenericCRUDService;
 import com.td.service.crud.dictionary.role.RoleService;
 import com.td.service.crud.dictionary.user.UserCRUDService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,7 +35,7 @@ import java.util.UUID;
  */
 @Service
 @CompanyCrud
-public class CompanyCRUDService extends AbstractCRUDService<CompanyModel, CompanyRepository> implements CompanyService{
+public class CompanyCRUDService extends GenericCRUDService<CompanyModel> implements CompanyService{
 
     private static final String PRE_AUTHORIZE = "hasAnyRole('"+ RoleNames.ROLE_SUPER_ADMIN +"," + RoleNames.ROLE_ADMIN+", "+RoleNames.ROLE_MANAGER+"')";
 
@@ -66,14 +65,14 @@ public class CompanyCRUDService extends AbstractCRUDService<CompanyModel, Compan
         ValidationService.getInstance().validate(object);
         companyInstaller.install(object);
         getRepository().save(object);
-        IUserModel userModel = new UserModel();
+        UserModel userModel = new UserModel();
         userModel.setLogin("admin");
         userModel.setPassword(new Password("admin", userModel));
         userModel.setFirstName("admin");
         userModel.setLastName("admin");
-        userModel.setGender(IPerson.Gender.MAN);
+        userModel.setGender(Person.Gender.MAN);
         userModel.setCompany(object);
-        IRoleModel roleModel = roleService.getRoleByName(RoleNames.ROLE_ADMIN);
+        RoleModel roleModel = roleService.getRoleByName(RoleNames.ROLE_ADMIN);
         userModel.addRoleModel(roleModel);
         userService.saveOrUpdate((UserModel) userModel);
     }
@@ -105,15 +104,15 @@ public class CompanyCRUDService extends AbstractCRUDService<CompanyModel, Compan
     @Override
     @SchemaAware(resolvedBy = SchemaAware.ResolvedBy.COMPANY_ID)
     @PreAuthorize(PRE_AUTHORIZE)
-    public CompanyModel getModel(UUID id) {
-        return super.getModel(id);
+    public CompanyModel findById(UUID id) {
+        return super.findById(id);
     }
 
     @Override
     @SchemaAware(resolvedBy = SchemaAware.ResolvedBy.COMPANY_ID)
     @PreAuthorize(PRE_AUTHORIZE)
-    public <D extends IPersistent> D getModel(UUID id, String typeName) {
-        return super.getModel(id, typeName);
+    public <D extends Persistent> D findById(UUID id, String typeName) {
+        return super.findById(id, typeName);
     }
 
     @Override
@@ -123,12 +122,6 @@ public class CompanyCRUDService extends AbstractCRUDService<CompanyModel, Compan
         return super.getReference(id);
     }
 
-    @Override
-    @SchemaAware(resolvedBy = SchemaAware.ResolvedBy.COMPANY_ID)
-    @PreAuthorize(PRE_AUTHORIZE)
-    public <D extends IPersistent> D getReference(UUID id, Class<D> clazz) {
-        return super.getReference(id, clazz);
-    }
 
     @Inject
     @UserCrud
@@ -144,5 +137,10 @@ public class CompanyCRUDService extends AbstractCRUDService<CompanyModel, Compan
     @RoleServiceQualifier
     public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
+    }
+
+    @Override
+    protected CompanyRepository getRepository() {
+        return (CompanyRepository) super.getRepository();
     }
 }

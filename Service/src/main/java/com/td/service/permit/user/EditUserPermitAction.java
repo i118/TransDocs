@@ -2,6 +2,7 @@ package com.td.service.permit.user;
 
 import com.td.model.entity.dictionary.role.RoleNames;
 import com.td.model.entity.dictionary.user.IUserModel;
+import com.td.model.entity.dictionary.user.UserModel;
 import com.td.model.security.UserDetailsImpl;
 import com.td.service.permit.AbstractPermitAction;
 import org.springframework.security.core.Authentication;
@@ -22,7 +23,7 @@ public class EditUserPermitAction extends AbstractPermitAction {
 
     @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
-        IUserModel currentUser  = getCurrentUser(authentication);
+        UserModel currentUser  = getCurrentUser(authentication);
        return hasAnyRole(currentUser, RoleNames.ROLE_ADMIN, RoleNames.ROLE_SUPER_ADMIN);
     }
 
@@ -31,7 +32,7 @@ public class EditUserPermitAction extends AbstractPermitAction {
         return false;
     }
 
-    protected IUserModel getCurrentUser(Authentication authentication){
+    protected UserModel getCurrentUser(Authentication authentication){
         Object principal = authentication.getPrincipal();
         if(principal instanceof UserDetailsImpl){
             return ((UserDetailsImpl)principal).getCurrentUser();

@@ -3,8 +3,6 @@ package com.td.model.entity;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.td.model.entity.dictionary.company.CarrierPersonModel;
-import com.td.model.entity.dictionary.company.ContractPersonModel;
-import com.td.model.entity.dictionary.company.JuridicalPersonModel;
 import com.td.model.entity.dictionary.company.CustomerModel;
 import com.td.model.entity.dictionary.company.DriverModel;
 import com.td.model.entity.dictionary.role.RoleModel;
@@ -37,7 +35,7 @@ import java.util.UUID;
                 @JsonSubTypes.Type(value = FileModel.class, name = FileModel.TABLE_NAME),
                 @JsonSubTypes.Type(value = DriverModel.class, name = DriverModel.TABLE_NAME),
                 @JsonSubTypes.Type(value = Lock.class, name = Lock.TABLE_NAME)})
-public interface IPersistent extends IModel {
+public interface Persistent extends Model {
 
     public void setObjectId(UUID value);
 

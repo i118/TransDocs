@@ -3,17 +3,14 @@ package com.td.service.permit;
 import com.td.model.entity.dictionary.role.IRoleModel;
 import com.td.model.entity.dictionary.role.RoleModel;
 import com.td.model.entity.dictionary.role.RoleNames;
-import com.td.model.entity.dictionary.user.IUserModel;
 import com.td.model.entity.dictionary.user.UserModel;
 import com.td.model.security.UserDetailsImpl;
 import com.td.service.permit.user.EditUserPermitAction;
-import com.td.service.crud.dictionary.role.RoleServiceImpl;
+import com.td.service.crud.dictionary.role.RoleCRUDService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.security.core.Authentication;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -33,7 +30,7 @@ public class EditUserPermitActionTest {
     EditUserPermitAction permitAction;
 
     @Mock
-    RoleServiceImpl roleTransactService;
+    RoleCRUDService roleTransactService;
 
     @BeforeTest
     public void before() {
@@ -43,7 +40,7 @@ public class EditUserPermitActionTest {
 
     @Test
     public void testHasPermission(){
-        IRoleModel adminRole = new RoleModel();
+        RoleModel adminRole = new RoleModel();
         adminRole.setRoleName(RoleNames.ROLE_ADMIN);
 
 

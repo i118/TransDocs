@@ -1,6 +1,6 @@
 package com.td.model.factory;
 
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 import net.sf.corn.cps.CPScanner;
 import net.sf.corn.cps.ClassFilter;
 import net.sf.corn.cps.PackageNameFilter;
@@ -43,7 +43,7 @@ public class TypeFactory implements ITypeFactory{
         return typeMap.get(type);
     }
 
-    public <T extends IPersistent> T createObjectByType(String type){
+    public <T extends Persistent> T createObjectByType(String type){
         Class<T> objectClass = getClassByType(type);
         if(objectClass==null) throw new IllegalArgumentException("file class not found. fileType = "+type);
         try {

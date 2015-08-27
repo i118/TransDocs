@@ -24,7 +24,7 @@ import javax.persistence.Transient;
 @Table(name = CustomerFileModel.TABLE_NAME)
 @PrimaryKeyJoinColumn(name= AbstractModel.Columns.OBJECT_ID, referencedColumnName= AbstractModel.Columns.OBJECT_ID)
 @EntityListeners({AttachmentListener.class})
-public class CustomerFileModel extends FileModel implements IAttachment<ICustomerModel> {
+public class CustomerFileModel extends FileModel implements Attachment<ICustomerModel> {
 
     public static final String TABLE_NAME = "td_customer_file";
 
@@ -51,8 +51,8 @@ public class CustomerFileModel extends FileModel implements IAttachment<ICustome
     @Override
     public void addFile(IFileModel fileModel) {
         super.addFile(fileModel);
-        if(fileModel instanceof IAttachment){
-            ((IAttachment) fileModel).setOwner(getOwner());
+        if(fileModel instanceof Attachment){
+            ((Attachment) fileModel).setOwner(getOwner());
         }
     }
 }

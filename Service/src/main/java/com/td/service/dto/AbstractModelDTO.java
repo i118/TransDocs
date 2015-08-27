@@ -1,6 +1,6 @@
 package com.td.service.dto;
 
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 
 import java.util.Date;
 import java.util.UUID;
@@ -8,7 +8,7 @@ import java.util.UUID;
 /**
  * Created by konstantinchipunov on 07.10.14.
  */
-public class AbstractModelDTO implements IPersistent{
+public class AbstractModelDTO implements Persistent {
 
     private UUID objectId;
 
@@ -26,11 +26,11 @@ public class AbstractModelDTO implements IPersistent{
 
     public AbstractModelDTO(){}
 
-    public AbstractModelDTO(IPersistent persistent){
+    public AbstractModelDTO(Persistent persistent){
       this.build(persistent);
     }
 
-    private void build(IPersistent persistent){
+    private void build(Persistent persistent){
        this.objectId = persistent.getObjectId();
         this.creationDate = persistent.getCreationDate();
         this.modifyDate = persistent.getModifyDate();

@@ -1,7 +1,7 @@
 package com.td.service.lock;
 
 import com.td.model.entity.dictionary.user.IUserModel;
-import com.td.model.entity.lock.ILockable;
+import com.td.model.entity.lock.Lockable;
 import com.td.service.crud.CRUDService;
 
 /**
@@ -9,11 +9,11 @@ import com.td.service.crud.CRUDService;
  */
 public interface LockService extends CRUDService {
 
-    public void lock(ILockable lockable) throws LockException;
+    public void lock(Lockable lockable) throws LockException;
 
-    public void unlock(ILockable lockable) throws LockException;
+    public void unlock(Lockable lockable) throws LockException;
 
-    public boolean isLockedByUser(ILockable lockable, IUserModel userModel);
+    public boolean isLockedByUser(Lockable lockable, IUserModel userModel);
 
-    public boolean isLocked(ILockable lockable);
+    public boolean isLocked(Lockable lockable);
 }

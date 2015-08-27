@@ -6,6 +6,6 @@ import java.util.UUID;
 /**
  * Created by konstantinchipunov on 03.01.14.
  */
-public interface IModel extends Serializable {
+public interface Model extends Serializable {
     public UUID getObjectId();
 }

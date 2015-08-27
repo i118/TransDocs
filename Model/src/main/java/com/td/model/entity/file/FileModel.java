@@ -9,7 +9,7 @@ import com.td.jcr.JcrFactory;
 import com.td.jcr.JcrOperations;
 import com.td.model.entity.AbstractModel;
 import com.td.model.entity.lock.ILock;
-import com.td.model.entity.lock.ILockable;
+import com.td.model.entity.lock.Lockable;
 import com.td.model.entity.lock.Lock;
 import com.td.model.listener.FileListener;
 
@@ -32,7 +32,7 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"content","size"})
 @EntityListeners({FileListener.class})
-public class FileModel extends AbstractModel implements IFileModel, IFileContainer, ILockable {
+public class FileModel extends AbstractModel implements IFileModel, FileContainer, Lockable {
 
     public static final String TABLE_NAME = "td_file";
 
@@ -48,7 +48,7 @@ public class FileModel extends AbstractModel implements IFileModel, IFileContain
 
     private transient InputStream content;
 
-    private IFileContainer container;
+    private FileContainer container;
 
     private List<IFileModel> files;
 
@@ -209,7 +209,7 @@ public class FileModel extends AbstractModel implements IFileModel, IFileContain
             targetEntity = FileModel.class
     )
     @JsonBackReference("file-container")
-    public IFileContainer getContainer(){
+    public FileContainer getContainer(){
       return this.container;
     }
 
@@ -218,7 +218,7 @@ public class FileModel extends AbstractModel implements IFileModel, IFileContain
       return getContainer()!=null ? getContainer().getObjectId() : null;
     }
 
-    public void setContainer(IFileContainer container){
+    public void setContainer(FileContainer container){
         this.container = container;
     }
 }

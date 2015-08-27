@@ -1,7 +1,7 @@
 package com.td.model.repository.dictionary.user;
 
 import com.td.model.repository.dictionary.IDataService;
-import com.td.model.entity.dictionary.IPerson;
+import com.td.model.entity.dictionary.Person;
 import com.td.model.entity.dictionary.company.CompanyModel;
 import com.td.model.entity.dictionary.company.JuridicalPerson;
 import com.td.model.entity.dictionary.user.IUserModel;
@@ -39,7 +39,7 @@ public class UserDataService implements IDataService<IUserModel> {
         userModel.setPatronymic("test_user");
         userModel.setMail("test@mail.ru");
         userModel.setPhone("111111");
-        userModel.setGender(IPerson.Gender.MAN);
+        userModel.setGender(Person.Gender.MAN);
         userModel.setPassword(new Password("1", userModel));
         CompanyModel companyModel = new CompanyModel();
         companyModel.setFullName("djsijlsdjl");

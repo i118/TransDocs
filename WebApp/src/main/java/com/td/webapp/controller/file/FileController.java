@@ -1,7 +1,7 @@
 package com.td.webapp.controller.file;
 
 import com.td.model.context.qualifier.FileQualifier;
-import com.td.model.entity.file.IFileContainer;
+import com.td.model.entity.file.FileContainer;
 import com.td.model.entity.file.IFileModel;
 import com.td.model.utils.StringUtil;
 import com.td.service.lock.LockException;
@@ -110,7 +110,7 @@ public class FileController extends AbstractController {
     IResponse getFiles(@PathVariable String containerId, @RequestParam String containerType) {
         IResponse response = new ResponseImpl<>();
         response.setSuccess(true);
-        IFileContainer container = null;
+        FileContainer container = null;
         final List<IFileModel> files = new ArrayList<>();
         try {
             container = getFileService().getReference(UUID.fromString(containerId), containerType);
@@ -120,7 +120,7 @@ public class FileController extends AbstractController {
             return response;
         }
 
-        getFileService().initLazy(container, (IFileContainer c) -> {
+        getFileService().initLazy(container, (FileContainer c) -> {
             c.getFiles().stream().forEach((IFileModel file) -> {
                 files.add(file);
             });
@@ -132,7 +132,7 @@ public class FileController extends AbstractController {
 
     @RequestMapping(value = "/"+RequestName.LOAD_FILE+"/{fileId}", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody IResponse loadFile(@PathVariable String fileId){
-        IFileModel fileModel = getFileService().getModel(UUID.fromString(fileId));
+        IFileModel fileModel = getFileService().findById(UUID.fromString(fileId));
         IResponse response = new ResponseImpl<>();
         response.addResult(fileModel);
         response.setSuccess(true);

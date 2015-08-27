@@ -1,6 +1,6 @@
 package com.td.service.dto;
 
-import com.td.model.entity.file.IFileContainer;
+import com.td.model.entity.file.FileContainer;
 import com.td.model.entity.file.IFileModel;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class FileModelDTO extends AbstractModelDTO implements IFileModel {
 
     private InputStream content;
 
-    private IFileContainer container;
+    private FileContainer container;
 
 
     public String getName() {
@@ -75,11 +75,11 @@ public class FileModelDTO extends AbstractModelDTO implements IFileModel {
         this.content = content;
     }
 
-    public IFileContainer getContainer() {
+    public FileContainer getContainer() {
         return container;
     }
 
-    public void setContainer(IFileContainer container) {
+    public void setContainer(FileContainer container) {
         this.container = container;
     }
 

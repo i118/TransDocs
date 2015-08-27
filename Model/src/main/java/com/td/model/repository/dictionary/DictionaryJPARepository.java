@@ -43,6 +43,10 @@ public class DictionaryJPARepository<T extends Dictionary> extends GenericJPARep
         }
     }
 
+    public void testJpql(){
+       javax.persistence.Query query = getEntityManager().createQuery("SELECT e FROM CarrierModel e");
+    }
+
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
     }

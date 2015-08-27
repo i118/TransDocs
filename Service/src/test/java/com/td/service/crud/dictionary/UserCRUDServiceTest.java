@@ -34,7 +34,7 @@ import static org.zerotul.specification.Specifications.from;
 /**
  * Created by konstantinchipunov on 30.07.14.
  */
-public class UserTransactServiceTest {
+public class UserCRUDServiceTest {
 
 
     @Mock
@@ -53,9 +53,7 @@ public class UserTransactServiceTest {
     @BeforeTest
     public void before() {
         initMocks(this);
-        Mockito.reset(userModelDao);
-        Mockito.reset(roleService);
-        Mockito.reset(securityService);
+        Mockito.reset(userModelDao, roleService, securityService);
         userTransactService.setSecurityService(securityService);
         userTransactService.setRoleService(roleService);
     }

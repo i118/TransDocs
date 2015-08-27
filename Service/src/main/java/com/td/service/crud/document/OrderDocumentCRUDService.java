@@ -2,7 +2,6 @@ package com.td.service.crud.document;
 
 import com.td.model.context.qualifier.DocumentQualifier;
 import com.td.model.context.qualifier.SecurityQualifier;
-import com.td.model.entity.document.OrderTransport;
 import com.td.model.repository.document.DocumentRepository;
 import com.td.model.entity.document.OrderDocumentModel;
 import com.td.model.security.SecurityService;
@@ -15,7 +14,7 @@ import javax.inject.Inject;
  */
 @Service
 @DocumentQualifier(DocumentQualifier.Type.ORDER)
-public class OrderDocumentCRUDService extends AbstractDocumentCRUDService<OrderDocumentModel, DocumentRepository<OrderDocumentModel>> {
+public class OrderDocumentCRUDService extends DocumentCRUDService<OrderDocumentModel> {
 
     private SecurityService securityService;
 

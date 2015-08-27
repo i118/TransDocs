@@ -2,6 +2,7 @@ package com.td.service.permit;
 
 import com.td.model.context.qualifier.RoleQualifier;
 import com.td.model.entity.dictionary.user.IUserModel;
+import com.td.model.entity.dictionary.user.UserModel;
 import com.td.service.context.qualifier.RoleServiceQualifier;
 import com.td.service.crud.dictionary.role.RoleService;
 
@@ -13,11 +14,11 @@ import javax.inject.Inject;
 public abstract class AbstractPermitAction<T extends Object> implements PermissionEvaluatorAdapter<T> {
     private RoleService roleService;
 
-    protected boolean hasRole(IUserModel userModel, String roleName){
+    protected boolean hasRole(UserModel userModel, String roleName){
       return getRoleService().hasRole(userModel, roleName);
     }
 
-    protected boolean hasAnyRole(IUserModel userModel, String... roleNames){
+    protected boolean hasAnyRole(UserModel userModel, String... roleNames){
         return getRoleService().hasAnyRole(userModel, roleNames);
     }
 

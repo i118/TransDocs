@@ -1,7 +1,7 @@
 package com.td.model.repository;
 
 import com.td.model.repository.context.ModelTestContext;
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 import com.td.model.multitenant.SchemaProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -18,7 +18,7 @@ import static org.testng.Assert.assertNotNull;
  */
 @ContextConfiguration(classes = {ModelTestContext.class})
 @TransactionConfiguration( transactionManager = "transactionManager")
-public abstract class AbstractDaoTest<T extends IPersistent> extends AbstractTransactionalTestNGSpringContextTests {
+public abstract class AbstractDaoTest<T extends Persistent> extends AbstractTransactionalTestNGSpringContextTests {
 
     protected abstract <D extends IRepository> D getDao();
 

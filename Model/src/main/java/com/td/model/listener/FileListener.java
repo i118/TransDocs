@@ -3,8 +3,8 @@ package com.td.model.listener;
 
 import com.td.jcr.JcrFactory;
 import com.td.jcr.JcrOperations;
-import com.td.model.entity.file.IAttachment;
-import com.td.model.entity.file.IFileContainer;
+import com.td.model.entity.file.Attachment;
+import com.td.model.entity.file.FileContainer;
 import com.td.model.entity.file.IFileModel;
 import org.springframework.stereotype.Component;
 
@@ -79,13 +79,13 @@ public class FileListener {
     }
 
     protected Node getParentNode(IFileModel fileModel) throws RepositoryException {
-        IFileContainer container = null;
+        FileContainer container = null;
         Node fileNode = null;
 
-        if (IFileModel.FileType.STORE.equals(fileModel.getFileType()) && fileModel instanceof IAttachment) {
+        if (IFileModel.FileType.STORE.equals(fileModel.getFileType()) && fileModel instanceof Attachment) {
             if (!hasText(fileModel.getName())) fileModel.setName(fileModel.getObjectId().toString());
 
-            container = ((IAttachment) fileModel).getOwner();
+            container = ((Attachment) fileModel).getOwner();
             if (container != null) {
                 return getTemplate().getOrCreateFolder(container.getObjectId().toString());
             }
@@ -97,7 +97,7 @@ public class FileListener {
                 path.insert(0, "/");
                 if (container instanceof IFileModel) {
                     boolean isStore = IFileModel.FileType.STORE.equals(((IFileModel) container).getFileType());
-                    container = isStore ? ((IAttachment) container).getOwner() : ((IFileModel) container).getContainer();
+                    container = isStore ? ((Attachment) container).getOwner() : ((IFileModel) container).getContainer();
                 } else {
                     container = null;
                 }

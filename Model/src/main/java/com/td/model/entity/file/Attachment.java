@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         }
 )
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType", visible = true)
-public interface IAttachment<T extends IFileContainer> extends IFileModel, IFileContainer {
+public interface Attachment<T extends FileContainer> extends IFileModel, FileContainer {
 
     @JsonBackReference("fileStore")
     public T getOwner();

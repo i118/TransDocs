@@ -3,11 +3,11 @@ package com.td.model.entity.dictionary.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 import com.td.model.entity.dictionary.Dictionary;
-import com.td.model.entity.dictionary.IPerson;
-import com.td.model.entity.dictionary.role.IRoleModel;
+import com.td.model.entity.dictionary.Person;
 import com.td.model.entity.dictionary.company.CompanyModel;
+import com.td.model.entity.dictionary.role.RoleModel;
 
 import java.util.Set;
 
@@ -20,7 +20,7 @@ import java.util.Set;
  */
 @JsonSubTypes({ @JsonSubTypes.Type(value = UserModel.class, name = UserModel.TABLE_NAME)})
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.PROPERTY, property="objectType" , visible = true)
-public interface IUserModel extends IPerson, Dictionary, IPersistent {
+public interface IUserModel extends Person, Dictionary, Persistent {
     public String getLogin();
 
     public void setLogin(String login);
@@ -39,11 +39,11 @@ public interface IUserModel extends IPerson, Dictionary, IPersistent {
 
     public String getFirstName();
 
-    public Set<IRoleModel> getRoleModels();
+    public Set<RoleModel> getRoleModels();
 
-    public void setRoleModels(Set<IRoleModel> roleModels);
+    public void setRoleModels(Set<RoleModel> roleModels);
 
-    public void addRoleModel(IRoleModel roleModel);
+    public void addRoleModel(RoleModel roleModel);
 
     @JsonBackReference("users")
     public CompanyModel getCompany();

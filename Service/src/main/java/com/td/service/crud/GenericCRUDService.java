@@ -1,8 +1,7 @@
 package com.td.service.crud;
 
 import com.td.model.repository.IRepository;
-import com.td.model.entity.AbstractModel;
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 import com.td.model.factory.ITypeFactory;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,13 +15,13 @@ import java.util.UUID;
  * Time: 22:15
  * To change this template use File | Settings | File Templates.
  */
-public abstract class AbstractCRUDService<T extends IPersistent, D extends IRepository> implements CRUDService<T> {
+public class GenericCRUDService<T extends Persistent> implements CRUDService<T> {
 
-    protected D repository;
+    protected IRepository<T> repository;
 
     private ITypeFactory typeFactory;
 
-    public AbstractCRUDService(D repository){
+    public GenericCRUDService(IRepository<T> repository){
         this.repository = repository;
     }
 
@@ -35,7 +34,7 @@ public abstract class AbstractCRUDService<T extends IPersistent, D extends IRepo
        return (T) repository.saveOrUpdate(model);
     }
 
-    protected D getRepository() {
+    protected IRepository<T> getRepository() {
         return repository;
     }
 
@@ -48,22 +47,19 @@ public abstract class AbstractCRUDService<T extends IPersistent, D extends IRepo
 
     @Override
     @Transactional
-    public T getModel(UUID id){
+    public T findById(UUID id){
         return (T) repository.getModel(id);
     }
 
-    @Override
-    @Transactional
-    public <D extends IPersistent> D getModel(UUID id, Class<D> clazz){
-       return (D) getRepository().getModel(id, clazz);
-    }
 
     @Override
     @Transactional
-    public <D extends IPersistent> D getModel(UUID id, String typeName) {
+    public <D extends Persistent> D findById(UUID id, String typeName) {
         Class clazz = typeFactory.getClassByType(typeName);
-        if(clazz==null) clazz = AbstractModel.class;
-        return (D) getModel(id, clazz);
+        if(clazz==null){
+            throw new IllegalStateException("entity the type "+typeName+" is not found");
+        };
+        return (D) getRepository().getModel(id, clazz);
     }
 
     @Override
@@ -72,18 +68,15 @@ public abstract class AbstractCRUDService<T extends IPersistent, D extends IRepo
         return (T) repository.getReference(id);
     }
 
-    @Override
-    @Transactional
-    public <D extends IPersistent> D getReference(UUID id, Class<D> clazz){
-        return (D) repository.getReference(id, clazz);
-    }
 
     @Override
     @Transactional
-    public <D extends IPersistent> D getReference(UUID id, String typeName){
+    public <D extends Persistent> D getReference(UUID id, String typeName){
         Class clazz = typeFactory.getClassByType(typeName);
-        if(clazz==null) clazz = AbstractModel.class;
-        return (D) getReference(id, clazz);
+        if(clazz==null){
+            throw new IllegalStateException("entity the type "+typeName+" is not found");
+        };
+        return (D) getRepository().getReference(id, clazz);
     }
 
     @Override
@@ -98,7 +91,7 @@ public abstract class AbstractCRUDService<T extends IPersistent, D extends IRepo
 
     @Override
     @Transactional
-    public <V extends IPersistent> void initLazy(V persistent, LazyInitVisiter<V> visiter){
+    public <V extends Persistent> void initLazy(V persistent, LazyInitVisiter<V> visiter){
        persistent = (V) update((T) persistent);
        visiter.initLazy(persistent);
     }

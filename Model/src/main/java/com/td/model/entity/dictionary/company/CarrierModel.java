@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.td.model.entity.file.CarrierFileModel;
-import com.td.model.entity.file.IAttachment;
-import com.td.model.entity.file.IFileContainer;
+import com.td.model.entity.file.Attachment;
+import com.td.model.entity.file.FileContainer;
 import com.td.model.entity.file.IFileModel;
 import com.td.model.listener.ContractorListener;
 
@@ -32,13 +32,13 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"files"})
 @DiscriminatorValue(CarrierModel.TABLE_NAME)
 @EntityListeners({ContractorListener.class})
-public class CarrierModel extends JuridicalPersonModel implements IFileContainer, Contractor {
+public class CarrierModel extends JuridicalPersonModel implements FileContainer, Contractor {
 
     public static final String TABLE_NAME = "td_carrier";
 
-    private Set<IContractPerson> persons;
+    private Set<ContractPerson> persons;
 
-    private IAttachment<CarrierModel> fileStore;
+    private Attachment<CarrierModel> fileStore;
 
     private Set<DriverModel> drivers;
 
@@ -60,16 +60,16 @@ public class CarrierModel extends JuridicalPersonModel implements IFileContainer
             cascade = CascadeType.ALL
     )
     @JsonManagedReference("persons")
-    public Set<IContractPerson> getPersons() {
+    public Set<ContractPerson> getPersons() {
         return persons;
     }
 
-    public void setPersons(Set<IContractPerson> persons) {
+    public void setPersons(Set<ContractPerson> persons) {
         this.persons = persons;
     }
 
     @Override
-    public void addPerson(IContractPerson person) {
+    public void addPerson(ContractPerson person) {
         if(persons==null){
             persons = new HashSet<>();
         }
@@ -83,11 +83,11 @@ public class CarrierModel extends JuridicalPersonModel implements IFileContainer
             cascade = {CascadeType.REMOVE, CascadeType.PERSIST}
     )
     @JsonManagedReference("fileStore")
-    public IAttachment<CarrierModel> getFileStore() {
+    public Attachment<CarrierModel> getFileStore() {
         return fileStore;
     }
 
-    public void setFileStore(IAttachment<CarrierModel> fileStore) {
+    public void setFileStore(Attachment<CarrierModel> fileStore) {
         this.fileStore = fileStore;
     }
 

@@ -6,6 +6,7 @@ import com.td.model.repository.dictionary.contractor.CarrierRepository;
 import com.td.model.entity.dictionary.company.CarModel;
 import com.td.model.entity.dictionary.company.CarrierModel;
 import com.td.model.entity.dictionary.company.DriverModel;
+import com.td.model.repository.dictionary.contractor.ContractorRepository;
 import com.td.service.context.qualifier.ContractorCrud;
 import com.td.service.crud.file.FileService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +24,7 @@ import java.util.Set;
  */
 @Service
 @ContractorCrud(ContractorCrud.Type.CARRIER)
-public class CarrierCRUDService extends ContractorCRUDServiceImpl<CarrierModel, CarrierRepository> {
+public class CarrierCRUDService extends ContractorCRUDServiceImpl<CarrierModel> {
 
     private FileService fileService;
 
@@ -68,5 +69,10 @@ public class CarrierCRUDService extends ContractorCRUDServiceImpl<CarrierModel, 
 
     public FileService getFileService() {
         return fileService;
+    }
+
+    @Override
+    protected CarrierRepository getRepository() {
+        return (CarrierRepository) super.getRepository();
     }
 }

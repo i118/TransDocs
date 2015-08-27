@@ -1,7 +1,7 @@
 package com.td.model.listener;
 
-import com.td.model.entity.file.IAttachment;
-import com.td.model.entity.file.IFileContainer;
+import com.td.model.entity.file.Attachment;
+import com.td.model.entity.file.FileContainer;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -14,39 +14,39 @@ import java.util.Set;
 public class AttachmentListener {
 
     @PrePersist
-    public void prePersist(IAttachment attachment) {
+    public void prePersist(Attachment attachment) {
       checkOwner(attachment);
     }
 
     @PreUpdate
-    public void preUpdate(IAttachment attachment) {
+    public void preUpdate(Attachment attachment) {
         checkOwner(attachment);
     }
 
-    protected void checkOwner(IAttachment attachment) {
+    protected void checkOwner(Attachment attachment) {
         if (attachment.getOwner() != null) return;
 
-        Set<IAttachment> attachmentSet = new HashSet<>();
+        Set<Attachment> attachmentSet = new HashSet<>();
         attachmentSet.add(attachment);
-        IFileContainer container = attachment.getContainer();
-        IFileContainer owner = null;
+        FileContainer container = attachment.getContainer();
+        FileContainer owner = null;
         while (container != null) {
-            if (container instanceof IAttachment) {
-                owner = ((IAttachment) container).getOwner();
+            if (container instanceof Attachment) {
+                owner = ((Attachment) container).getOwner();
                 if (owner == null) {
-                    attachmentSet.add((IAttachment) container);
+                    attachmentSet.add((Attachment) container);
                 } else {
                     break;
                 }
-                container = ((IAttachment) container).getContainer();
+                container = ((Attachment) container).getContainer();
             }else{
                 break;
             }
-            container = ((IAttachment) container).getContainer();
+            container = ((Attachment) container).getContainer();
         }
 
         if (owner != null) {
-            for (IAttachment attach : attachmentSet) {
+            for (Attachment attach : attachmentSet) {
                 attach.setOwner(owner);
             }
         }

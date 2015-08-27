@@ -4,7 +4,7 @@ import com.td.model.context.qualifier.FileQualifier;
 import com.td.model.context.qualifier.LockQualifier;
 import com.td.model.context.qualifier.SecurityQualifier;
 import com.td.model.entity.file.IFileModel;
-import com.td.model.entity.lock.ILockable;
+import com.td.model.entity.lock.Lockable;
 import com.td.service.lock.LockService;
 import com.td.service.permit.AbstractPermitAction;
 import com.td.model.security.SecurityService;
@@ -37,20 +37,20 @@ public class CheckoutFilePermitAction extends AbstractPermitAction<IFileModel> {
     @Override
     @Transactional
     public boolean hasPermission(Authentication authentication, IFileModel targetDomainObject, Object permission) {
-        if(!(targetDomainObject instanceof ILockable)) return false;
+        if(!(targetDomainObject instanceof Lockable)) return false;
         if(!IFileModel.FileType.FILE.equals(targetDomainObject.getFileType())) return false;
-        IFileModel fileModel = getFileService().getModel(targetDomainObject.getObjectId());
-        return ((ILockable) fileModel).getLockObject()==null || lockService.isLockedByUser((ILockable) fileModel, getSecurityService().getCurrentUser());
+        IFileModel fileModel = getFileService().findById(targetDomainObject.getObjectId());
+        return ((Lockable) fileModel).getLockObject()==null || lockService.isLockedByUser((Lockable) fileModel, getSecurityService().getCurrentUser());
     }
 
     @Override
     @Transactional
     public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType, Object permission) {
         if(targetId==null)return false;
-        IFileModel fileModel = getFileService().getModel((UUID) targetId);
-        if(!(fileModel instanceof ILockable)) return false;
+        IFileModel fileModel = getFileService().findById((UUID) targetId);
+        if(!(fileModel instanceof Lockable)) return false;
         if(!IFileModel.FileType.FILE.equals(fileModel.getFileType())) return false;
-        return ((ILockable) fileModel).getLockObject()==null || lockService.isLockedByUser((ILockable) fileModel, getSecurityService().getCurrentUser());
+        return ((Lockable) fileModel).getLockObject()==null || lockService.isLockedByUser((Lockable) fileModel, getSecurityService().getCurrentUser());
     }
 
     public SecurityService getSecurityService() {

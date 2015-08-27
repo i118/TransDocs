@@ -3,13 +3,13 @@ package com.td.service.crud.file;
 import com.td.model.context.qualifier.FileQualifier;
 import com.td.model.context.qualifier.LockQualifier;
 import com.td.model.repository.file.FileRepository;
-import com.td.model.entity.file.IFileContainer;
+import com.td.model.entity.file.FileContainer;
 import com.td.model.entity.file.IFileModel;
-import com.td.model.entity.lock.ILockable;
+import com.td.model.entity.lock.Lockable;
 import com.td.service.dto.FileModelDTO;
 import com.td.service.lock.LockException;
 import com.td.service.lock.LockService;
-import com.td.service.crud.AbstractCRUDService;
+import com.td.service.crud.GenericCRUDService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 @Service
 @FileQualifier
-public class FileServiceImpl extends AbstractCRUDService<IFileModel, FileRepository> implements FileService {
+public class FileServiceImpl extends GenericCRUDService<IFileModel> implements FileService {
 
     private LockService lockService;
 
@@ -57,14 +57,14 @@ public class FileServiceImpl extends AbstractCRUDService<IFileModel, FileReposit
     @Override
     @Transactional
     public void deleteFile(UUID id){
-       IFileModel fileModel = getModel(id);
+       IFileModel fileModel = findById(id);
        delete(fileModel);
     }
 
     @Transactional
     public IFileModel checkout(UUID id) throws LockException {
-       IFileModel fileModel = getModel(id);
-       getLockService().lock((ILockable) fileModel);
+       IFileModel fileModel = findById(id);
+       getLockService().lock((Lockable) fileModel);
        saveOrUpdate(fileModel);
 
        FileModelDTO dto = new FileModelDTO();
@@ -79,14 +79,14 @@ public class FileServiceImpl extends AbstractCRUDService<IFileModel, FileReposit
 
     @Transactional(rollbackFor = Throwable.class, propagation = Propagation.REQUIRED)
     public IFileModel cancelCheckout(UUID id) throws LockException {
-       IFileModel fileModel = getModel(id);
-       getLockService().unlock((ILockable) fileModel);
+       IFileModel fileModel = findById(id);
+       getLockService().unlock((Lockable) fileModel);
        saveOrUpdate(fileModel);
        return fileModel;
     }
 
     @Transactional(rollbackFor = Throwable.class, propagation = Propagation.REQUIRED)
-    public void saveFiles(IFileContainer fileContainer){
+    public void saveFiles(FileContainer fileContainer){
       Collection<IFileModel> newFiles = new HashSet<>();
       Collection<IFileModel> dirtyFiles = new HashSet<>();
       sortedFiles(fileContainer, newFiles, dirtyFiles);
@@ -94,12 +94,12 @@ public class FileServiceImpl extends AbstractCRUDService<IFileModel, FileReposit
       dirtyFiles.stream().forEach((IFileModel fileModel)->saveOrUpdate(fileModel));
     }
 
-    protected void sortedFiles(IFileContainer container, Collection<IFileModel> newFiles, Collection<IFileModel> dirtyFiles){
+    protected void sortedFiles(FileContainer container, Collection<IFileModel> newFiles, Collection<IFileModel> dirtyFiles){
         Collection<IFileModel> files = container.getFiles();
         if(files==null)return;
         for (IFileModel fileModel : container.getFiles()) {
-            if(fileModel instanceof IFileContainer){
-                sortedFiles((IFileContainer) fileModel, newFiles, dirtyFiles);
+            if(fileModel instanceof FileContainer){
+                sortedFiles((FileContainer) fileModel, newFiles, dirtyFiles);
             }
             if(fileModel.isNew()){
                 newFiles.add(fileModel);
@@ -111,7 +111,7 @@ public class FileServiceImpl extends AbstractCRUDService<IFileModel, FileReposit
 
     @Transactional
     public IFileModel getFile(UUID id){
-       IFileModel fileModel = getModel(id);
+       IFileModel fileModel = findById(id);
 
        FileModelDTO dto = new FileModelDTO();
        dto.setContent(fileModel.getContent());
@@ -125,8 +125,8 @@ public class FileServiceImpl extends AbstractCRUDService<IFileModel, FileReposit
 
     @Transactional
     public IFileModel checkIn(UUID id, InputStream content) throws IOException, LockException {
-        IFileModel fileModel = getModel(id);
-        getLockService().unlock((ILockable) fileModel);
+        IFileModel fileModel = findById(id);
+        getLockService().unlock((Lockable) fileModel);
         fileModel.setContent(content);
         fileModel.setModifyDate(new Date());
         saveFile(fileModel, null);
@@ -148,4 +148,8 @@ public class FileServiceImpl extends AbstractCRUDService<IFileModel, FileReposit
         this.lockService = lockService;
     }
 
+    @Override
+    protected FileRepository getRepository() {
+        return (FileRepository) super.getRepository();
+    }
 }

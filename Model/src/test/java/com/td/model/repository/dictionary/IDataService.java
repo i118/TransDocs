@@ -1,6 +1,6 @@
 package com.td.model.repository.dictionary;
 
-import com.td.model.entity.IPersistent;
+import com.td.model.entity.Persistent;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by konstantinchipunov on 28.07.14.
  */
-public interface IDataService<T extends IPersistent> {
+public interface IDataService<T extends Persistent> {
 
     public T[][] getDataArray();
 

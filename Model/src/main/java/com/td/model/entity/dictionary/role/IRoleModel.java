@@ -2,7 +2,6 @@ package com.td.model.entity.dictionary.role;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.td.model.entity.IPersistent;
 import com.td.model.entity.dictionary.Dictionary;
 
 /**
