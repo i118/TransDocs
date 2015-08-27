@@ -21,8 +21,9 @@
             <param name="LevelMin" value="WARN"/>
         </filter>
     </appender>
-    <appender name="LOG-FILE-APPENDER" class="org.apache.log4j.FileAppender">
-        <param name="file" value="/Users/zerotul/work/projects/TransDocs/log/log/transdocs.log"/>
+    <appender name="LOG-FILE-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="/Users/zerotul/work/projects/TransDocs/log/td.log"/>
+        <param name="DatePattern" value="'.'yyyy-ww" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
         </layout>
