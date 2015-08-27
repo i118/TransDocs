@@ -16,13 +16,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created with IntelliJ IDEA.
- * User: konstantinchipunov
- * Date: 06.11.13
- * Time: 23:05
- * To change this template use File | Settings | File Templates.
- *
- *
+ * Created by zerotul
  * Базовый интерфейс модели
  */
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.PROPERTY, property="objectType", visible = true)

@@ -8,7 +8,7 @@ import com.td.model.entity.Model;
 import java.util.Set;
 
 /**
- * Created by zerotul on 27.01.15.
+ * Created by zerotul.
  */
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.PROPERTY, property="objectType", visible = true)
 @JsonSubTypes({

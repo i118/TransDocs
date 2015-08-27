@@ -8,7 +8,7 @@ import com.td.model.entity.dictionary.role.RoleModel;
 import com.td.model.entity.dictionary.user.UserModel;
 
 /**
- * Created by konstantinchipunov on 14.08.14.
+ * Created by zerotul.
  */
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.PROPERTY, property="objectType", visible = true)
 @JsonSubTypes({
