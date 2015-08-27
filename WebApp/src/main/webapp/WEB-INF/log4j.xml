@@ -22,7 +22,7 @@
         </filter>
     </appender>
     <appender name="LOG-FILE-APPENDER" class="org.apache.log4j.FileAppender">
-        <param name="file" value="/Users/zerotul/work/projects/TransDocs/log/transdocs.log"/>
+        <param name="file" value="log/transdocs.log"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
         </layout>
