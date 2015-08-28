@@ -31,7 +31,6 @@ public class WebInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext container) throws ServletException {
-        try {
             AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
             rootContext.register(WebAppContext.class);
             container.setInitParameter("log4jConfigLocation", "/WEB-INF/log4j.xml");
@@ -57,11 +56,5 @@ public class WebInitializer implements WebApplicationInitializer {
             ServletRegistration.Dynamic dispatcher = container.addServlet("transdocs", new DispatcherServlet(rootContext));
             dispatcher.setLoadOnStartup(1);
             dispatcher.addMapping("/");
-        }catch (Exception e){
-            StringWriter writer = new StringWriter();
-            e.printStackTrace(new PrintWriter(writer));
-            logger.debug(writer.toString());
-            throw new ServletException(e);
-        }
     }
 }

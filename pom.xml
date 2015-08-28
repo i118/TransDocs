@@ -247,6 +247,7 @@
                         <complianceLevel>${maven.compiler.source}</complianceLevel>
                         <encoding>UTF-8</encoding>
                         <verbose>true</verbose>
+
                     </configuration>
                     <executions>
                         <execution>
