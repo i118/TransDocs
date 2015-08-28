@@ -11,9 +11,9 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(RoleModel.class)
 public abstract class RoleModel_ extends AbstractModel_ {
 
-    public static volatile SingularAttribute<IRoleModel, String> roleName;
+    public static volatile SingularAttribute<RoleModel, String> roleName;
 
-    public static volatile SingularAttribute<IRoleModel, String> description;
+    public static volatile SingularAttribute<RoleModel, String> description;
 
 
 }
