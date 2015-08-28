@@ -16,7 +16,7 @@ import javax.inject.Inject;
 import java.util.Map;
 
 /**
- * Created by konstantinchipunov on 25.08.14.
+ * Created by zerotul
  */
 @Service
 @ContractorCrud(ContractorCrud.Type.CUSTOMER)

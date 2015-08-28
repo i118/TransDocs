@@ -7,7 +7,7 @@ import com.td.model.entity.dictionary.company.JuridicalPerson;
 import com.td.service.crud.dictionary.DictionaryCRUDService;
 
 /**
- * Created by konstantinchipunov on 23.08.14.
+ * Created by zerotul.
  */
 public interface ContractorCRUDService<T extends Contractor & Dictionary & JuridicalPerson>  extends DictionaryCRUDService<T> {
 

@@ -18,7 +18,7 @@ import javax.inject.Inject;
 import java.util.Map;
 
 /**
- * Created by konstantinchipunov on 23.08.14.
+ * Created by zerotul.
  */
 public class ContractorCRUDServiceImpl<T extends JuridicalPerson & Contractor> extends GenericCRUDService<T> implements ContractorCRUDService<T> {
 
