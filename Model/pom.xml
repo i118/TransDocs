@@ -294,7 +294,7 @@
         </dependency>
         <dependency>
             <groupId>org.zerotul</groupId>
-            <artifactId>orika-core</artifactId>
+            <artifactId>custom-orika-core</artifactId>
             <version>1.4.6</version>
         </dependency>
     </dependencies>
