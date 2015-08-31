@@ -2,6 +2,8 @@ package com.td.service.crud.dictionary.contractor;
 
 import com.td.model.context.qualifier.ContractorQualifier;
 import com.td.model.context.qualifier.FileQualifier;
+import com.td.model.dto.dictionary.contractor.CustomerDTO;
+import com.td.model.dto.mapper.Mapper;
 import com.td.model.repository.dictionary.contractor.ContractorRepository;
 import com.td.model.entity.dictionary.company.CustomerModel;
 import com.td.service.context.qualifier.ContractorCrud;
@@ -20,7 +22,9 @@ import java.util.Map;
  */
 @Service
 @ContractorCrud(ContractorCrud.Type.CUSTOMER)
-public class CustomerCRUDServiceImpl extends ContractorCRUDServiceImpl<CustomerModel> {
+public class CustomerCRUDServiceImpl extends ContractorCRUDServiceImpl<CustomerModel> implements CustomerCRUDService {
+
+    private Mapper mapper;
 
     @Inject
     public CustomerCRUDServiceImpl(@ContractorQualifier(Type.CUSTOMER) ContractorRepository<CustomerModel> dao) {
@@ -38,6 +42,13 @@ public class CustomerCRUDServiceImpl extends ContractorCRUDServiceImpl<CustomerM
         getFileService().saveFiles(object);
     }
 
+    @Override
+    @Transactional
+    public void updateDictionaryObject(CustomerDTO object, Map<String, String> args) {
+        CustomerModel model = getReference(object.getObjectId());
+        mapper.map(object, model);
+        super.updateDictionaryObject(model, args);
+    }
 
     @Inject
     @FileQualifier
@@ -47,5 +58,14 @@ public class CustomerCRUDServiceImpl extends ContractorCRUDServiceImpl<CustomerM
 
     public FileService getFileService() {
         return fileService;
+    }
+
+    public Mapper getMapper() {
+        return mapper;
+    }
+
+    @Inject
+    public void setMapper(Mapper mapper) {
+        this.mapper = mapper;
     }
 }

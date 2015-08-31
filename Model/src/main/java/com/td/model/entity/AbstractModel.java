@@ -1,7 +1,9 @@
 package com.td.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.td.model.listener.ModelModificationListener;
 import org.hibernate.annotations.Type;
 
@@ -10,16 +12,12 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created with IntelliJ IDEA.
- * User: konstantinchipunov
- * Date: 06.11.13
- * Time: 23:07
- * To change this template use File | Settings | File Templates.
- *
+ * created by zerotul
  * Абстракный класс модели
  */
 
 @MappedSuperclass
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="objectId")
 @EntityListeners({ModelModificationListener.class})
 public abstract class AbstractModel implements Persistent {
 

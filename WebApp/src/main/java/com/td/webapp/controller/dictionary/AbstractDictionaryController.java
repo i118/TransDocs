@@ -39,7 +39,7 @@ public abstract class AbstractDictionaryController<T extends Dictionary> extends
         return response;
     }
 
-    @RequestMapping(value = "/"+ RequestName.UPDATE_OBJECT +"/{persistentId}", method = RequestMethod.PUT,
+    @RequestMapping(value = "/"+ RequestName.UPDATE_OBJECT+"1"+ "/{persistentId}", method = RequestMethod.PUT,
             headers = CONTENT_TYPE)
     public @ResponseBody IResponse updateObject(@RequestBody T persistent,@RequestParam Map<String, String> args){
         IResponse response = new ResponseImpl();

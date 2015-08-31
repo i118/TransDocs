@@ -9,10 +9,10 @@ Ext.define("TransDocs.model.AbstractModel",{
     identifier: 'uuid',
     fields: [
         {name: 'objectId', type: 'string'},
-        {name: 'version', defaultValue: -1},
+        {name: 'version', defaultValue: -1, critical: true},
         {name: 'creationDate',type:'date'},
         {name: 'modifyDate',type:'date'},
-        {name: 'objectType',type:'string', persist:true,  convert: function(newValue, model){
+        {name: 'objectType',type:'string', critical: true, persist:true,  convert: function(newValue, model){
             return model.getObjectType();
         } },
         {name: 'deleted',type:'boolean'}
@@ -136,7 +136,7 @@ Ext.define("TransDocs.model.AbstractModel",{
 
     createActionMap: function(){},
 
-    getAssociatedData: function (result, options,writer) {
+    getAssociatedData: function (result, operation,writer) {
         var me = this,
             associations = me.associations,
             deep, i, item, items, itemData, length, record, role, roleName;
@@ -144,7 +144,7 @@ Ext.define("TransDocs.model.AbstractModel",{
         var getDataInternal = function(record){
             var dataInternal;
             if(writer){
-                dataInternal = writer.getRecordData(record);
+                dataInternal = writer.getRecordData(record, operation);
                 if(writer.getExpandData()){
                     dataInternal = writer.getExpandedData([dataInternal])[0]
                 }

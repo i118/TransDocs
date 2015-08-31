@@ -33,19 +33,19 @@ public class CarrierDataProvider {
         carrierModel.setPhone("1112");
         carrierModel.setEmail("test@mail.com");
 
-        LegalAccountDetails.AccountDetailsBuilder builder = LegalAccountDetails.AccountDetailsBuilder.with()
-                .setAccount("112234543312")
-                .setCorrespondentAccount("112234543312")
-                .setChiefAccountant("Марья Ивановна")
-                .setDirector("Роман Абрамович")
-                .setDirector("Банк первой голактической империи")
-                .setINN("11122233323232")
-                .setKPP("11122233323232")
-                .setBIC("11122233323232")
-                .setOGRN("11122233323232")
-                .setOKVED("11122233323232");
+        LegalAccountDetails details = new LegalAccountDetails();
+        details.setAccount("112234543312");
+        details.setCorrespondentAccount("112234543312");
+        details.setChiefAccountant("Марья Ивановна");
+        details.setDirector("Роман Абрамович");
+        details.setDirector("Банк первой голактической империи");
+        details.setINN("11122233323232");
+        details.setKPP("11122233323232");
+        details.setBIC("11122233323232");
+        details.setOGRN("11122233323232");
+        details.setOKVED("11122233323232");
 
-        carrierModel.setAccountDetails(builder.build());
+        carrierModel.setAccountDetails(details);
 
         ContractPerson contractPerson =new CarrierPersonModel();
         contractPerson.setFirstName("Дарт");
@@ -62,8 +62,8 @@ public class CarrierDataProvider {
         driverModel.setGender(Person.Gender.MAN);
         driverModel.setPhone("11111");
         driverModel.setRegistrationAddress("город Иркутск");
-        Passport.PassportBuilder passportBuilder = Passport.PassportBuilder.getBuilder("2222","444444","РОВД");
-        driverModel.setPassport(passportBuilder.build());
+        Passport passport = new Passport("2222", "444444", "РОВД");
+        driverModel.setPassport(passport);
 
         CarModel carModel =new CarModel();
         carModel.setCarNumber("111");

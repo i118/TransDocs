@@ -1,16 +1,10 @@
 package com.td.model.repository.dictionary.contractor;
 
+import com.td.model.entity.dictionary.company.*;
 import com.td.model.repository.dictionary.IDataService;
 import com.td.model.entity.dictionary.Person;
-import com.td.model.entity.dictionary.company.CustomerModel;
-import com.td.model.entity.dictionary.company.CustomerPersonModel;
-import com.td.model.entity.dictionary.company.ContractPerson;
-import com.td.model.entity.dictionary.company.JuridicalPerson;
-import com.td.model.entity.dictionary.company.ICustomerModel;
 
 import java.util.UUID;
-
-import static com.td.model.entity.dictionary.company.LegalAccountDetails.AccountDetailsBuilder;
 
 /**
  * Created by konstantinchipunov on 21.08.14.
@@ -43,19 +37,19 @@ public class CustomerDataService implements IDataService<JuridicalPerson> {
         customerModel.setPhone("1112");
         customerModel.setEmail("test@mail.com");
 
-        AccountDetailsBuilder builder = AccountDetailsBuilder.with()
-                                                 .setAccount("112234543312")
-                                                 .setCorrespondentAccount("112234543312")
-                                                 .setChiefAccountant("Марья Ивановна")
-                                                 .setDirector("Роман Абрамович")
-                                                 .setDirector("Банк первой голактической империи")
-                                                 .setINN("11122233323232")
-                                                 .setKPP("11122233323232")
-                                                 .setBIC("11122233323232")
-                                                 .setOGRN("11122233323232")
-                                                 .setOKVED("11122233323232");
+        LegalAccountDetails details = new LegalAccountDetails();
+        details.setAccount("112234543312");
+        details.setCorrespondentAccount("112234543312");
+        details.setChiefAccountant("Марья Ивановна");
+        details.setDirector("Роман Абрамович");
+        details.setDirector("Банк первой голактической империи");
+        details.setINN("11122233323232");
+        details.setKPP("11122233323232");
+        details.setBIC("11122233323232");
+        details.setOGRN("11122233323232");
+        details.setOKVED("11122233323232");
 
-        customerModel.setAccountDetails(builder.build());
+        customerModel.setAccountDetails(details);
 
         ContractPerson contractPerson =new CustomerPersonModel();
         contractPerson.setFirstName("Дарт");

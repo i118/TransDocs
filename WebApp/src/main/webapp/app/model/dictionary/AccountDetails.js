@@ -1,5 +1,11 @@
-Ext.define("TransDocs.model.dictionary.AccountDetails",{
+Ext.define("TransDocs.model.dictionary.AccountDetails", {
     extend: "Ext.data.Model",
+
+    constructor: function () {
+        this.callParent(arguments);
+        this.phantom = false;
+    },
+
     fields: [
         {name: 'inn', type: 'string'},
         {name: 'kpp', type: 'string'},
@@ -12,8 +18,10 @@ Ext.define("TransDocs.model.dictionary.AccountDetails",{
         {name: 'chiefAccountant', type: 'string'},
         {name: 'account', type: 'string'},
         {name: 'correspondentAccount'},
-        {name: 'objectType', type: 'string',  convert: function(value, record){
+        {
+            name: 'objectType', type: 'string',critical:true, convert: function (value, record) {
             return 'account_details';
-        }}
+        }
+        }
     ]
 });

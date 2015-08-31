@@ -41,6 +41,14 @@ public class Passport implements Serializable, Cloneable {
          public static final String ISSUED_PASSPORT = "issued_passport";
     }
 
+    public Passport(String serial, String number, String issuedPassport) {
+        this.serial = serial;
+        this.number = number;
+        this.issuedPassport = issuedPassport;
+    }
+
+    public Passport() {
+    }
 
     public String getSerial() {
         return serial;
@@ -48,6 +56,18 @@ public class Passport implements Serializable, Cloneable {
 
     public String getNumber() {
         return number;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setIssuedPassport(String issuedPassport) {
+        this.issuedPassport = issuedPassport;
     }
 
     public String getIssuedPassport() {
@@ -73,49 +93,5 @@ public class Passport implements Serializable, Cloneable {
         int result = serial != null ? serial.hashCode() : 0;
         result = 31 * result + (number != null ? number.hashCode() : 0);
         return result;
-    }
-
-    public static class PassportBuilder {
-
-        private String serial;
-
-        private String number;
-
-        private String issuedPassport;
-
-        private PassportBuilder(){}
-
-        public static PassportBuilder getBuilder(String serial, String number, String issuedPassport){
-           PassportBuilder builder = new PassportBuilder();
-           builder.setNumber(number).setIssuedPassport(issuedPassport).setSerial(serial);
-           return builder;
-        }
-
-        public static PassportBuilder getBuilder(){
-          return getBuilder(null,null,null);
-        }
-
-        public PassportBuilder setSerial(String serial) {
-            this.serial = serial;
-            return this;
-        }
-
-        public PassportBuilder setNumber(String number) {
-            this.number = number;
-            return this;
-        }
-
-        public PassportBuilder setIssuedPassport(String issuedPassport) {
-            this.issuedPassport = issuedPassport;
-            return this;
-        }
-
-        public Passport build(){
-            Passport passport = new Passport();
-            passport.serial = this.serial;
-            passport.issuedPassport = this.issuedPassport;
-            passport.number = this.number;
-            return passport;
-        }
     }
 }

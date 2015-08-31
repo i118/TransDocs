@@ -106,11 +106,11 @@
             <artifactId>hibernate-validator</artifactId>
             <version>5.1.1.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>4.3.5.Final</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-jpamodelgen</artifactId>-->
+            <!--<version>4.3.5.Final</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>tck-utils-api</artifactId>
@@ -153,7 +153,11 @@
             <!--<artifactId>persistence-api</artifactId>-->
             <!--<version>1.0.2</version>-->
         <!--</dependency>-->
-
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.2</version>
+        </dependency>
         <dependency>
             <groupId>org.hibernate.common</groupId>
             <artifactId>hibernate-commons-annotations</artifactId>
@@ -165,18 +169,6 @@
             <artifactId>connector-api</artifactId>
             <version>1.5</version>
         </dependency>
-        <dependency>
-            <groupId>org.jboss.ironjacamar</groupId>
-            <artifactId>ironjacamar-core-impl</artifactId>
-            <version>1.2.0.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.ironjacamar</groupId>
-            <artifactId>ironjacamar-jdbc</artifactId>
-            <version>1.2.0.Final</version>
-        </dependency>
-
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
@@ -301,12 +293,13 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>3.3.2</version>
+            <groupId>org.zerotul</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>1.4.6</version>
         </dependency>
     </dependencies>
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -347,22 +340,30 @@
                             </processors>
                         </configuration>
                     </execution>
+
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.hibernate</groupId>
+                        <artifactId>hibernate-jpamodelgen</artifactId>
+                        <version>4.3.5.Final</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <configuration>
-                    <sources>
-                        <source>
+                <!--<configuration>-->
+                    <!--<sources>-->
+                        <!--<source>-->
                             <!--<basedir>src/main/java</basedir>-->
-                            <excludes>
-                                <exclude>**/entity/*</exclude>
-                            </excludes>
-                        </source>
-                    </sources>
-                </configuration>
+                            <!--<excludes>-->
+                                <!--<exclude>**/entity/*</exclude>-->
+                            <!--</excludes>-->
+                        <!--</source>-->
+                    <!--</sources>-->
+                <!--</configuration>-->
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

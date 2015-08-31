@@ -144,6 +144,50 @@ public class LegalAccountDetails implements IAccountDetails {
         return correspondentAccount;
     }
 
+    public void setINN(String INN) {
+        this.INN = INN;
+    }
+
+    public void setKPP(String KPP) {
+        this.KPP = KPP;
+    }
+
+    public void setBIC(String BIC) {
+        this.BIC = BIC;
+    }
+
+    public void setOKPO(String OKPO) {
+        this.OKPO = OKPO;
+    }
+
+    public void setOGRN(String OGRN) {
+        this.OGRN = OGRN;
+    }
+
+    public void setOKVED(String OKVED) {
+        this.OKVED = OKVED;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public void setChiefAccountant(String chiefAccountant) {
+        this.chiefAccountant = chiefAccountant;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public void setCorrespondentAccount(String correspondentAccount) {
+        this.correspondentAccount = correspondentAccount;
+    }
+
     @Override
     //TODO Изменить сгенереный equals и hashCode
     public boolean equals(Object o) {
@@ -183,107 +227,5 @@ public class LegalAccountDetails implements IAccountDetails {
         result = 31 * result + (account != null ? account.hashCode() : 0);
         result = 31 * result + (correspondentAccount != null ? correspondentAccount.hashCode() : 0);
         return result;
-    }
-
-    public static class AccountDetailsBuilder{
-        private String INN;
-
-        private String KPP;
-
-        private String BIC;
-
-        private String OKPO;
-
-        private String OGRN;
-
-        private String OKVED;
-
-        private String bank;
-
-        private String director;
-
-        private String chiefAccountant;
-
-        private String account;
-
-        private String correspondentAccount;
-
-        private AccountDetailsBuilder() {}
-
-        public static AccountDetailsBuilder with(){
-            return new AccountDetailsBuilder();
-        }
-
-        public AccountDetailsBuilder setINN(String INN) {
-            this.INN = INN;
-            return this;
-        }
-
-        public AccountDetailsBuilder setKPP(String KPP) {
-            this.KPP = KPP;
-            return this;
-        }
-
-        public AccountDetailsBuilder setBIC(String BIC) {
-            this.BIC = BIC;
-            return this;
-        }
-
-        public AccountDetailsBuilder setOKPO(String OKPO) {
-            this.OKPO = OKPO;
-            return this;
-        }
-
-        public AccountDetailsBuilder setOGRN(String OGRN) {
-            this.OGRN = OGRN;
-            return this;
-        }
-
-        public AccountDetailsBuilder setOKVED(String OKVED) {
-            this.OKVED = OKVED;
-            return this;
-        }
-
-        public AccountDetailsBuilder setBank(String bank) {
-            this.bank = bank;
-            return this;
-        }
-
-        public AccountDetailsBuilder setDirector(String director) {
-            this.director = director;
-            return this;
-        }
-
-        public AccountDetailsBuilder setChiefAccountant(String chiefAccountant) {
-            this.chiefAccountant = chiefAccountant;
-            return this;
-        }
-
-        public AccountDetailsBuilder setAccount(String account) {
-            this.account = account;
-            return this;
-        }
-
-        public AccountDetailsBuilder setCorrespondentAccount(String correspondentAccount) {
-            this.correspondentAccount = correspondentAccount;
-            return this;
-        }
-
-        public LegalAccountDetails build(){
-            LegalAccountDetails accountDetails = new LegalAccountDetails();
-            accountDetails.INN = this.INN;
-            accountDetails.BIC = this.BIC;
-            accountDetails.KPP = this.KPP;
-            accountDetails.OGRN =this.OGRN;
-            accountDetails.OKPO = this.OKPO;
-            accountDetails.OGRN = this.OGRN;
-            accountDetails.director = this.director;
-            accountDetails.bank = this.bank;
-            accountDetails.chiefAccountant = this.chiefAccountant;
-            accountDetails.account = this.account;
-            accountDetails.correspondentAccount = this.correspondentAccount;
-            accountDetails.OKVED = this.OKVED;
-            return accountDetails;
-        }
     }
 }

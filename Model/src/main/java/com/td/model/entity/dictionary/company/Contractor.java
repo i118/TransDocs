@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.td.model.entity.Model;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,7 +22,7 @@ public interface Contractor extends Model {
      * @return  Контактные лица контрагента
      */
     @JsonManagedReference("persons")
-    public Set<ContractPerson> getPersons();
+    public List<ContractPerson> getPersons();
 
     /**
      * Добовляет контактное лицо контрагенту
