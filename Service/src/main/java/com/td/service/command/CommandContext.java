@@ -1,5 +1,7 @@
 package com.td.service.command;
 
+import com.td.service.command.exception.CommandException;
+
 /**
  * Created by zerotul.
  */
@@ -27,35 +29,13 @@ public interface CommandContext<T> {
      * Возвращает исключение прервавшее выполнение команды
      * @return
      */
-    public Exception getException();
+    public CommandException getException();
 
     /**
      * Устанавливает исключение прервавшее выполнение команды
      * @return
      */
-    public void setException(Exception ex);
-
-    /**
-     * Возвращает аргумент необходимый для выполнения команды
-     * @param key
-     * @return
-     */
-    public Object getArgument(String key);
-
-    /**
-     * Возвращает типизированый аргумент необходимый для выполнения команды
-     * @param key
-     * @param argumentClass
-     * @return
-     */
-    public <V> V getArgument(String key, Class<V> argumentClass);
-
-    /**
-     * Добавляет аргумент необходимый для выполнения команды
-     * @param key
-     * @param value
-     */
-    public void addArgument(String key, Object value);
+    public void setException(CommandException ex);
 
     default boolean isFailure(){
         return Result.FAILURE.equals(getResult());

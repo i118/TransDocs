@@ -1,7 +1,11 @@
 package com.td.webapp.controller.dictionary;
 
+import com.td.model.dto.dictionary.DictionaryDTO;
+import com.td.model.dto.dictionary.SimpleDictionaryDTO;
 import com.td.model.entity.dictionary.SimpleDictionary;
+import com.td.service.context.qualifier.DictionaryCRUDFacade;
 import com.td.service.context.qualifier.DictionaryCrud;
+import com.td.service.crud.CRUDFacade;
 import com.td.service.crud.dictionary.DictionaryCRUDService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,41 +19,44 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("/"+SimpleDictionaryController.CONTROLLER_NAME)
-public class SimpleDictionaryController extends AbstractDictionaryController<SimpleDictionary> {
+public class SimpleDictionaryController extends AbstractDictionaryController<SimpleDictionary, SimpleDictionaryDTO> {
 
     public static final String CONTROLLER_NAME = "SimpleDictionary";
 
-
-    @Inject
-    @DictionaryCrud
-    private DictionaryCRUDService<SimpleDictionary> dictionaryService;
+    private CRUDFacade<SimpleDictionary, SimpleDictionaryDTO> facade;
 
     @Override
-    public DictionaryCRUDService<SimpleDictionary> getDictionaryService() {
-        return dictionaryService;
-    }
-
-    @Override
-    public void deleteDictionary(SimpleDictionary persistent, Map<String, String> arguments) {
-        dictionaryService.deleteDictionaryObject(persistent, arguments);
+    public void deleteDictionary(UUID persistentId, Map<String, String> arguments) {
+       getFacade().delete(persistentId, obtainArguments(arguments));
     }
 
     @Override
     public void createDictionary(SimpleDictionary persistent, Map<String, String> arguments) {
-        dictionaryService.createDictionaryObject(persistent, arguments);
+        getFacade().create(persistent, obtainArguments(arguments));
     }
 
     @Override
-    public void updateDictionary(SimpleDictionary persistent, Map<String, String> arguments) {
-         dictionaryService.updateDictionaryObject(persistent, arguments);
+    public SimpleDictionary updateDictionary(SimpleDictionaryDTO persistent, Map<String, String> arguments) {
+        return getFacade().update(persistent, obtainArguments(arguments));
     }
+
 
     @Override
     public SimpleDictionary getDictionary(UUID persistentId, Map<String, String> arguments) {
-        return dictionaryService.findById(persistentId);
+      return getFacade().findById(persistentId);
     }
 
 
+    @Override
+    public CRUDFacade<SimpleDictionary, SimpleDictionaryDTO> getFacade() {
+        return facade;
+    }
+
+    @Inject
+    @DictionaryCRUDFacade
+    public void setFacade(CRUDFacade<SimpleDictionary, SimpleDictionaryDTO> facade) {
+        this.facade = facade;
+    }
 
     @Override
     public String getControllerName() {

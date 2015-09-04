@@ -1,5 +1,7 @@
 package com.td.service.command;
 
+import com.td.service.command.exception.CommandException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +14,7 @@ public class GenericCommandContext <T> implements CommandContext<T> {
 
     private Result result;
 
-    private Exception exception;
+    private CommandException exception;
 
     private Map<String, Object> arguments;
 
@@ -38,27 +40,13 @@ public class GenericCommandContext <T> implements CommandContext<T> {
     }
 
     @Override
-    public Exception getException() {
+    public CommandException getException() {
         return exception;
     }
 
     @Override
-    public void setException(Exception ex) {
+    public void setException(CommandException ex) {
         this.exception = ex;
     }
 
-    @Override
-    public Object getArgument(String key) {
-        return getArgument(key, Object.class);
-    }
-
-    @Override
-    public <V> V getArgument(String key, Class<V> argumentClass) {
-        return (V) arguments.get(key);
-    }
-
-    @Override
-    public void addArgument(String key, Object value) {
-        arguments.put(key, value);
-    }
 }

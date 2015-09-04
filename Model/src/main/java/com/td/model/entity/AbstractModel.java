@@ -17,7 +17,6 @@ import java.util.UUID;
  */
 
 @MappedSuperclass
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="objectId")
 @EntityListeners({ModelModificationListener.class})
 public abstract class AbstractModel implements Persistent {
 

@@ -1,9 +1,8 @@
 package com.td.service.command;
 
+import com.td.service.command.argument.Argument;
 import com.td.service.context.qualifier.CommandServiceQualifier;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 /**
  * Created by zerotul.
@@ -12,36 +11,16 @@ import java.util.Map;
 @CommandServiceQualifier
 public class CommandServiceImpl implements CommandService {
 
-    @Override
-    public <T> CommandContext<T> execute(T target, Command<T> command) {
-        return execute(target, command, null);
-    }
-
 
     @Override
-    public <T> CommandContext<T> execute(T target, Command<T> command, Map<String, Object> arguments) {
+    public <T> CommandContext<T> execute(T target, Command<T> command, Argument... args) {
         CommandContext<T> commandContext = new GenericCommandContext<>(target);
-        if(arguments!=null){
-            arguments.forEach((String key, Object value)->{
-                commandContext.addArgument(key, value);
-            });
-        }
-        return command.execute(commandContext);
+        return command.execute(commandContext, args);
     }
 
     @Override
-    public <T, V> ProducerCommandContext<T, V> execute(T target, ProducerCommand<T, V> command) {
-        return execute(target, command, null);
-    }
-
-    @Override
-    public <T, V> ProducerCommandContext<T, V> execute(T target, ProducerCommand<T, V> command, Map<String, Object> arguments) {
+    public <T, V> ProducerCommandContext<T, V> execute(T target, ProducerCommand<T, V> command, Argument... args) {
         ProducerCommandContext<T, V> commandContext = new GenericProducerCommandContext<>(target);
-        if(arguments!=null){
-            arguments.forEach((String key, Object value)->{
-                commandContext.addArgument(key, value);
-            });
-        }
-        return command.execute(commandContext);
+        return command.execute(commandContext, args);
     }
 }

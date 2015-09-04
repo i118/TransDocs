@@ -49,7 +49,7 @@ public class CustomerFileModel extends FileModel implements Attachment<ICustomer
     }
 
     @Override
-    public void addFile(IFileModel fileModel) {
+    public void addFile(FileModel fileModel) {
         super.addFile(fileModel);
         if(fileModel instanceof Attachment){
             ((Attachment) fileModel).setOwner(getOwner());

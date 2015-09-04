@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.td.model.entity.file.CustomerFileModel;
 import com.td.model.entity.file.Attachment;
+import com.td.model.entity.file.FileModel;
 import com.td.model.entity.file.IFileModel;
 import com.td.model.listener.ContractorListener;
 
@@ -70,7 +71,7 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
     }
 
 
-    @OneToOne(fetch = FetchType.EAGER, targetEntity = CustomerFileModel.class, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = CustomerFileModel.class, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     @JsonManagedReference("fileStore")
     public Attachment<ICustomerModel> getFileStore() {
         return fileStore;
@@ -88,7 +89,7 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
 
     @Override
     @Transient
-    public List<IFileModel> getFiles() {
+    public List<FileModel> getFiles() {
         if (fileStore == null) {
             CustomerFileModel fileModel = new CustomerFileModel();
             fileModel.setOwner(this);
@@ -102,11 +103,11 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
     }
 
     @Override
-    public void setFiles(List<IFileModel> files) {
+    public void setFiles(List<FileModel> files) {
         getFileStore().setFiles(files);
     }
 
-    public void addFile(IFileModel fileModel) {
+    public void addFile(FileModel fileModel) {
         getFileStore().addFile(fileModel);
     }
 

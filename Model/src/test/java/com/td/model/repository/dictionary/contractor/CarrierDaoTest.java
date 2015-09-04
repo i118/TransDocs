@@ -29,10 +29,10 @@ public class CarrierDaoTest extends AbstractDaoTest<CarrierModel> {
     @Test(dataProviderClass = CarrierDataProvider.class,
             dataProvider = CarrierDataProvider.DataProviders.CARRIER_DATA)
     public void testSaveCarrier(CarrierModel customerModel){
-        getDao().saveOrUpdate(customerModel);
+        customerModel =  getDao().update(customerModel);
         ((GenericJPARepository)getDao()).getEntityManager().flush();
 
-        CarrierModel persistCustomer = contractorModelDao.getModel(customerModel.getObjectId());
+        CarrierModel persistCustomer = contractorModelDao.findById(customerModel.getObjectId());
         assertModel(customerModel, persistCustomer);
     }
 

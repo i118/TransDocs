@@ -1,8 +1,10 @@
 package com.td.service.crud;
 
+import com.td.model.entity.dictionary.role.RoleNames;
 import com.td.model.repository.IRepository;
 import com.td.model.entity.Persistent;
 import com.td.model.factory.ITypeFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -17,6 +19,8 @@ import java.util.UUID;
  */
 public class GenericCRUDService<T extends Persistent> implements CRUDService<T> {
 
+    public static final String PRE_AUTHORIZE = "hasAnyRole('" + RoleNames.ROLE_SUPER_ADMIN + "," + RoleNames.ROLE_ADMIN + "," + RoleNames.ROLE_MANAGER + "')";
+
     protected IRepository<T> repository;
 
     private ITypeFactory typeFactory;
@@ -30,6 +34,7 @@ public class GenericCRUDService<T extends Persistent> implements CRUDService<T> 
     }
 
     @Override
+    @PreAuthorize(PRE_AUTHORIZE)
     public T saveOrUpdate(T model){
        return (T) repository.saveOrUpdate(model);
     }
@@ -40,6 +45,7 @@ public class GenericCRUDService<T extends Persistent> implements CRUDService<T> 
 
 
     @Override
+    @PreAuthorize(PRE_AUTHORIZE)
     public void delete(T persistent){
         repository.delete(persistent);
     }
@@ -47,19 +53,22 @@ public class GenericCRUDService<T extends Persistent> implements CRUDService<T> 
 
     @Override
     @Transactional
+    @PreAuthorize(PRE_AUTHORIZE)
     public T findById(UUID id){
-        return (T) repository.getModel(id);
+        return (T) repository.findById(id);
     }
 
 
     @Override
+    @PreAuthorize(PRE_AUTHORIZE)
     @Transactional
+    //TODO Избавится от метода
     public <D extends Persistent> D findById(UUID id, String typeName) {
         Class clazz = typeFactory.getClassByType(typeName);
         if(clazz==null){
             throw new IllegalStateException("entity the type "+typeName+" is not found");
         };
-        return (D) getRepository().getModel(id, clazz);
+        return (D) getRepository().findById(id, clazz);
     }
 
     @Override
@@ -70,7 +79,9 @@ public class GenericCRUDService<T extends Persistent> implements CRUDService<T> 
 
 
     @Override
+    @PreAuthorize(PRE_AUTHORIZE)
     @Transactional
+    //TODO Избавится от метода
     public <D extends Persistent> D getReference(UUID id, String typeName){
         Class clazz = typeFactory.getClassByType(typeName);
         if(clazz==null){
@@ -80,19 +91,23 @@ public class GenericCRUDService<T extends Persistent> implements CRUDService<T> 
     }
 
     @Override
-    public T update(T persistent) {
-        return (T) getRepository().update(persistent);
+    @PreAuthorize(PRE_AUTHORIZE)
+    public T update(T persistence) {
+        return getRepository().update(persistence);
     }
 
     @Override
+    @PreAuthorize(PRE_AUTHORIZE)
     public void save(T persistent) {
         getRepository().save(persistent);
     }
 
     @Override
+    @PreAuthorize(PRE_AUTHORIZE)
     @Transactional
+    //TODO Избавится от метода
     public <V extends Persistent> void initLazy(V persistent, LazyInitVisiter<V> visiter){
-       persistent = (V) update((T) persistent);
+       persistent = (V) getRepository().update((T) persistent);
        visiter.initLazy(persistent);
     }
 
@@ -104,4 +119,5 @@ public class GenericCRUDService<T extends Persistent> implements CRUDService<T> 
     public void setTypeFactory(ITypeFactory typeFactory) {
         this.typeFactory = typeFactory;
     }
+
 }

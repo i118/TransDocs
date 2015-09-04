@@ -77,4 +77,12 @@ public abstract class ModelDTO extends DirtySupportDTO {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ModelDTO{");
+        sb.append("objectId=").append(objectId);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -37,6 +37,9 @@ import java.util.UUID;
 @UniqueLogin(groups = {PrePersistGroup.class})
 @JsonIgnoreProperties(ignoreUnknown = true,value = {"passwordModel"})
 @ExcludeSuperclassListeners
+@NamedQueries({
+        @NamedQuery(name = UserModel.Query.FIND_BY_COMPANY, query = "SELECT u from UserModel u WHERE u.company.objectId = :companyid")
+})
 @EntityListeners({ModelModificationListener.class})
 public class UserModel extends AbstractDictionary implements IUserModel {
 
@@ -71,6 +74,10 @@ public class UserModel extends AbstractDictionary implements IUserModel {
     @Transient
     public String getTableName() {
         return TABLE_NAME;
+    }
+
+    public static class Query{
+        public static final String FIND_BY_COMPANY = "user.findByCompany";
     }
 
 
@@ -161,7 +168,7 @@ public class UserModel extends AbstractDictionary implements IUserModel {
         this.mail = mail;
     }
 
-    @ManyToMany(targetEntity = RoleModel.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = RoleModel.class, fetch = FetchType.EAGER)
     @JoinTable(
             name = Relations.USER_TO_ROLES,
             joinColumns ={ @JoinColumn(name=Relations.USER_ID, nullable=false)},

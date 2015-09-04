@@ -1,6 +1,7 @@
 package com.td.model.dto.mapper;
 
 import com.td.model.annotation.DTO;
+import com.td.model.context.qualifier.MapperQualifier;
 import com.td.model.dto.DirtySupportDTO;
 import com.td.model.entity.AbstractModel;
 import ma.glasnost.orika.MapperFacade;
@@ -15,6 +16,7 @@ import javax.inject.Inject;
  * Created by zerotul.
  */
 @Component
+@MapperQualifier
 public class OrikaAdapterMapper implements Mapper<DirtySupportDTO, AbstractModel> {
 
     private final MapperFacade facade;

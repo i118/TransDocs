@@ -1,5 +1,5 @@
 Ext.define("TransDocs.model.Passport",{
-    extend: "Ext.data.Model",
+    extend: "TransDocs.model.EmbeddableModel",
 
     entityName: "Passport",
     fields: [

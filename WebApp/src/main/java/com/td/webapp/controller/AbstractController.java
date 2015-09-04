@@ -1,5 +1,12 @@
 package com.td.webapp.controller;
 
+import com.td.service.command.argument.Argument;
+import com.td.service.command.argument.ArgumentImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by konstantinchipunov on 02.01.14.
  */
@@ -29,4 +36,13 @@ public abstract class AbstractController {
     public static class ArgumentName{}
 
     public abstract String getControllerName();
+
+    protected Argument[] obtainArguments(Map<String, String> args){
+        if(args==null) return new Argument[0];
+        List<Argument> argumentList = new ArrayList<>();
+        args.forEach((String key, Object value)->{
+            argumentList.add(ArgumentImpl.ArgumentBuilder.with(key).valueOf(value));
+        });
+        return argumentList.toArray(new Argument[0]);
+    }
 }

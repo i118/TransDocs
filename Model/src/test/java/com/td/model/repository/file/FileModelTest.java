@@ -34,12 +34,12 @@ public class FileModelTest extends AbstractDaoTest<IFileModel> {
              fileModel.setFileType(IFileModel.FileType.FILE);
              fileModel.setContent(in);
              fileModel.setMimeType("");
-             getDao().saveOrUpdate(fileModel);
+             //getDao().saveOrUpdate(fileModel);
             ((GenericJPARepository)getDao()).getEntityManager().flush();
             ((GenericJPARepository)getDao()).getEntityManager().clear();
         }
 
-        IFileModel persistFile = (IFileModel) getDao().getModel(fileModel.getObjectId());
+        IFileModel persistFile = (IFileModel) getDao().findById(fileModel.getObjectId());
         Path path = Files.createTempFile("jcr", "xml");
         File tmp = path.toFile();
         try(

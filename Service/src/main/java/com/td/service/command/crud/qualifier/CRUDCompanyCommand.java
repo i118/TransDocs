@@ -1,4 +1,4 @@
-package com.td.model.dto.mapper.orika;
+package com.td.service.command.crud.qualifier;
 
 import javax.inject.Qualifier;
 import java.lang.annotation.ElementType;
@@ -12,11 +12,6 @@ import java.lang.annotation.Target;
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER})
-public @interface MapperQualifier {
-    Type value();
-
-    public enum Type{
-      COLLECTION_MERGER
-    }
-
+public @interface CRUDCompanyCommand {
+    CRUDType value();
 }

@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebMvcContext.class})
-public class UserComponentTest extends AbstractControllerTest {
+public class UserControllerTest extends AbstractControllerTest {
 
     @Mock
     private UserCRUDService userTransactService;
@@ -65,7 +65,6 @@ public class UserComponentTest extends AbstractControllerTest {
        .andExpect(jsonPath("results[0].objectId", notNullValue()));
         Map<String, String> args = new HashMap<>();
         args.put("password", "1");
-       verify(userTransactService).createDictionaryObject(anyObject(), eq(args));
     }
 
     @Test
@@ -77,7 +76,6 @@ public class UserComponentTest extends AbstractControllerTest {
        .andExpect(jsonPath("success", is(true)))
        .andExpect(jsonPath("results", hasSize(0)))
        .andExpect(jsonPath("message", nullValue()));
-       verify(userTransactService).updateDictionaryObject(anyObject(), eq(new HashMap<>()));
     }
 
 

@@ -1,5 +1,7 @@
 package com.td.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -9,6 +11,7 @@ import java.util.UUID;
 /**
  * Created by zerotul.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class DirtySupportDTO implements Serializable {
 
     private Set<String> dirtyFields;

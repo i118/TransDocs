@@ -5,6 +5,7 @@ import com.td.model.entity.dictionary.user.IUserModel;
 import com.td.model.entity.dictionary.user.UserModel;
 import com.td.model.entity.dictionary.user.UserModel_;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.FlushModeType;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -12,6 +13,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created with IntelliJ IDEA.
@@ -61,6 +66,13 @@ public class UserJPARepository extends DictionaryJPARepository<UserModel> implem
     public boolean hasUser(IUserModel userModel){
        IUserModel user = getUserByName(userModel.getLogin(), FlushModeType.COMMIT, true);
        return user!=null;
+    }
+
+    @Override
+    public List<UserModel> findByCompanyId(UUID companyId) {
+        TypedQuery<UserModel> query = getEntityManager().createNamedQuery(UserModel.Query.FIND_BY_COMPANY, UserModel.class);
+        query.setParameter("companyId", companyId);
+        return query.getResultList();
     }
 
 

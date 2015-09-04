@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.td.model.annotation.DTO;
 import com.td.model.dto.DirtySupportDTO;
+import com.td.model.dto.file.CustomerFileDTO;
 import com.td.model.entity.dictionary.company.ContractPerson;
 import com.td.model.entity.dictionary.company.CustomerModel;
 import com.td.model.entity.dictionary.company.JuridicalPerson.LegalForm;
@@ -23,6 +24,8 @@ public class CustomerDTO extends JuridicalPersonDTO {
 
     private List<CustomerPersonDTO> persons;
 
+    private CustomerFileDTO fileStore;
+
     @JsonManagedReference("persons")
     public List<CustomerPersonDTO> getPersons() {
         return persons;
@@ -30,5 +33,14 @@ public class CustomerDTO extends JuridicalPersonDTO {
 
     public void setPersons(List<CustomerPersonDTO> persons) {
         this.persons = persons;
+    }
+
+    @JsonManagedReference("fileStore")
+    public CustomerFileDTO getFileStore() {
+        return fileStore;
+    }
+
+    public void setFileStore(CustomerFileDTO fileStore) {
+        this.fileStore = fileStore;
     }
 }

@@ -14,6 +14,7 @@ import com.td.service.context.qualifier.RoleServiceQualifier;
 import com.td.service.context.qualifier.UserCrud;
 import com.td.service.crud.GenericCRUDService;
 import com.td.service.crud.LazyInitVisiter;
+import com.td.service.crud.dictionary.GenericDictionaryCRUDService;
 import com.td.service.crud.dictionary.role.RoleService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.zerotul.specification.Specification;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,9 +35,7 @@ import java.util.Map;
  */
 @Service
 @UserCrud
-public class UserCRUDServiceImpl extends GenericCRUDService<UserModel> implements UserCRUDService {
-
-    private RoleService roleService;
+public class UserCRUDServiceImpl extends GenericDictionaryCRUDService<UserModel> implements UserCRUDService {
 
     private SecurityService securityService;
 
@@ -58,83 +59,18 @@ public class UserCRUDServiceImpl extends GenericCRUDService<UserModel> implement
         return securityService.getCurrentUser();
     }
 
-    @Transactional(readOnly = true)
-    public UserModel getUserByName(String userName, LazyInitVisiter<UserModel> lazyInitVisiter) {
-        UserModel userModel = getUserByName(userName);
-        if (userModel != null && lazyInitVisiter != null) {
-            lazyInitVisiter.initLazy(userModel);
-        }
-        return userModel;
+    @Override
+    public List<UserModel> findByCompanyId(UUID companyId) {
+        return getRepository().findByCompanyId(companyId);
     }
 
-    @Override
-    public void save(UserModel persistent) {
-        super.save(persistent);
-    }
 
     @Override
     protected UserRepository getRepository() {
         return (UserRepository) super.getRepository();
     }
 
-    private void createUser(UserModel model, String password) {
-        model.setPassword(new Password(password, model));
-        IUserModel currentUser = getCurrentUser();
-        model.setCompany(currentUser.getCompany());
-        saveOrUpdate(model);
 
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public <U extends DictionaryDataSet> PagingList<U> findDataSet(Specification<? super U> specification) {
-        return getRepository().findDataSet(specification);
-    }
-
-    @Override
-    @Transactional
-    @PreAuthorize("hasPermission(filterObject, 'CreateUserAction')")
-    public void createDictionaryObject(UserModel object, Map<String, String> args) {
-        final String password = args.get(ArgumentName.PASSWORD);
-        createUser(object, password);
-    }
-
-    @Override
-    @Transactional
-    @PreAuthorize("hasPermission(filterObject, 'DeleteUserAction')")
-    public void deleteDictionaryObject(UserModel object, Map<String, String> args) {
-        deleteUser(object);
-    }
-
-    @Override
-    @Transactional
-    @PreAuthorize("hasPermission(filterObject, 'UpdateUserAction')")
-    public void updateDictionaryObject(UserModel object, Map<String, String> args) {
-        updateUser(object, args);
-    }
-
-    private void deleteUser(UserModel userModel) {
-        delete(userModel);
-    }
-
-
-    private void updateUser(UserModel model, Map<String, String> args) {
-        String password = args.get(ArgumentName.PASSWORD);
-        if (password != null && !password.equals("")) {
-            model.setPassword(new Password(password, model));
-        }
-        getRepository().saveOrUpdate(model);
-    }
-
-    public RoleService getRoleService() {
-        return roleService;
-    }
-
-    @Inject
-    @RoleServiceQualifier
-    public void setRoleService(RoleService roleService) {
-        this.roleService = roleService;
-    }
 
     public SecurityService getSecurityService() {
         return securityService;

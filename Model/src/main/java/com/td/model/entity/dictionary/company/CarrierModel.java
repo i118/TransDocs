@@ -3,10 +3,7 @@ package com.td.model.entity.dictionary.company;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.td.model.entity.file.CarrierFileModel;
-import com.td.model.entity.file.Attachment;
-import com.td.model.entity.file.FileContainer;
-import com.td.model.entity.file.IFileModel;
+import com.td.model.entity.file.*;
 import com.td.model.listener.ContractorListener;
 
 import javax.persistence.CascadeType;
@@ -77,7 +74,7 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
 
     @OneToOne(fetch = FetchType.EAGER,
             targetEntity = CarrierFileModel.class,
-            cascade = {CascadeType.REMOVE, CascadeType.PERSIST}
+            cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE}
     )
     @JsonManagedReference("fileStore")
     public Attachment<CarrierModel> getFileStore() {
@@ -95,7 +92,7 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
 
     @Override
     @Transient
-    public List<IFileModel> getFiles() {
+    public List<FileModel> getFiles() {
         if(fileStore==null){
             CarrierFileModel fileModel = new CarrierFileModel ();
             fileModel.setOwner(this);
@@ -109,11 +106,11 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
     }
 
     @Override
-    public void setFiles(List<IFileModel> files) {
+    public void setFiles(List<FileModel> files) {
         getFileStore().setFiles(files);
     }
 
-    public void addFile(IFileModel fileModel){
+    public void addFile(FileModel fileModel){
         getFileStore().addFile(fileModel);
     }
 

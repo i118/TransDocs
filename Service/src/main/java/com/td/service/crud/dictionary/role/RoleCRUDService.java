@@ -43,20 +43,6 @@ public class RoleCRUDService extends GenericCRUDService<RoleModel> implements Ro
         return getRepository().findDataSet(specification);
     }
 
-    @Override
-    public void createDictionaryObject(RoleModel object, Map<String, String> args) {
-
-    }
-
-    @Override
-    public void deleteDictionaryObject(RoleModel object, Map<String, String> args) {
-
-    }
-
-    @Override
-    public void updateDictionaryObject(RoleModel object, Map<String, String> args) {
-
-    }
 
     @Override
     public boolean hasRole(UserModel userModel, String roleName) {

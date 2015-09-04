@@ -24,7 +24,7 @@ Ext.define("TransDocs.model.dictionary.DriverModel", {
             association: 'DriverByCar',
             role: 'car',
             inverse: 'drivers'
-        }
+        }, mapping: "car.objectId",
         },
         {
             name: 'carrierId', reference: {

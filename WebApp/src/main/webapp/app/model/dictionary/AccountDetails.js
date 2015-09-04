@@ -1,10 +1,5 @@
 Ext.define("TransDocs.model.dictionary.AccountDetails", {
-    extend: "Ext.data.Model",
-
-    constructor: function () {
-        this.callParent(arguments);
-        this.phantom = false;
-    },
+    extend: "TransDocs.model.EmbeddableModel",
 
     fields: [
         {name: 'inn', type: 'string'},

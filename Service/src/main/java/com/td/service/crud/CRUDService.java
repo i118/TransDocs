@@ -1,5 +1,7 @@
 package com.td.service.crud;
 
+import com.td.model.dto.DirtySupportDTO;
+import com.td.model.dto.ModelDTO;
 import com.td.model.entity.Persistent;
 import com.td.service.IService;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,17 +17,17 @@ import java.util.UUID;
  */
 public interface CRUDService<T extends Persistent>  extends IService{
 
-    public T saveOrUpdate(T model);
+    T saveOrUpdate(T model);
 
-    public void delete(T persistent);
+    void delete(T persistent);
 
-    public T findById(UUID id);
+    T findById(UUID id);
 
-    public <D extends Persistent> D findById(UUID id, String typeName);
+    <D extends Persistent> D findById(UUID id, String typeName);
 
-    public T getReference(UUID id);
+    T getReference(UUID id);
 
-    public <D extends Persistent> D getReference(UUID id, String typeName);
+    <D extends Persistent> D getReference(UUID id, String typeName);
 
     @Transactional(readOnly = true)
     public default T findById(UUID id, LazyInitVisiter<T> visiter){
@@ -45,7 +47,7 @@ public interface CRUDService<T extends Persistent>  extends IService{
       return persistent;
     }
 
-    public  T update(T persistent);
+    public  T update(T dto);
 
     public void save(T persistent);
 

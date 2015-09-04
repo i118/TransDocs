@@ -18,11 +18,5 @@ import java.util.Map;
  */
 public interface DictionaryCRUDService<T extends Dictionary>  extends CRUDService<T>{
 
-    public <U extends DictionaryDataSet> PagingList<U> findDataSet(Specification<? super U> specification);
-
-    public void createDictionaryObject(T object, Map<String, String> args);
-
-    public void deleteDictionaryObject(T object, Map<String, String> args);
-
-    public void updateDictionaryObject(T object, Map<String, String> args);
+    <U extends DictionaryDataSet> PagingList<U> findDataSet(Specification<? super U> specification);
 }
