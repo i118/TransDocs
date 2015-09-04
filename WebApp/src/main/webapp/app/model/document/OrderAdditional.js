@@ -2,7 +2,7 @@
  * Created by zerotul on 26.06.15.
  */
 Ext.define('TransDocs.model.document.OrderAdditional', {
-    extend: 'Ext.data.Model',
+    extend: 'TransDocs.model.EmbeddableModel',
     entityName: "OrderAdditional",
     fields: [
         {name: "transportType", type: "string"},

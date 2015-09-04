@@ -1,17 +1,20 @@
 package com.td.service.context;
 
+import com.td.model.context.qualifier.DocumentQualifier;
 import com.td.model.dto.ModelDTO;
 import com.td.model.dto.dictionary.SimpleDictionaryDTO;
 import com.td.model.dto.dictionary.contractor.CarrierDTO;
 import com.td.model.dto.dictionary.contractor.CompanyDTO;
 import com.td.model.dto.dictionary.contractor.CustomerDTO;
 import com.td.model.dto.dictionary.user.UserDTO;
+import com.td.model.dto.document.OrderDocumentDTO;
 import com.td.model.entity.Persistent;
 import com.td.model.entity.dictionary.SimpleDictionary;
 import com.td.model.entity.dictionary.company.CarrierModel;
 import com.td.model.entity.dictionary.company.CompanyModel;
 import com.td.model.entity.dictionary.company.CustomerModel;
 import com.td.model.entity.dictionary.user.UserModel;
+import com.td.model.entity.document.OrderDocumentModel;
 import com.td.service.command.Command;
 import com.td.service.command.CommandService;
 import com.td.service.command.ProducerCommand;
@@ -21,6 +24,8 @@ import com.td.service.crud.CRUDFacade;
 import com.td.service.crud.CRUDService;
 import com.td.service.crud.CommandCRUDFacade;
 import com.td.service.crud.dictionary.company.CompanyService;
+import com.td.service.crud.document.DocumentCRUDService;
+import com.td.service.crud.document.DocumentService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -51,6 +56,10 @@ public class CRUDFacadeContext {
     @Inject
     @CompanyCrud
     private CompanyService companyService;
+
+    @Inject
+    @DocumentQualifier(DocumentQualifier.Type.ORDER)
+    private DocumentService<OrderDocumentModel> orderDocumentService;
 
     @Inject
     @CreateCommandQualifier
@@ -124,6 +133,17 @@ public class CRUDFacadeContext {
     public CRUDFacade<CompanyModel, CompanyDTO> companyCRUDFacade(@CRUDCompanyCommand(CRUDType.CREATE) ProducerCommand<CompanyModel, CompanyModel> createCompany){
         CommandCRUDFacade crudFacade = new CommandCRUDFacade(companyService, commandService);
         crudFacade.setCreateCommand(createCompany);
+        crudFacade.setUpdateCommand(updateCommand);
+        crudFacade.setDeleteCommand(deleteCommand);
+        return crudFacade;
+    }
+
+    @Bean
+    @Inject
+    @OrderCRUDFacade
+    public CRUDFacade<OrderDocumentModel, OrderDocumentDTO> orderDocumentCRUDFacade(){
+        CommandCRUDFacade crudFacade = new CommandCRUDFacade(orderDocumentService, commandService);
+        crudFacade.setCreateCommand(createCommand);
         crudFacade.setUpdateCommand(updateCommand);
         crudFacade.setDeleteCommand(deleteCommand);
         return crudFacade;

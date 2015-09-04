@@ -1,5 +1,5 @@
 Ext.define("TransDocs.model.document.DocumentNumber", {
-    extend: "Ext.data.Model",
+    extend: "TransDocs.model.EmbeddableModel",
     fields: [
         {name: "number", type: 'string'},
         {name: "numberDate", type: 'date', dateFormat: 'd.m.Y'}

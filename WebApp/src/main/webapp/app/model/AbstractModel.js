@@ -160,7 +160,6 @@ Ext.define("TransDocs.model.AbstractModel", {
         result = result || {};
 
         me.$gathering = 1;
-
         for (roleName in associations) {
             role = associations[roleName];
             item = role.getAssociatedItem(me);
@@ -180,6 +179,7 @@ Ext.define("TransDocs.model.AbstractModel", {
                 length = items.length;
                 itemData = [];
                 var isManyToMany = role.association.isManyToMany;
+
                 var isModified = isManyToMany || me.isModified(role.association.field.getName());
                 if (!isModified) {
                     for (var i = 0; i < length; ++i) {
@@ -221,6 +221,7 @@ Ext.define("TransDocs.model.AbstractModel", {
 
     isDirty: function () {
         this.phantom = this.isNew();
+        if(this.isNew())return true;
         var me = this;
         var fields = this.getFields();
         var isModified = false;

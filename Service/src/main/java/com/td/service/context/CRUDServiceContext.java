@@ -2,17 +2,22 @@ package com.td.service.context;
 
 import com.td.model.context.qualifier.ContractorQualifier;
 import com.td.model.context.qualifier.DictionaryQualifier;
+import com.td.model.context.qualifier.DocumentQualifier;
 import com.td.model.entity.dictionary.SimpleDictionary;
 import com.td.model.entity.dictionary.company.CarrierModel;
 import com.td.model.entity.dictionary.company.CustomerModel;
+import com.td.model.entity.document.OrderDocumentModel;
 import com.td.model.repository.IRepository;
 import com.td.model.repository.dictionary.DictionaryRepository;
+import com.td.model.repository.document.DocumentRepository;
 import com.td.service.context.qualifier.ContractorCrud;
 import com.td.service.context.qualifier.DictionaryCrud;
 import com.td.service.crud.CRUDService;
 import com.td.service.crud.GenericCRUDService;
 import com.td.service.crud.dictionary.DictionaryCRUDService;
 import com.td.service.crud.dictionary.GenericDictionaryCRUDService;
+import com.td.service.crud.document.DocumentCRUDService;
+import com.td.service.crud.document.DocumentService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,5 +48,12 @@ public class CRUDServiceContext {
     @DictionaryCrud
     public DictionaryCRUDService<SimpleDictionary> simpleDictionaryDictionaryService(@DictionaryQualifier DictionaryRepository<SimpleDictionary> repository){
         return new GenericDictionaryCRUDService<>(repository);
+    }
+
+    @Bean
+    @Inject
+    @DocumentQualifier(DocumentQualifier.Type.ORDER)
+    public DocumentService<OrderDocumentModel> orderDocumentService(@DocumentQualifier(DocumentQualifier.Type.ORDER) DocumentRepository<OrderDocumentModel> repository){
+        return new DocumentCRUDService<>(repository);
     }
 }

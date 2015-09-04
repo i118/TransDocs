@@ -21,26 +21,6 @@ public class DocumentCRUDService<T extends AbstractDocumentModel> extends Generi
         super(repository);
     }
 
-    @Transactional
-    public void createDocument(T document){
-        getRepository().saveOrUpdate(document);
-    }
-
-
-    @Transactional
-    public T getDocument(UUID documentId){
-        return findById(documentId);
-    }
-
-    @Transactional
-    public T getDocument(UUID documentId, LazyInitVisiter<T> lazyInitVisiter){
-        T document = getDocument(documentId);
-        if(lazyInitVisiter!=null){
-            lazyInitVisiter.initLazy(document);
-        }
-        return document;
-    }
-
     @Override
     @Transactional
     public <U extends DocumentDataSet> PagingList<U> findDocumentDataSet(Specification<? super DocumentDataSet> specification) {

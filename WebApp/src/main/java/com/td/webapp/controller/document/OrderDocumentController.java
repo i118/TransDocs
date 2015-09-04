@@ -1,9 +1,13 @@
 package com.td.webapp.controller.document;
 
 import com.td.model.context.qualifier.DocumentQualifier;
+import com.td.model.dto.document.OrderDocumentDTO;
+import com.td.model.entity.document.AbstractDocumentModel;
 import com.td.model.entity.document.OrderAdditionalCondition;
 import com.td.model.entity.document.OrderDocumentModel;
 import com.td.model.entity.document.OrderTransport;
+import com.td.service.context.qualifier.OrderCRUDFacade;
+import com.td.service.crud.CRUDFacade;
 import com.td.service.crud.document.DocumentService;
 import com.td.webapp.response.IResponse;
 import com.td.webapp.response.ResponseImpl;
@@ -19,11 +23,13 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("/"+OrderDocumentController.CONTROLLER_NAME)
-public class OrderDocumentController extends AbstractDocumentController<OrderDocumentModel> {
+public class OrderDocumentController extends AbstractDocumentController<OrderDocumentModel, OrderDocumentDTO> {
 
     public static final String CONTROLLER_NAME = "OrderDocument";
 
     private DocumentService<OrderDocumentModel> documentService;
+
+    private CRUDFacade<OrderDocumentModel, OrderDocumentDTO> facade;
 
 
     public static class RequestName extends AbstractDocumentController.RequestName{
@@ -36,18 +42,18 @@ public class OrderDocumentController extends AbstractDocumentController<OrderDoc
     public @ResponseBody
     IResponse createObject(@RequestBody OrderDocumentModel persistent, @RequestParam(required = false) Map<String, String> arguments){
         IResponse response = new ResponseImpl();
-        getDocumentService().createDocument(persistent);
+        getFacade().create(persistent, obtainArguments(arguments));
         response.setSuccess(true);
-        response.addResult(getDocumentService().getDocument(persistent.getObjectId()));
+        response.addResult(getFacade().findById(persistent.getObjectId()));
         return response;
     }
 
     @RequestMapping(value = "/"+ RequestName.UPDATE_OBJECT+"/{documentId}", method = RequestMethod.PUT,
             headers = CONTENT_TYPE)
     public @ResponseBody
-    IResponse updateObject(@RequestBody OrderDocumentModel persistent, @RequestParam(required = false) Map<String, String> arguments){
+    IResponse updateObject(@RequestBody OrderDocumentDTO dto, @RequestParam(required = false) Map<String, String> arguments){
         IResponse response = new ResponseImpl();
-        getDocumentService().createDocument(persistent);
+        OrderDocumentModel persistent = getFacade().update(dto, obtainArguments(arguments));
         response.setSuccess(true);
         response.addResult(persistent);
         return response;
@@ -57,7 +63,7 @@ public class OrderDocumentController extends AbstractDocumentController<OrderDoc
             headers = CONTENT_TYPE)
     public @ResponseBody IResponse getObject(@PathVariable UUID objectId, @RequestParam Map<String, String> args){
         IResponse<OrderDocumentModel> response = new ResponseImpl();
-        OrderDocumentModel order = getDocumentService().getDocument(objectId);
+        OrderDocumentModel order = getFacade().findById(objectId);
         response.addResult(order);
         response.setSuccess(true);
         return response;
@@ -98,5 +104,17 @@ public class OrderDocumentController extends AbstractDocumentController<OrderDoc
     @Override
     public String getControllerName() {
         return CONTROLLER_NAME;
+    }
+
+
+    @Override
+    protected CRUDFacade<OrderDocumentModel, OrderDocumentDTO> getFacade() {
+        return facade;
+    }
+
+    @Inject
+    @OrderCRUDFacade
+    public void setFacade(CRUDFacade<OrderDocumentModel, OrderDocumentDTO> facade) {
+        this.facade = facade;
     }
 }

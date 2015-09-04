@@ -24,14 +24,6 @@ public class GenericJPARepository<T extends Persistent> implements IRepository<T
 
     @Override
     public T saveOrUpdate(T persistent){
-//      if(persistent==null)return persistent;
-//      if(persistent.isNew()){
-//          save(persistent);
-//          return persistent;
-//      }else{
-//          T mergedPersistent = update(persistent);
-//          return  mergedPersistent;
-//      }
         return getEntityManager().merge(persistent);
     }
 

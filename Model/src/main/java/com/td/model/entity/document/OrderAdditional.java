@@ -55,6 +55,22 @@ public class OrderAdditional implements Serializable{
         return additionalService;
     }
 
+    public void setTransportType(String transportType) {
+        this.transportType = transportType;
+    }
+
+    public void setBorderCrossing(String borderCrossing) {
+        this.borderCrossing = borderCrossing;
+    }
+
+    public void setTemperatureRegime(String temperatureRegime) {
+        this.temperatureRegime = temperatureRegime;
+    }
+
+    public void setAdditionalService(String additionalService) {
+        this.additionalService = additionalService;
+    }
+
     public static class OrderAdditionalBuilder{
 
         private String transportType;
