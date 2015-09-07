@@ -51,7 +51,7 @@ public class RoleDaoTest extends AbstractDaoTest<IRoleModel>{
             dataProvider = DataProviders.ROLE_DATA_PROVIDER
     )
     public void testRoleDao(IRoleModel roleModel){
-        roleModelDao.saveOrUpdate((RoleModel) roleModel);
+        roleModel = roleModelDao.saveOrUpdate((RoleModel) roleModel);
         IRoleModel roleById = roleModelDao.findById(roleModel.getObjectId());
         IRoleModel roleByName = roleModelDao.getRoleByName(roleModel.getRoleName());
         assertModel(roleModel, roleById);

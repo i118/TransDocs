@@ -28,7 +28,7 @@ public class OrderDocumentDaoTest extends AbstractDaoTest<OrderDocumentModel> {
 
     @Test(dataProviderClass = OrderDocumentDataProvider.class, dataProvider = OrderDocumentDataProvider.DataProviders.ORDER_DOCUMENT_DATA)
     public void testSaveOrder(OrderDocumentModel orderDocumentModel){
-        getDao().saveOrUpdate(orderDocumentModel);
+        orderDocumentModel =  getDao().saveOrUpdate(orderDocumentModel);
         getDao().getEntityManager().flush();
         getDao().getEntityManager().clear();
         OrderDocumentModel persistOrderDocumentModel = getDao().findById(orderDocumentModel.getObjectId());
