@@ -140,88 +140,129 @@ Ext.define("TransDocs.model.AbstractModel", {
     createActionMap: function () {
     },
 
-    getAssociatedData: function (result, operation, writer) {
+    getAssociatedData: function(result, options, dirtyGraph) {
         var me = this,
             associations = me.associations,
-            deep, item, items, itemData, length, record, role, roleName;
-
-        var getDataInternal = function (record) {
-            var dataInternal;
-            if (writer) {
-                dataInternal = writer.getRecordData(record, operation);
-                if (writer.getExpandData()) {
-                    dataInternal = writer.getExpandedData([dataInternal])[0]
-                }
-            } else {
-                dataInternal = record.getData(true);
-            }
-            return dataInternal;
-        }
+            deep, i, item, items, itemData, length, record, role, roleName, opts, clear, associated, dirty = {dirty:false};
+        dirtyGraph = dirtyGraph ? dirtyGraph : {dirty:false};
         result = result || {};
-
         me.$gathering = 1;
+        if (options) {
+            options = Ext.Object.chain(options);
+        }
         for (roleName in associations) {
+            dirty = {dirty:false};
             role = associations[roleName];
             item = role.getAssociatedItem(me);
             if (!item || item.$gathering) {
-                //if(role.isMany){
-                //    result[roleName]=[];
-                //}else{
-                //    result[roleName]=null;
-                //}
+
                 continue;
             }
-
             if (item.isStore) {
                 item.$gathering = 1;
-
                 items = item.getData().items;
                 length = items.length;
                 itemData = [];
-                var isManyToMany = role.association.isManyToMany;
-
-                var isModified = isManyToMany || me.isModified(role.association.field.getName());
-                if (!isModified) {
-                    for (var i = 0; i < length; ++i) {
-                        record = items[i];
-                        if (record.isDirty()) {
-                            isModified = true;
-                            break;
-                        }
-                    }
-                }
-                if (!isModified) {
-                    delete item.$gathering;
-                    continue;
-                }
-                for (var i = 0; i < length; ++i) {
+                for (i = 0; i < length; ++i) {
                     record = items[i];
+                    if(me.isNew() || record.isDirty() ){
+                        dirty.dirty = true;
+                    }
                     deep = !record.$gathering;
                     record.$gathering = 1;
-                    var data = getDataInternal(record);
-                    itemData.push(data);
+                    if (options) {
+                        associated = options.associated;
+                        if (associated === undefined) {
+                            options.associated = deep;
+                            clear = true;
+                        } else if (!deep) {
+                            options.associated = false;
+                            clear = true;
+                        }
+                        opts = options;
+                    } else {
+                        opts = deep ? me._getAssociatedOptions : me._getNotAssociatedOptions;
+                    }
+                    var deepDirty = dirty.dirty ? {dirty:false} :  dirty;
+                    itemData.push(record.getData(opts, deepDirty));
+                    if (clear) {
+                        options.associated = associated;
+                        clear = false;
+                    }
                     delete record.$gathering;
                 }
-
                 delete item.$gathering;
             } else {
-                if (!item.isDirty() && !me.isModified(role.association.field.getName())) {
-                    continue;
+                opts = options || me._getAssociatedOptions;
+                if (options && options.associated === undefined) {
+                    opts.associated = true;
                 }
-                itemData = getDataInternal(item);
+                if(me.isNew() || item.isDirty() || me.isModified(role.association.field.getName())){
+                    dirty.dirty = true;
+                }
+                var deepDirty = dirty.dirty ? {dirty:false} :  dirty;
+                itemData = item.getData(opts, deepDirty);
             }
-
-            result[roleName] = itemData;
+            if(dirty.dirty) {
+                dirtyGraph.dirty = true;
+                result[roleName] = itemData;
+            }
         }
-
         delete me.$gathering;
-
         return result;
+    },
+
+    getData: function(options, dirtyGraph) {
+        var me = this,
+            ret = {},
+            opts = (options === true) ? me._getAssociatedOptions : (options || ret),
+
+            data = me.data,
+            associated = opts.associated,
+            changes = opts.changes && !me.phantom,
+            critical = changes && opts.critical,
+            content = changes ? me.modified : data,
+            fieldsMap = me.fieldsMap,
+            persist = opts.persist,
+            serialize = opts.serialize,
+            criticalFields, field, n, name, value;
+        if (content) {
+            for (name in content) {
+                value = data[name];
+                field = fieldsMap[name];
+                if (field) {
+                    if (persist && !field.persist) {
+                        continue;
+                    }
+                    if (serialize && field.serialize) {
+                        value = field.serialize(value, me);
+                    }
+                }
+                ret[name] = value;
+            }
+        }
+        if (critical) {
+            criticalFields = me.self.criticalFields || me.getCriticalFields();
+            for (n = criticalFields.length; n-- > 0; ) {
+                name = (field = criticalFields[n]).name;
+                if (!(name in ret)) {
+                    value = data[name];
+                    if (serialize && field.serialize) {
+                        value = field.serialize(value, me);
+                    }
+                    ret[name] = value;
+                }
+            }
+        }
+        if (associated) {
+            me.getAssociatedData(ret, opts, dirtyGraph);
+        }
+        return ret;
     },
 
     isDirty: function () {
         this.phantom = this.isNew();
-        if(this.isNew())return true;
+        if(this.phantom)return true;
         var me = this;
         var fields = this.getFields();
         var isModified = false;
@@ -232,42 +273,6 @@ Ext.define("TransDocs.model.AbstractModel", {
                 break;
             }
         }
-        return isModified || me.isDirtyAssociations();
-    },
-
-    isDirtyAssociations: function () {
-        var me = this,
-            associations = me.associations,
-            roleName, role, item, items, length, record, deep;
-        me.$associationDyrtyGathering = 1;
-        for (roleName in associations) {
-            role = associations[roleName];
-            item = role.getAssociatedItem(me);
-            if (!item || item.$associationDyrtyGathering) {
-                continue;
-            }
-            if (item.isStore) {
-                item.$associationDyrtyGathering = 1;
-
-                items = item.getData().items;
-                length = items.length;
-                var isManyToMany = role.association.isManyToMany;
-                var isModified = isManyToMany || me.isModified(role.association.field.getName());
-                if (!isModified) {
-                    for (var i = 0; i < length; ++i) {
-                        record = items[i];
-                        record.$associationDyrtyGathering = 1;
-                        if (record.isDirty()) {
-                            delete record.$associationDyrtyGathering;
-                            return true;
-                        }
-                    }
-                }
-
-                delete item.$associationDyrtyGathering;
-            } else {
-                return me.isModified(role.association.field.getName()) || item.isDirty();
-            }
-        }
+        return isModified;
     }
 });

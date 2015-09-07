@@ -6,6 +6,7 @@ import com.td.model.dto.DirtySupportDTO;
 import ma.glasnost.orika.*;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
 import ma.glasnost.orika.metadata.ClassMapBuilder;
 import ma.glasnost.orika.metadata.Property;
 import ma.glasnost.orika.metadata.TypeFactory;
@@ -141,8 +142,8 @@ public class OrikaMapper extends ConfigurableMapper {
 
     @Override
     public void configureFactoryBuilder(DefaultMapperFactory.Builder builder) {
-        //  builder.compilerStrategy(new JavassistCompilerStrategy());
+       // builder.compilerStrategy(new EclipseJdtCompilerStrategy());
         builder.unenhanceStrategy(new HibernateUnenhanceStrategy());
-        // builder.useAutoMapping(false);
+        builder.useAutoMapping(false);
     }
 }

@@ -4,7 +4,10 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
     title: 'Заявка',
 
     requires: [
-        "TransDocs.data.store.dictionary.CustomerStore"
+        "TransDocs.data.store.dictionary.CustomerStore",
+        "TransDocs.data.store.dictionary.UserStore",
+        "TransDocs.data.store.dictionary.CompanyStore",
+        "TransDocs.data.store.dictionary.CarrierStore"
     ],
     layout: {
         type: 'vbox',
@@ -230,8 +233,10 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                                 valueField: 'objectId',
                                 recordType: "com.td.model.entity.dictionary.dataset.UserDataSet",
                                 bind: {
-                                    value: '{document.manager}',
-                                    store: '{userStore}'
+                                    value: '{document.manager}'
+                                },
+                                store:{
+                                  type: "userStore"
                                 },
                                 queryProperty: "description",
                                 searchHandler: 'findManager',
@@ -280,8 +285,10 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         queryProperty: "description",
                         searchHandler: "findCustomer",
                         bind: {
-                            value: '{customer}',
-                            store: '{customerStore}'
+                            value: '{customer}'
+                        },
+                        store: {
+                          type:"customerStore"
                         },
                         listeners: {
                             change: 'changeCustomer'
@@ -484,8 +491,10 @@ Ext.define("TransDocs.view.component.document.OrderMainPanel", {
                         queryProperty: "description",
                         searchHandler: 'findCarrier',
                         bind: {
-                            value: '{carrier}',
-                            store: '{carrierStore}'
+                            value: '{carrier}'
+                        },
+                        store:{
+                            type: "carrierStore"
                         },
                         listeners: {
                             change: 'changeCarrier'

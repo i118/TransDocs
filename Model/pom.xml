@@ -297,6 +297,11 @@
             <artifactId>custom-orika-core</artifactId>
             <version>1.4.6</version>
         </dependency>
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-eclipse-tools</artifactId>
+            <version>1.4.6</version>
+        </dependency>
     </dependencies>
     <build>
 

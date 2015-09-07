@@ -2,7 +2,7 @@ Ext.define("TransDocs.model.file.AbstractFileModel",{
     extend: "TransDocs.model.tree.TreeBase",
     fields:[
         {name: 'extension', type:'string'},
-        {name: 'fileType', type:'string'},
+        {name: 'fileType', type:'string', critical:true},
         {name: 'mimeType', type:'string'},
         {name: 'name', type:'string'},
         {name: 'fileLocation', type:'string'},

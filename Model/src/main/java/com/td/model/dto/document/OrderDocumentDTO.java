@@ -2,9 +2,11 @@ package com.td.model.dto.document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.td.model.annotation.DTO;
+import com.td.model.annotation.ExcludeMapping;
 import com.td.model.dto.ModelDTO;
 import com.td.model.dto.dictionary.contractor.*;
 import com.td.model.dto.dictionary.user.UserDTO;
+import com.td.model.dto.mapper.orika.OrderDocumentCustomMapper;
 import com.td.model.entity.dictionary.company.*;
 import com.td.model.entity.dictionary.user.IUserModel;
 import com.td.model.entity.document.*;
@@ -14,7 +16,7 @@ import org.joda.money.Money;
 /**
  * Created by zerotul.
  */
-@DTO(mappedBy = OrderDocumentModel.class)
+@DTO(mappedBy = OrderDocumentModel.class, customMapperName = OrderDocumentCustomMapper.NAME)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderDocumentDTO extends ModelDTO {
 
@@ -92,6 +94,7 @@ public class OrderDocumentDTO extends ModelDTO {
         this.transportationType = transportationType;
     }
 
+    @ExcludeMapping
     public UserDTO getManager() {
         return manager;
     }
@@ -100,6 +103,7 @@ public class OrderDocumentDTO extends ModelDTO {
         this.manager = manager;
     }
 
+    @ExcludeMapping
     public CustomerDTO getCustomer() {
         return customer;
     }
@@ -108,6 +112,7 @@ public class OrderDocumentDTO extends ModelDTO {
         this.customer = customer;
     }
 
+    @ExcludeMapping
     public CustomerPersonDTO getCustomerPerson() {
         return customerPerson;
     }
@@ -116,6 +121,7 @@ public class OrderDocumentDTO extends ModelDTO {
         this.customerPerson = customerPerson;
     }
 
+    @ExcludeMapping
     public CarrierDTO getCarrier() {
         return carrier;
     }
@@ -124,6 +130,7 @@ public class OrderDocumentDTO extends ModelDTO {
         this.carrier = carrier;
     }
 
+    @ExcludeMapping
     public CompanyDTO getCompany() {
         return company;
     }
@@ -204,6 +211,7 @@ public class OrderDocumentDTO extends ModelDTO {
         this.carrierPhone = carrierPhone;
     }
 
+    @ExcludeMapping
     public CarrierPersonDTO getCarrierPerson() {
         return carrierPerson;
     }
