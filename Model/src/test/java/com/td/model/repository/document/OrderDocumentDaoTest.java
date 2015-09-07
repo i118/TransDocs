@@ -31,7 +31,7 @@ public class OrderDocumentDaoTest extends AbstractDaoTest<OrderDocumentModel> {
         getDao().saveOrUpdate(orderDocumentModel);
         getDao().getEntityManager().flush();
         getDao().getEntityManager().clear();
-        OrderDocumentModel persistOrderDocumentModel = getDao().getModel(orderDocumentModel.getObjectId());
+        OrderDocumentModel persistOrderDocumentModel = getDao().findById(orderDocumentModel.getObjectId());
 
         assertModel(orderDocumentModel, persistOrderDocumentModel);
     }

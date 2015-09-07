@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.td.model.entity.file.CustomerFileModel;
 import com.td.model.entity.file.Attachment;
+import com.td.model.entity.file.FileModel;
 import com.td.model.entity.file.IFileModel;
 import com.td.model.listener.ContractorListener;
 
@@ -17,10 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by konstantinchipunov on 13.08.14.
@@ -35,7 +33,7 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
 
     public static final String TABLE_NAME = "td_customer";
 
-    private Set<ContractPerson> persons;
+    private List<ContractPerson> persons;
 
     private Attachment<ICustomerModel> fileStore;
 
@@ -55,25 +53,25 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
             cascade = CascadeType.ALL
     )
     @JsonManagedReference("persons")
-    public Set<ContractPerson> getPersons() {
+    public List<ContractPerson> getPersons() {
         return persons;
     }
 
-    public void setPersons(Set<ContractPerson> persons) {
+    public void setPersons(List<ContractPerson> persons) {
         this.persons = persons;
     }
 
     @Override
     public void addPerson(ContractPerson person) {
         if (persons == null) {
-            persons = new HashSet<>();
+            persons = new ArrayList<>();
         }
         persons.add(person);
         person.setContractor(this);
     }
 
 
-    @OneToOne(fetch = FetchType.EAGER, targetEntity = CustomerFileModel.class, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = CustomerFileModel.class, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     @JsonManagedReference("fileStore")
     public Attachment<ICustomerModel> getFileStore() {
         return fileStore;
@@ -91,7 +89,7 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
 
     @Override
     @Transient
-    public List<IFileModel> getFiles() {
+    public List<FileModel> getFiles() {
         if (fileStore == null) {
             CustomerFileModel fileModel = new CustomerFileModel();
             fileModel.setOwner(this);
@@ -105,11 +103,11 @@ public class CustomerModel extends JuridicalPersonModel implements ICustomerMode
     }
 
     @Override
-    public void setFiles(List<IFileModel> files) {
+    public void setFiles(List<FileModel> files) {
         getFileStore().setFiles(files);
     }
 
-    public void addFile(IFileModel fileModel) {
+    public void addFile(FileModel fileModel) {
         getFileStore().addFile(fileModel);
     }
 

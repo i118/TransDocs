@@ -7,15 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.td.model.entity.AbstractModel;
 import com.td.model.validation.annotation.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.UUID;
@@ -27,7 +19,7 @@ import java.util.UUID;
 @Table(name = CarModel.TABLE_NAME)
 @JsonTypeName(CarModel.TABLE_NAME)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CarModel extends AbstractModel{
+public class CarModel extends AbstractModel {
     private static final long serialVersionUID = -5746679152707163921L;
 
     public static final String TABLE_NAME = "td_car";
@@ -54,13 +46,13 @@ public class CarModel extends AbstractModel{
 
     private Set<DriverModel> drivers;
 
-    public static class Columns extends AbstractModel.Columns{
-        public static final String CAR_BRAND= "car_brand";
-        public static final String CAR_NUMBER= "car_number";
-        public static final String TRAILER_BRAND= "trailer_brand";
-        public static final String TRAILER_NUMBER= "trailer_number";
-        public static final String TRAILER_TYPE= "trailer_type";
-        public static final String CAPACITY= "capacity";
+    public static class Columns extends AbstractModel.Columns {
+        public static final String CAR_BRAND = "car_brand";
+        public static final String CAR_NUMBER = "car_number";
+        public static final String TRAILER_BRAND = "trailer_brand";
+        public static final String TRAILER_NUMBER = "trailer_number";
+        public static final String TRAILER_TYPE = "trailer_type";
+        public static final String CAPACITY = "capacity";
         public static final String CUBAGE = "cubage";
         public static final String CARRIER_OBJECT_ID = "carrier_object_id";
     }
@@ -127,7 +119,7 @@ public class CarModel extends AbstractModel{
 
     @Transient
     public UUID getCarrierId() {
-        return getCarrier()!=null ? getCarrier().getObjectId() : null;
+        return getCarrier() != null ? getCarrier().getObjectId() : null;
     }
 
     public void setCubage(String cubage) {
@@ -135,7 +127,7 @@ public class CarModel extends AbstractModel{
     }
 
     @ManyToOne
-    @JoinColumn(name=Columns.CARRIER_OBJECT_ID, nullable=true)
+    @JoinColumn(name = Columns.CARRIER_OBJECT_ID, nullable = true)
     @JsonBackReference("carrier-cars")
     public CarrierModel getCarrier() {
         return carrier;
@@ -149,16 +141,25 @@ public class CarModel extends AbstractModel{
             mappedBy = "car",
             fetch = FetchType.LAZY
     )
-    @JsonManagedReference
+    @JsonManagedReference("car-drivers")
     public Set<DriverModel> getDrivers() {
         return drivers;
     }
 
     public void setDrivers(Set<DriverModel> drivers) {
-        if(drivers!=null) {
+        if (drivers != null) {
             drivers.parallelStream().filter((DriverModel driver) -> driver.getCar() == null).forEach((DriverModel driver) -> driver.setCar(this));
         }
         this.drivers = drivers;
+    }
+
+
+    @PreUpdate
+    private void preUpdate() {
+        if (isDeleted() && getDrivers() != null) {
+            getDrivers().forEach((DriverModel driver) -> driver.setCar(null));
+            getDrivers().clear();
+        }
     }
 
     @Transient

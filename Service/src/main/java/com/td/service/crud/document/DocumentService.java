@@ -15,11 +15,6 @@ import java.util.UUID;
  */
 public interface DocumentService<T extends AbstractDocumentModel> extends CRUDService<T>{
 
-    public void createDocument(T document);
-
     public <U extends DocumentDataSet> PagingList<U> findDocumentDataSet(Specification<? super DocumentDataSet> specification);
 
-    public T getDocument(UUID documentId);
-
-    public T getDocument(UUID documentId, LazyInitVisiter<T> lazyInitVisiter);
 }

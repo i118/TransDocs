@@ -116,7 +116,7 @@ public class PersistenceRepositoryContext {
     @Bean
     @FileQualifier
     public FileRepository fileModelRepository(){
-        FileJPARepository fileModelDao = new FileJPARepository(FileModel.class);
+        FileJPARepository fileModelDao = new FileJPARepository();
         return fileModelDao;
     }
 

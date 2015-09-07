@@ -34,6 +34,14 @@ public class DocumentNumber implements Serializable {
     private DocumentNumber() {
     }
 
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setNumberDate(LocalDate numberDate) {
+        this.numberDate = numberDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

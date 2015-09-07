@@ -19,9 +19,9 @@ public interface IRepository<T extends Model> {
 
     public void delete(T persistent);
 
-    public T getModel(UUID id);
+    public T findById(UUID id);
 
-    public T getModel(UUID objectId, Class<T> clazz);
+    public T findById(UUID objectId, Class<T> clazz);
 
     public T getReference(UUID objectId, Class<T> clazz);
 

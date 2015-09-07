@@ -10,5 +10,5 @@ import com.td.service.crud.dictionary.DictionaryCRUDService;
  */
 public interface CompanyService extends DictionaryCRUDService<CompanyModel>, CRUDService<CompanyModel> {
 
-    public CompanyModel getCurrentCompany();
+     CompanyModel getCurrentCompany();
 }

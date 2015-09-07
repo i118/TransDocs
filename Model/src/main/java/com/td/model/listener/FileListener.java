@@ -37,6 +37,7 @@ public class FileListener {
     }
 
     protected void setExtension(IFileModel fileModel) {
+        if(IFileModel.FileType.STORE.equals(fileModel.getFileType())) return;
         String name = fileModel.getName();
         int index = name.lastIndexOf(".");
         if (index != -1) {

@@ -41,7 +41,7 @@ public abstract class JuridicalPersonModel extends AbstractDictionary implements
 
     private String comment;
 
-    private IAccountDetails accountDetails;
+    private LegalAccountDetails accountDetails;
 
     public static class Columns extends AbstractDictionary.Columns{
         public static final String FULL_NAME = "full_name";
@@ -161,12 +161,12 @@ public abstract class JuridicalPersonModel extends AbstractDictionary implements
     @Override
     @Embedded
     @Target(LegalAccountDetails.class)
-    public IAccountDetails getAccountDetails() {
+    public LegalAccountDetails getAccountDetails() {
         return accountDetails;
     }
 
     @Override
-    public void setAccountDetails(IAccountDetails accountDetails) {
+    public void setAccountDetails(LegalAccountDetails accountDetails) {
         this.accountDetails = accountDetails;
     }
 

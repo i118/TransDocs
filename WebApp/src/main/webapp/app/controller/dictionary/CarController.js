@@ -30,11 +30,12 @@ Ext.define("TransDocs.controller.dictionary.CarController", {
                     record.cars().remove(selection[index]);
                 }
                 selection[index].drivers().each(function(driver){
-                    driver.setCar(undefined);
+                    driver.setCar(null);
+                    selection[index].drivers().remove(driver);
                     record.drivers().on("load", function(store, records, successful, eOpts){
                         var loadedDriver = store.getById(driver.getId());
                         if(loadedDriver){
-                            loadedDriver.setCar("");
+                            loadedDriver.setCar(null);
                         }
                     });
                 });

@@ -1,5 +1,6 @@
 package com.td.model.context;
 
+import com.td.model.aop.DTODirtyFieldsAspect;
 import com.td.model.aop.SchemaAwareAspect;
 import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,12 @@ public class ModelAopContext {
     }
 
     @Bean
-    public SchemaAwareAspect schemaAwareAspect(){
+    public SchemaAwareAspect schemaAwareAspect() {
         return SchemaAwareAspect.aspectOf();
+    }
+
+    @Bean
+    public DTODirtyFieldsAspect dtoDirtyFieldsAspect() {
+        return DTODirtyFieldsAspect.aspectOf();
     }
 }

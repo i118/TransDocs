@@ -38,7 +38,7 @@ public class CustomerDaoTest extends AbstractDaoTest<ICustomerModel> {
        getDao().saveOrUpdate(customerModel);
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((DictionaryRepository)getDao()).findDataSet(from(DictionaryDataSetImpl.class).endFrom());
-       ICustomerModel persistCustomer = customerModelDao.getModel(customerModel.getObjectId());
+       ICustomerModel persistCustomer = customerModelDao.findById(customerModel.getObjectId());
        assertModel(customerModel, persistCustomer);
     }
 

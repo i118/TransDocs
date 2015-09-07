@@ -48,7 +48,7 @@ public class CarrierFileModel extends FileModel implements Attachment<CarrierMod
     }
 
     @Override
-    public void addFile(IFileModel fileModel) {
+    public void addFile(FileModel fileModel) {
         super.addFile(fileModel);
         if(fileModel instanceof Attachment){
             ((Attachment) fileModel).setOwner(getOwner());

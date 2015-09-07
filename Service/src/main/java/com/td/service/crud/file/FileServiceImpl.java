@@ -2,6 +2,7 @@ package com.td.service.crud.file;
 
 import com.td.model.context.qualifier.FileQualifier;
 import com.td.model.context.qualifier.LockQualifier;
+import com.td.model.entity.file.FileModel;
 import com.td.model.repository.file.FileRepository;
 import com.td.model.entity.file.FileContainer;
 import com.td.model.entity.file.IFileModel;
@@ -27,7 +28,7 @@ import java.util.UUID;
  */
 @Service
 @FileQualifier
-public class FileServiceImpl extends GenericCRUDService<IFileModel> implements FileService {
+public class FileServiceImpl extends GenericCRUDService<FileModel> implements FileService {
 
     private LockService lockService;
 
@@ -48,23 +49,21 @@ public class FileServiceImpl extends GenericCRUDService<IFileModel> implements F
 
     @Override
     @Transactional
-    public void saveFile(IFileModel fileModel, UUID containerId) {
-        IFileModel savedFile = saveOrUpdate(fileModel);
-        //TODO маленький костыльчик, после мерджа обнуляется контент и в листенере файл не обновляется, если найдется вариант по лучше убрать
-        savedFile.setContent(fileModel.getContent());
+    public void saveFile(FileModel fileModel, UUID containerId) {
+        save(fileModel);
     }
 
     @Override
     @Transactional
     public void deleteFile(UUID id){
-       IFileModel fileModel = findById(id);
+       FileModel fileModel = findById(id);
        delete(fileModel);
     }
 
     @Transactional
     public IFileModel checkout(UUID id) throws LockException {
-       IFileModel fileModel = findById(id);
-       getLockService().lock((Lockable) fileModel);
+       FileModel fileModel = findById(id);
+       getLockService().lock(fileModel);
        saveOrUpdate(fileModel);
 
        FileModelDTO dto = new FileModelDTO();
@@ -78,8 +77,8 @@ public class FileServiceImpl extends GenericCRUDService<IFileModel> implements F
     }
 
     @Transactional(rollbackFor = Throwable.class, propagation = Propagation.REQUIRED)
-    public IFileModel cancelCheckout(UUID id) throws LockException {
-       IFileModel fileModel = findById(id);
+    public FileModel cancelCheckout(UUID id) throws LockException {
+       FileModel fileModel = findById(id);
        getLockService().unlock((Lockable) fileModel);
        saveOrUpdate(fileModel);
        return fileModel;
@@ -87,17 +86,17 @@ public class FileServiceImpl extends GenericCRUDService<IFileModel> implements F
 
     @Transactional(rollbackFor = Throwable.class, propagation = Propagation.REQUIRED)
     public void saveFiles(FileContainer fileContainer){
-      Collection<IFileModel> newFiles = new HashSet<>();
-      Collection<IFileModel> dirtyFiles = new HashSet<>();
+      Collection<FileModel> newFiles = new HashSet<>();
+      Collection<FileModel> dirtyFiles = new HashSet<>();
       sortedFiles(fileContainer, newFiles, dirtyFiles);
-      newFiles.stream().forEach((IFileModel fileModel)->saveOrUpdate(fileModel));
-      dirtyFiles.stream().forEach((IFileModel fileModel)->saveOrUpdate(fileModel));
+      newFiles.stream().forEach((FileModel fileModel)->saveOrUpdate(fileModel));
+      dirtyFiles.stream().forEach((FileModel fileModel)->saveOrUpdate(fileModel));
     }
 
-    protected void sortedFiles(FileContainer container, Collection<IFileModel> newFiles, Collection<IFileModel> dirtyFiles){
-        Collection<IFileModel> files = container.getFiles();
+    protected void sortedFiles(FileContainer container, Collection<FileModel> newFiles, Collection<FileModel> dirtyFiles){
+        Collection<FileModel> files = container.getFiles();
         if(files==null)return;
-        for (IFileModel fileModel : container.getFiles()) {
+        for (FileModel fileModel : container.getFiles()) {
             if(fileModel instanceof FileContainer){
                 sortedFiles((FileContainer) fileModel, newFiles, dirtyFiles);
             }
@@ -124,17 +123,17 @@ public class FileServiceImpl extends GenericCRUDService<IFileModel> implements F
     }
 
     @Transactional
-    public IFileModel checkIn(UUID id, InputStream content) throws IOException, LockException {
-        IFileModel fileModel = findById(id);
+    public FileModel checkIn(UUID id, InputStream content) throws IOException, LockException {
+        FileModel fileModel = findById(id);
         getLockService().unlock((Lockable) fileModel);
         fileModel.setContent(content);
         fileModel.setModifyDate(new Date());
-        saveFile(fileModel, null);
-
+        FileModel updatedFile = getRepository().update(fileModel);
+        updatedFile.setContent(fileModel.getContent());
         return fileModel;
     }
 
-    public IFileModel createFile(String fileType){
+    public FileModel createFile(String fileType){
        return getTypeFactory().createObjectByType(fileType);
     }
 

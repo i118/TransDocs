@@ -1,4 +1,4 @@
-Ext.define("TransDocs.model.AbstractModel",{
+Ext.define("TransDocs.model.AbstractModel", {
     extend: 'Ext.data.Model',
     idProperty: 'objectId',
     requires: [
@@ -9,17 +9,20 @@ Ext.define("TransDocs.model.AbstractModel",{
     identifier: 'uuid',
     fields: [
         {name: 'objectId', type: 'string'},
-        {name: 'version', defaultValue: -1},
-        {name: 'creationDate',type:'date'},
-        {name: 'modifyDate',type:'date'},
-        {name: 'objectType',type:'string', persist:true,  convert: function(newValue, model){
+        {name: 'version', defaultValue: -1, critical: true},
+        {name: 'creationDate', type: 'date'},
+        {name: 'modifyDate', type: 'date'},
+        {
+            name: 'objectType', type: 'string', critical: true, persist: true, convert: function (newValue, model) {
             return model.getObjectType();
-        } },
-        {name: 'deleted',type:'boolean'}
+        }
+        },
+        {name: 'deleted', type: 'boolean'}
     ],
 
     actionMapEnabled: false,
     actionMap: undefined,
+
 
     schema: {
         proxy: {
@@ -37,7 +40,7 @@ Ext.define("TransDocs.model.AbstractModel",{
                 update: 'PUT',
                 destroy: 'DELETE'
             },
-            api:{
+            api: {
                 create: '{entityName}/create.object',
                 update: '{entityName}/update.object',
                 destroy: '{entityName}/delete.object',
@@ -65,21 +68,21 @@ Ext.define("TransDocs.model.AbstractModel",{
         }
     },
 
-    getObjectType: function(){
-        throw "unimplemented method, class = "+Ext.getClass(this).getName();
+    getObjectType: function () {
+        throw "unimplemented method, class = " + Ext.getClass(this).getName();
     },
 
-    isNew: function(){
-        return this.get('version')==-1;
+    isNew: function () {
+        return this.get('version') == -1;
     },
 
-    reload: function(callBack, params, url) {
+    reload: function (callBack, params, url) {
 
         var me = this;
         return Ext.getClass(this).load(this.getId(), {
             url: url ? url : this.url,
             params: params ? params : this.params,
-            success: function(r, o) {
+            success: function (r, o) {
                 var k;
                 for (k in r.data) {
                     me.data[k] = r.data[k];
@@ -89,7 +92,7 @@ Ext.define("TransDocs.model.AbstractModel",{
                     callBack(true);
                 }
             },
-            failure: function() {
+            failure: function () {
                 if (Ext.isFunction(callBack)) {
                     callBack(false);
                 }
@@ -97,15 +100,15 @@ Ext.define("TransDocs.model.AbstractModel",{
         });
     },
 
-    refresh: function(store, callback){
+    refresh: function (store, callback) {
         var me = this;
         store.load({
             id: me.getId(),
             addRecords: true,
-            callback: function(records, operation, success){
-                if(success && store.getSession() && records.length>0){
+            callback: function (records, operation, success) {
+                if (success && store.getSession() && records.length > 0) {
                     var record = records[0];
-                    if(record.raw){
+                    if (record.raw) {
                         var rawData = store.getProxy().getReader().extractData(record.raw);
                         record.data = rawData[0].data;
                     }
@@ -118,83 +121,158 @@ Ext.define("TransDocs.model.AbstractModel",{
     },
 
 
-    getActionMap: function(){
-        if(!this.actionMap && this.actionMapEnabled){
+    getActionMap: function () {
+        if (!this.actionMap && this.actionMapEnabled) {
             this.actionMap = this.createActionMap();
         }
         return this.actionMap;
     },
 
 
-    setDirty: function(flag){
+    setDirty: function (flag) {
         this.dirty = flag;
     },
 
-    isDirty: function(){
+    isDirty: function () {
         return this.dirty;
     },
 
-    createActionMap: function(){},
+    createActionMap: function () {
+    },
 
-    getAssociatedData: function (result, options,writer) {
+    getAssociatedData: function(result, options, dirtyGraph) {
         var me = this,
             associations = me.associations,
-            deep, i, item, items, itemData, length, record, role, roleName;
-
-        var getDataInternal = function(record){
-            var dataInternal;
-            if(writer){
-                dataInternal = writer.getRecordData(record);
-                if(writer.getExpandData()){
-                    dataInternal = writer.getExpandedData([dataInternal])[0]
-                }
-            }else{
-                dataInternal = record.getData(true);
-            }
-            return dataInternal;
-        }
+            deep, i, item, items, itemData, length, record, role, roleName, opts, clear, associated, dirty = {dirty:false};
+        dirtyGraph = dirtyGraph ? dirtyGraph : {dirty:false};
         result = result || {};
-
         me.$gathering = 1;
-
+        if (options) {
+            options = Ext.Object.chain(options);
+        }
         for (roleName in associations) {
+            dirty = {dirty:false};
             role = associations[roleName];
             item = role.getAssociatedItem(me);
             if (!item || item.$gathering) {
-                if(role.isMany){
-                    result[roleName]=[];
-                }else{
-                    result[roleName]=null;
-                }
+
                 continue;
             }
-
             if (item.isStore) {
                 item.$gathering = 1;
-
                 items = item.getData().items;
                 length = items.length;
                 itemData = [];
-
                 for (i = 0; i < length; ++i) {
                     record = items[i];
+                    if(me.isNew() || record.isDirty() ){
+                        dirty.dirty = true;
+                    }
                     deep = !record.$gathering;
                     record.$gathering = 1;
-                    var data = getDataInternal(record);
-                    itemData.push(data);
+                    if (options) {
+                        associated = options.associated;
+                        if (associated === undefined) {
+                            options.associated = deep;
+                            clear = true;
+                        } else if (!deep) {
+                            options.associated = false;
+                            clear = true;
+                        }
+                        opts = options;
+                    } else {
+                        opts = deep ? me._getAssociatedOptions : me._getNotAssociatedOptions;
+                    }
+                    var deepDirty = dirty.dirty ? {dirty:false} :  dirty;
+                    itemData.push(record.getData(opts, deepDirty));
+                    if (clear) {
+                        options.associated = associated;
+                        clear = false;
+                    }
                     delete record.$gathering;
                 }
-
                 delete item.$gathering;
             } else {
-                itemData = getDataInternal(item);
+                opts = options || me._getAssociatedOptions;
+                if (options && options.associated === undefined) {
+                    opts.associated = true;
+                }
+                if(me.isNew() || item.isDirty() || me.isModified(role.association.field.getName())){
+                    dirty.dirty = true;
+                }
+                var deepDirty = dirty.dirty ? {dirty:false} :  dirty;
+                itemData = item.getData(opts, deepDirty);
             }
-
-            result[roleName] = itemData;
+            if(dirty.dirty) {
+                dirtyGraph.dirty = true;
+                result[roleName] = itemData;
+            }
         }
-
         delete me.$gathering;
-
         return result;
+    },
+
+    getData: function(options, dirtyGraph) {
+        var me = this,
+            ret = {},
+            opts = (options === true) ? me._getAssociatedOptions : (options || ret),
+
+            data = me.data,
+            associated = opts.associated,
+            changes = opts.changes && !me.phantom,
+            critical = changes && opts.critical,
+            content = changes ? me.modified : data,
+            fieldsMap = me.fieldsMap,
+            persist = opts.persist,
+            serialize = opts.serialize,
+            criticalFields, field, n, name, value;
+        if (content) {
+            for (name in content) {
+                value = data[name];
+                field = fieldsMap[name];
+                if (field) {
+                    if (persist && !field.persist) {
+                        continue;
+                    }
+                    if (serialize && field.serialize) {
+                        value = field.serialize(value, me);
+                    }
+                }
+                ret[name] = value;
+            }
+        }
+        if (critical) {
+            criticalFields = me.self.criticalFields || me.getCriticalFields();
+            for (n = criticalFields.length; n-- > 0; ) {
+                name = (field = criticalFields[n]).name;
+                if (!(name in ret)) {
+                    value = data[name];
+                    if (serialize && field.serialize) {
+                        value = field.serialize(value, me);
+                    }
+                    ret[name] = value;
+                }
+            }
+        }
+        if (associated) {
+            me.getAssociatedData(ret, opts, dirtyGraph);
+        }
+        return ret;
+    },
+
+    isDirty: function () {
+        this.phantom = this.isNew();
+        if(this.phantom)return true;
+        var me = this;
+        var fields = this.getFields();
+        var isModified = false;
+        for (var i = 0; i < fields.length; ++i) {
+            var field = fields[i];
+            if (me.isModified(field.getName())) {
+                isModified = true;
+                break;
+            }
+        }
+        return isModified;
     }
 });

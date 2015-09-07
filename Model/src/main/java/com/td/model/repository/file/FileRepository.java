@@ -7,7 +7,7 @@ import com.td.model.entity.file.IFileModel;
 /**
  * Created by konstantinchipunov on 10.09.14.
  */
-public interface FileRepository<T extends FileModel> extends IRepository<T> {
+public interface FileRepository extends IRepository<FileModel> {
 
     public IFileModel getFileByPath(String path);
 

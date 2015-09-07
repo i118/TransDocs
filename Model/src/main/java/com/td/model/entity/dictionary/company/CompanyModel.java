@@ -31,7 +31,7 @@ public class CompanyModel extends JuridicalPersonModel {
 
     private static final long serialVersionUID = 294505326356415655L;
 
-    private Set<IUserModel> users;
+    private Set<UserModel> users;
 
     private String login;
 
@@ -59,11 +59,11 @@ public class CompanyModel extends JuridicalPersonModel {
             mappedBy = "company"
     )
     @JsonManagedReference("users")
-    public Set<IUserModel> getUsers() {
+    public Set<UserModel> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<IUserModel> users) {
+    public void setUsers(Set<UserModel> users) {
         this.users = users;
     }
 }

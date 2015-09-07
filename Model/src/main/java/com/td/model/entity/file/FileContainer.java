@@ -22,10 +22,10 @@ import java.util.List;
 public interface FileContainer extends Persistent {
 
     @JsonManagedReference("file-container")
-    public List<IFileModel> getFiles();
+    public List<FileModel> getFiles();
 
 
-    public void setFiles(List<IFileModel> files);
+    public void setFiles(List<FileModel> files);
 
-    public void addFile(IFileModel fileModel);
+    public void addFile(FileModel fileModel);
 }

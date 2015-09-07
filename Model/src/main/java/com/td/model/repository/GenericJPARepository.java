@@ -24,14 +24,7 @@ public class GenericJPARepository<T extends Persistent> implements IRepository<T
 
     @Override
     public T saveOrUpdate(T persistent){
-      if(persistent==null)return persistent;
-      if(persistent.isNew()){
-          save(persistent);
-          return persistent;
-      }else{
-          T mergedPersistent = update(persistent);
-          return  mergedPersistent;
-      }
+        return getEntityManager().merge(persistent);
     }
 
     @Override
@@ -41,12 +34,12 @@ public class GenericJPARepository<T extends Persistent> implements IRepository<T
     }
 
     @Override
-    public T getModel(UUID objectId){
-      return getModel(objectId, modelClass);
+    public T findById(UUID objectId){
+      return findById(objectId, modelClass);
     }
 
     @Override
-    public T getModel(UUID objectId, Class<T> clazz){
+    public T findById(UUID objectId, Class<T> clazz){
         return  getEntityManager().find(clazz, objectId);
     }
 
@@ -67,7 +60,7 @@ public class GenericJPARepository<T extends Persistent> implements IRepository<T
 
     @Override
     public void save(T persistent){
-        getEntityManager().persist(persistent);
+        getEntityManager().merge(persistent);
     }
 
     @Override

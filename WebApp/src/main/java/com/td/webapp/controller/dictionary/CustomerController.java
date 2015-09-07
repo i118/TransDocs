@@ -1,38 +1,39 @@
 package com.td.webapp.controller.dictionary;
 
+import com.td.model.dto.dictionary.contractor.CustomerDTO;
 import com.td.model.entity.dictionary.company.CustomerModel;
-import com.td.model.repository.dictionary.contractor.ContractorRepository;
-import com.td.model.entity.dictionary.company.ICustomerModel;
-import com.td.service.context.qualifier.ContractorCrud;
-import com.td.service.crud.dictionary.contractor.ContractorCRUDService;
+import com.td.service.context.qualifier.ContractorCRUDFacade;
+import com.td.service.crud.CRUDFacade;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.Map;
 
 /**
  * Created by konstantinchipunov on 27.08.14.
  */
 @Controller
 @RequestMapping("/"+ CustomerController.CONTROLLER_NAME)
-public class CustomerController extends ContractorController<CustomerModel> {
+public class CustomerController extends ContractorController<CustomerModel, CustomerDTO> {
 
     public static final String CONTROLLER_NAME = "Customer";
 
-    ContractorCRUDService<CustomerModel> customerService;
+    private CRUDFacade<CustomerModel, CustomerDTO> facade;
 
     @Override
     public String getControllerName() {
         return CONTROLLER_NAME;
     }
 
-    public ContractorCRUDService<CustomerModel> getContractorService() {
-        return customerService;
+    @Inject
+    @ContractorCRUDFacade(ContractorCRUDFacade.Type.CUSTOMER)
+    public void setFacade(CRUDFacade<CustomerModel, CustomerDTO> crudFacade) {
+        this.facade = crudFacade;
     }
 
-    @Inject
-    @ContractorCrud(ContractorCrud.Type.CUSTOMER)
-    public void setContractorService(ContractorCRUDService<CustomerModel> customerService) {
-        this.customerService = customerService;
+    @Override
+    public CRUDFacade<CustomerModel, CustomerDTO> getFacade() {
+        return facade;
     }
 }

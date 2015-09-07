@@ -50,7 +50,7 @@ public class FileModel extends AbstractModel implements IFileModel, FileContaine
 
     private FileContainer container;
 
-    private List<IFileModel> files;
+    private List<FileModel> files;
 
     private ILock lock;
 
@@ -183,20 +183,19 @@ public class FileModel extends AbstractModel implements IFileModel, FileContaine
     @OneToMany(
             mappedBy = "container",
             targetEntity = FileModel.class,
-            cascade = {CascadeType.REMOVE},
-            fetch = FetchType.LAZY,
-            orphanRemoval=true
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE},
+            fetch = FetchType.LAZY
     )
     @JsonManagedReference("file-container")
-    public List<IFileModel> getFiles(){
+    public List<FileModel> getFiles(){
       return files;
     }
 
-    public void setFiles(List<IFileModel> files){
+    public void setFiles(List<FileModel> files){
         this.files = files;
     }
 
-    public void addFile(IFileModel fileModel){
+    public void addFile(FileModel fileModel){
         if(files == null){
             files = new ArrayList<>();
         }
@@ -221,4 +220,5 @@ public class FileModel extends AbstractModel implements IFileModel, FileContaine
     public void setContainer(FileContainer container){
         this.container = container;
     }
+
 }

@@ -2,6 +2,7 @@ package com.td.webapp.controller.file;
 
 import com.td.model.context.qualifier.FileQualifier;
 import com.td.model.entity.file.FileContainer;
+import com.td.model.entity.file.FileModel;
 import com.td.model.entity.file.IFileModel;
 import com.td.model.utils.StringUtil;
 import com.td.service.lock.LockException;
@@ -76,7 +77,7 @@ public class FileController extends AbstractController {
     @ResponseBody
     IResponse createFile(FileUpload uploadItem, @RequestParam String fileType, @RequestParam(required = false) String containerId) throws IOException {
         logger.debug("create file. fileName = " + uploadItem.getFile().getOriginalFilename());
-        IFileModel fileModel = fileService.createFile(fileType);
+        FileModel fileModel = fileService.createFile(fileType);
         try (InputStream in = uploadItem.getFile().getInputStream()) {
             fileModel.setContent(in);
             fileModel.setName(uploadItem.getFile().getOriginalFilename());

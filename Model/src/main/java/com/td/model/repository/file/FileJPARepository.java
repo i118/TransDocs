@@ -15,10 +15,10 @@ import javax.persistence.criteria.Root;
 /**
  * Created by konstantinchipunov on 10.09.14.
  */
-public class FileJPARepository<T extends FileModel> extends GenericJPARepository<T> implements FileRepository<T> {
+public class FileJPARepository extends GenericJPARepository<FileModel> implements FileRepository {
 
-    public FileJPARepository(Class<T> modelClass) {
-        super(modelClass);
+    public FileJPARepository() {
+        super(FileModel.class);
     }
 
     public JcrOperations getTemplate() {
@@ -39,12 +39,15 @@ public class FileJPARepository<T extends FileModel> extends GenericJPARepository
     }
 
     @Override
-    public void delete(T persistent){
+    public void delete(FileModel persistent){
         if(!getEntityManager().contains(persistent)){
             persistent = update(persistent);
         }
         getEntityManager().remove(persistent);
     }
 
-
+    @Override
+    public void save(FileModel persistent) {
+        getEntityManager().persist(persistent);
+    }
 }

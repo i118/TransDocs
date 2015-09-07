@@ -68,7 +68,7 @@ public class UserDaoTest extends AbstractDaoTest {
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((GenericJPARepository)getDao()).getEntityManager().clear();
 
-        IUserModel pesrsistUser = userModelDao.getModel(userModel.getObjectId());
+        IUserModel pesrsistUser = userModelDao.findById(userModel.getObjectId());
         assertModel(userModel, pesrsistUser);
         IUserModel userByName = userModelDao.getUserByName(userModel.getLogin());
         assertEquals(userModel, userByName);
@@ -81,7 +81,7 @@ public class UserDaoTest extends AbstractDaoTest {
     public void updateTest(IUserModel userModel){
         initDependents(userModel);
         userModelDao.saveOrUpdate((UserModel) userModel);
-        userModel = userModelDao.getModel(userModel.getObjectId());
+        userModel = userModelDao.findById(userModel.getObjectId());
         userModel.setPatronymic(UUID.randomUUID().toString());
         userModel.setLastName(UUID.randomUUID().toString());
         userModel.setFirstName(UUID.randomUUID().toString());
@@ -92,7 +92,7 @@ public class UserDaoTest extends AbstractDaoTest {
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((GenericJPARepository)getDao()).getEntityManager().clear();
 
-        IUserModel pesrsistUser = userModelDao.getModel(userModel.getObjectId());
+        IUserModel pesrsistUser = userModelDao.findById(userModel.getObjectId());
         assertModel(userModel, pesrsistUser);
         IUserModel userByName = userModelDao.getUserByName(userModel.getLogin());
         assertEquals(userModel, userByName);
@@ -114,12 +114,12 @@ public class UserDaoTest extends AbstractDaoTest {
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((GenericJPARepository)getDao()).getEntityManager().clear();
 
-        IUserModel persistUser = userModelDao.getModel(userModel.getObjectId());
+        IUserModel persistUser = userModelDao.findById(userModel.getObjectId());
         assertTrue(persistUser.isDeleted());
         IUserModel roleByName = userModelDao.getUserByName(userModel.getLogin());
         assertNull(roleByName);
         for(IRoleModel roleModel : roleModels){
-            assertNotNull(roleModelDao.getModel(roleModel.getObjectId()));
+            assertNotNull(roleModelDao.findById(roleModel.getObjectId()));
         }
     }
 

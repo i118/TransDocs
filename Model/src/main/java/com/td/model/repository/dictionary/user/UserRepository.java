@@ -5,6 +5,9 @@ import com.td.model.repository.dictionary.DictionaryRepository;
 import com.td.model.entity.dictionary.user.IUserModel;
 import com.td.model.entity.dictionary.user.UserModel;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  * Created with IntelliJ IDEA.
  * User: konstantinchipunov
@@ -17,5 +20,7 @@ public interface UserRepository extends DictionaryRepository<UserModel>, IReposi
     public UserModel getUserByName(String userName);
 
     public boolean hasUser(IUserModel userModel);
+
+    List<UserModel> findByCompanyId(UUID companyId);
 
 }

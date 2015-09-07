@@ -2,20 +2,14 @@ package com.td.model.entity.dictionary.company;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.td.model.entity.AbstractModel;
 import com.td.model.entity.Passport;
 import com.td.model.entity.dictionary.Person;
 import com.td.model.validation.annotation.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
@@ -153,9 +147,9 @@ public class DriverModel extends AbstractModel implements Person {
         this.drivingLicense = drivingLicense;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     @JoinColumn(name= Columns.CAR_ID)
-    @JsonBackReference
+    @JsonBackReference("car-drivers")
     public CarModel getCar() {
         return car;
     }

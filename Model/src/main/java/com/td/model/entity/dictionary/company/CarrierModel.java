@@ -3,10 +3,7 @@ package com.td.model.entity.dictionary.company;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.td.model.entity.file.CarrierFileModel;
-import com.td.model.entity.file.Attachment;
-import com.td.model.entity.file.FileContainer;
-import com.td.model.entity.file.IFileModel;
+import com.td.model.entity.file.*;
 import com.td.model.listener.ContractorListener;
 
 import javax.persistence.CascadeType;
@@ -18,10 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by konstantinchipunov on 12.11.14.
@@ -36,13 +30,13 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
 
     public static final String TABLE_NAME = "td_carrier";
 
-    private Set<ContractPerson> persons;
+    private List<ContractPerson> persons;
 
     private Attachment<CarrierModel> fileStore;
 
-    private Set<DriverModel> drivers;
+    private List<DriverModel> drivers;
 
-    private Set<CarModel> cars;
+    private List<CarModel> cars;
 
     public static class Columns extends JuridicalPersonModel.Columns{
 
@@ -60,18 +54,18 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
             cascade = CascadeType.ALL
     )
     @JsonManagedReference("persons")
-    public Set<ContractPerson> getPersons() {
+    public List<ContractPerson> getPersons() {
         return persons;
     }
 
-    public void setPersons(Set<ContractPerson> persons) {
+    public void setPersons(List<ContractPerson> persons) {
         this.persons = persons;
     }
 
     @Override
     public void addPerson(ContractPerson person) {
         if(persons==null){
-            persons = new HashSet<>();
+            persons = new ArrayList<>();
         }
         persons.add(person);
         person.setContractor(this);
@@ -80,7 +74,7 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
 
     @OneToOne(fetch = FetchType.EAGER,
             targetEntity = CarrierFileModel.class,
-            cascade = {CascadeType.REMOVE, CascadeType.PERSIST}
+            cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE}
     )
     @JsonManagedReference("fileStore")
     public Attachment<CarrierModel> getFileStore() {
@@ -98,7 +92,7 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
 
     @Override
     @Transient
-    public List<IFileModel> getFiles() {
+    public List<FileModel> getFiles() {
         if(fileStore==null){
             CarrierFileModel fileModel = new CarrierFileModel ();
             fileModel.setOwner(this);
@@ -112,11 +106,11 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
     }
 
     @Override
-    public void setFiles(List<IFileModel> files) {
+    public void setFiles(List<FileModel> files) {
         getFileStore().setFiles(files);
     }
 
-    public void addFile(IFileModel fileModel){
+    public void addFile(FileModel fileModel){
         getFileStore().addFile(fileModel);
     }
 
@@ -126,17 +120,17 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
             cascade = {CascadeType.REMOVE, CascadeType.MERGE}
     )
     @JsonManagedReference("carrier-drivers")
-    public Set<DriverModel> getDrivers() {
+    public List<DriverModel> getDrivers() {
         return drivers;
     }
 
-    public void setDrivers(Set<DriverModel> drivers) {
+    public void setDrivers(List<DriverModel> drivers) {
         this.drivers = drivers;
     }
 
     public void addDriver(DriverModel driver) {
         if(drivers==null){
-            drivers = new HashSet<>();
+            drivers = new ArrayList<>();
         }
         drivers.add(driver);
         driver.setCarrier(this);
@@ -148,19 +142,19 @@ public class CarrierModel extends JuridicalPersonModel implements FileContainer,
             cascade = {CascadeType.REMOVE, CascadeType.MERGE}
     )
     @JsonManagedReference("carrier-cars")
-    public Set<CarModel> getCars() {
+    public List<CarModel> getCars() {
         return cars;
     }
 
     public void addCar(CarModel carModel){
         if(cars==null){
-            cars = new HashSet<>();
+            cars = new ArrayList<>();
         }
         cars.add(carModel);
         carModel.setCarrier(this);
     }
 
-    public void setCars(Set<CarModel> cars) {
+    public void setCars(List<CarModel> cars) {
         this.cars = cars;
     }
 

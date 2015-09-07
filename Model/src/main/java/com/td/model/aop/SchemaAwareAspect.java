@@ -84,6 +84,6 @@ public class SchemaAwareAspect {
 
     @Transactional
     private CompanyModel getCompanyById(UUID id){
-        return companyDao.getModel(id);
+        return companyDao.findById(id);
     }
 }

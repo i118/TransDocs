@@ -327,7 +327,7 @@ public class OrderDocumentModel extends AbstractDocumentModel {
         this.orderAdditional = orderAdditional;
     }
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name = Columns.TRANSPORT_ID,  unique = true)
     public OrderTransport getOrderTransport() {
         return orderTransport;
@@ -337,7 +337,7 @@ public class OrderDocumentModel extends AbstractDocumentModel {
         this.orderTransport = orderTransport;
     }
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = Columns.CUSTOMER_ADDITIONAL_CONDITION, unique = true)
     public OrderAdditionalCondition getCustomerAdditionalCondition() {
         return customerAdditionalCondition;
@@ -347,7 +347,7 @@ public class OrderDocumentModel extends AbstractDocumentModel {
         this.customerAdditionalCondition = customerAdditionalCondition;
     }
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = Columns.CARRIER_ADDITIONAL_CONDITION, unique = true)
     public OrderAdditionalCondition getCarrierAdditionalCondition() {
         return carrierAdditionalCondition;

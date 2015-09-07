@@ -7,6 +7,9 @@ import com.td.service.crud.LazyInitVisiter;
 import com.td.service.crud.CRUDService;
 import com.td.service.crud.dictionary.DictionaryCRUDService;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  * Created with IntelliJ IDEA.
  * User: konstantinchipunov
@@ -14,13 +17,12 @@ import com.td.service.crud.dictionary.DictionaryCRUDService;
  * Time: 23:12
  * To change this template use File | Settings | File Templates.
  */
-public interface UserCRUDService extends DictionaryCRUDService<UserModel> {
+public interface UserCRUDService extends CRUDService<UserModel> {
 
 
-    public UserModel getUserByName(String userName);
+    UserModel getUserByName(String userName);
 
-    public UserModel getCurrentUser();
+    UserModel getCurrentUser();
 
-
-    public UserModel getUserByName(String userName, LazyInitVisiter<UserModel> lazyInitVisiter);
+    List<UserModel> findByCompanyId(UUID companyId);
 }

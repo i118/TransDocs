@@ -132,12 +132,6 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
         view.setLoading(true, true);
         var viewModel = view.lookupViewModel();
         var document = viewModel.get("document");
-        document.setDirty(true);
-        if (!document.isDirty()) {
-            view.setLoading(false);
-            view.close();
-            return;
-        }
         var orderStore = viewModel.getStore("orderStore");
         var me = this;
         document.save({

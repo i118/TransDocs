@@ -119,13 +119,13 @@ public interface JuridicalPerson extends Dictionary, Persistent {
      * Реквезиты
      * @return Реквезиты
      */
-    public IAccountDetails getAccountDetails();
+    public LegalAccountDetails getAccountDetails();
 
     /**
      * Реквезиты
      * @param accountDetails Реквезиты
      */
-    public void setAccountDetails(IAccountDetails accountDetails);
+    public void setAccountDetails(LegalAccountDetails accountDetails);
 
     /**
      * Виды организвционно правовых форм

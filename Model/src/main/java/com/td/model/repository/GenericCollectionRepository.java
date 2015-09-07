@@ -52,24 +52,24 @@ public class GenericCollectionRepository<T extends AbstractTransientModel> imple
     }
 
     @Override
-    public T getModel(UUID id) {
+    public T findById(UUID id) {
         if(id==null)return null;
         return modelMap.get(id);
     }
 
     @Override
-    public T getModel(UUID objectId, Class<T> clazz) {
-        return getModel(objectId);
+    public T findById(UUID objectId, Class<T> clazz) {
+        return findById(objectId);
     }
 
     @Override
     public T getReference(UUID objectId, Class<T> clazz) {
-        return getModel(objectId);
+        return findById(objectId);
     }
 
     @Override
     public T getReference(UUID id) {
-        return getModel(id);
+        return findById(id);
     }
 
     @Override

@@ -1,12 +1,14 @@
 package com.td.webapp.controller.dictionary;
 
-import com.td.model.repository.dictionary.contractor.ContractorRepository;
+import com.td.model.dto.dictionary.contractor.CarrierDTO;
 import com.td.model.entity.dictionary.company.CarModel;
 import com.td.model.entity.dictionary.company.CarrierModel;
 import com.td.model.entity.dictionary.company.DriverModel;
-import com.td.service.context.qualifier.ContractorCrud;
-import com.td.service.dto.DriverDTO;
-import com.td.service.crud.dictionary.contractor.ContractorCRUDService;
+import com.td.service.command.ProducerCommand;
+import com.td.service.command.crud.qualifier.FindCars;
+import com.td.service.command.crud.qualifier.FindDrivers;
+import com.td.service.context.qualifier.ContractorCRUDFacade;
+import com.td.service.crud.CRUDFacade;
 import com.td.webapp.mapper.Filter;
 import com.td.webapp.response.IResponse;
 import com.td.webapp.response.ResponseImpl;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -24,11 +28,15 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("/"+CarrierController.CONTROLLER_NAME)
-public class CarrierController extends ContractorController<CarrierModel> {
+public class CarrierController extends ContractorController<CarrierModel, CarrierDTO> {
 
     public static final String CONTROLLER_NAME = "Carrier";
 
-    private ContractorCRUDService<CarrierModel> contractorService;
+    private CRUDFacade<CarrierModel, CarrierDTO> facade;
+
+    private ProducerCommand<UUID, List<CarModel>> findCars;
+
+    private ProducerCommand<UUID, List<DriverModel>> findDriver;
 
     public static class RequestName extends ContractorController.RequestName{
         public static final String GET_DRIVERS = "get.drivers";
@@ -43,22 +51,19 @@ public class CarrierController extends ContractorController<CarrierModel> {
         String contractorId = jsonFilter.findByProperty("carrierId");
         if(contractorId ==null) throw new IllegalArgumentException("carrier filter not found");
         IResponse response = new ResponseImpl();
-        getContractorService().getReference(UUID.fromString(contractorId), (CarrierModel carrier) -> {
-            carrier.getDrivers().stream().filter((DriverModel driver) -> !driver.isDeleted()).forEach((DriverModel driver) -> {
-                response.addResult(new DriverDTO(driver));
-            });
-        });
+        response.addResults(getFacade().read(UUID.fromString(contractorId), getFindDriver()));
         response.setSuccess(true);
 
         return response;
     }
 
-    @RequestMapping(value = "/" + RequestName.GET_CARS+"/{carId}")
-    protected @ResponseBody
+    @RequestMapping(value = "/" + RequestName.GET_CARS + "/{carId}")
+    protected
+    @ResponseBody
     IResponse getCar(@PathVariable UUID carId) {
         IResponse response = new ResponseImpl();
-        CarModel carModel = getContractorService().findById(carId, CarModel.TABLE_NAME);
-        response.addResult(carModel);
+      //  CarModel carModel = getContractorService().findById(carId, CarModel.TABLE_NAME);
+   //     response.addResult(carModel);
         response.setSuccess(true);
         return response;
     }
@@ -70,29 +75,42 @@ public class CarrierController extends ContractorController<CarrierModel> {
         String contractorId = jsonFilter.findByProperty("carrierId");
         if(contractorId ==null) throw new IllegalArgumentException("company filter not found");
         IResponse response = new ResponseImpl();
-        getContractorService().getReference(UUID.fromString(contractorId), (CarrierModel carrier) -> {
-            carrier.getCars().stream().filter((CarModel carModel) -> !carModel.isDeleted()).forEach((CarModel carModel) -> {
-                carModel.getCarBrand();
-                carModel.getDrivers().stream().forEach((DriverModel driver)->driver.getFirstName());
-                response.addResult(carModel);
-            });
-        });
+        response.addResults(getFacade().read(UUID.fromString(contractorId), getFindCars()));
         response.setSuccess(true);
 
         return response;
     }
 
+
     @Override
-    public ContractorCRUDService<CarrierModel> getContractorService() {
-        return contractorService;
+    public CRUDFacade<CarrierModel, CarrierDTO> getFacade() {
+        return facade;
     }
 
+    @Inject
+    @ContractorCRUDFacade(ContractorCRUDFacade.Type.CARRIER)
+    public void setFacade(CRUDFacade<CarrierModel, CarrierDTO> facade) {
+        this.facade = facade;
+    }
+
+    public ProducerCommand<UUID, List<CarModel>> getFindCars() {
+        return findCars;
+    }
 
     @Inject
-    @Override
-    @ContractorCrud(ContractorCrud.Type.CARRIER)
-    public void setContractorService(ContractorCRUDService<CarrierModel> carrierService) {
-        this.contractorService = carrierService;
+    @FindCars
+    public void setFindCars(ProducerCommand<UUID, List<CarModel>> findCars) {
+        this.findCars = findCars;
+    }
+
+    public ProducerCommand<UUID, List<DriverModel>> getFindDriver() {
+        return findDriver;
+    }
+
+    @Inject
+    @FindDrivers
+    public void setFindDriver(ProducerCommand<UUID, List<DriverModel>> findDriver) {
+        this.findDriver = findDriver;
     }
 
     @Override
