@@ -34,8 +34,8 @@ public class CustomerDaoTest extends AbstractDaoTest<ICustomerModel> {
 
     @Test(dataProviderClass = CustomerModelDataProvider.class,
             dataProvider = CustomerModelDataProvider.DataProviders.CUSTOMER_DATA)
-    public void testSaveCustomer(ICustomerModel customerModel){
-       getDao().saveOrUpdate(customerModel);
+    public void testSaveCustomer(CustomerModel customerModel){
+      customerModel = getDao().saveOrUpdate(customerModel);
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((DictionaryRepository)getDao()).findDataSet(from(DictionaryDataSetImpl.class).endFrom());
        ICustomerModel persistCustomer = customerModelDao.findById(customerModel.getObjectId());
@@ -59,7 +59,7 @@ public class CustomerDaoTest extends AbstractDaoTest<ICustomerModel> {
     }
 
     @Override
-    protected IRepository getDao() {
+    protected ContractorJPARepository<CustomerModel> getDao() {
         return customerModelDao;
     }
 }

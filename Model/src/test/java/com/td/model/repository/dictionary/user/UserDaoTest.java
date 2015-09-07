@@ -64,7 +64,7 @@ public class UserDaoTest extends AbstractDaoTest {
     )
     public void testSave(IUserModel userModel) {
         initDependents(userModel);
-        userModelDao.saveOrUpdate((UserModel) userModel);
+        userModel = userModelDao.saveOrUpdate((UserModel) userModel);
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((GenericJPARepository)getDao()).getEntityManager().clear();
 
@@ -105,7 +105,7 @@ public class UserDaoTest extends AbstractDaoTest {
     )
     public void deleteTest(IUserModel userModel){
         initDependents(userModel);
-        userModelDao.saveOrUpdate((UserModel) userModel);
+        userModel = userModelDao.saveOrUpdate((UserModel) userModel);
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((GenericJPARepository)getDao()).getEntityManager().clear();
 
@@ -130,7 +130,7 @@ public class UserDaoTest extends AbstractDaoTest {
     )
     public void doubleUserTest(IUserModel userModel){
         initDependents(userModel);
-        userModelDao.saveOrUpdate((UserModel) userModel);
+        userModel = userModelDao.saveOrUpdate((UserModel) userModel);
         ((GenericJPARepository)getDao()).getEntityManager().flush();
         ((GenericJPARepository)getDao()).getEntityManager().clear();
 

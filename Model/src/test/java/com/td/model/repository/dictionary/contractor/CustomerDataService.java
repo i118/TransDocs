@@ -28,7 +28,7 @@ public class CustomerDataService implements IDataService<JuridicalPerson> {
 
     @Override
     public JuridicalPerson[][] getDataArray() {
-        ICustomerModel customerModel = new CustomerModel();
+        CustomerModel customerModel = new CustomerModel();
         customerModel.setFullName("ООО \"Курочка ряба\"");
         customerModel.setShortName("ООО \"Курочка ряба\"");
         customerModel.setLegalAddress(UUID.randomUUID().toString());
