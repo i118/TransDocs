@@ -47,6 +47,15 @@
             'TransDocs.controller.WorkSpaceController'
         ],
         launch: function () {
+            Ext.Ajax.on('beforerequest', function () {
+                var window = TransDocs.util.WindowManager.getActiveWindow();
+                if(window && window.autoMask){
+                    window.setLoading(true, true);
+                    Ext.Ajax.on('requestcomplete', function(){if(window && !Ext.Ajax.isLoading()){window.setLoading(false)};}, window);
+                    Ext.Ajax.on('requestexception', function(){if(window && !Ext.Ajax.isLoading())window.setLoading(false);}, window);
+                }
+            });
+
             applicationContext = Ext.create("TransDocs.util.ApplicationContext", {
                 sessionId: "<%=session.getId().toString()%>",
                 baseUrl: "${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"
