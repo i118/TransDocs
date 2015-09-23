@@ -32,7 +32,8 @@ Ext.define('TransDocs.util.WindowManager', {
         config.closeAction = 'destroy';
         var items = config.items;
         config.items = [];
-        var wnd = Ext.create('TransDocs.view.container.Window', config);
+        var type = config.type ? config.type : 'TransDocs.view.container.Window';
+        var wnd = Ext.create(type, config);
         this.windows.add(config.scope, wnd);
         var viewport = Ext.getCmp("TransDocsViewPort");
         var worSpace = Ext.getCmp("workSpaceCenter");

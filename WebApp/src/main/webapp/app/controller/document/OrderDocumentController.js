@@ -5,8 +5,22 @@ Ext.define("TransDocs.controller.document.OrderDocumentController", {
     requires: [
         "TransDocs.model.document.OrderDocumentModel",
         "TransDocs.service.ContractorService",
-        "TransDocs.service.DictionaryService"
+        "TransDocs.service.DictionaryService",
+        "TransDocs.view.Spinner"
     ],
+
+    initViewModel: function(vm){
+        var spinner = Ext.create("TransDocs.view.Spinner");
+        spinner.setViewModel(vm);
+        spinner.addBind("{document}");
+        spinner.addBind("{customer}");
+        spinner.addBind("{document.customerPerson}");
+        spinner.addBind("{carrier}");
+        spinner.addBind("{document.carrierPerson}");
+        spinner.addBind("{customerPersons}");
+        spinner.addBind("{carrierPersons}");
+        vm.getView().spinner = spinner;
+    },
 
     changeCustomer: function(combo, newValue, oldValue, eOpts){
         var mainPanel = this.lookupReference("orderMainPanel");

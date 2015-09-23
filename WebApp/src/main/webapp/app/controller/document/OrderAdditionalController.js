@@ -8,6 +8,7 @@ Ext.define('TransDocs.controller.document.OrderAdditionalController', {
 
     initViewModel: function(viewModel){
         var document = viewModel.get("document");
+        this.initSpinner(viewModel);
         if(!document.isNew()){
             document.getOrderTransport({reload:true});
         }
@@ -36,6 +37,17 @@ Ext.define('TransDocs.controller.document.OrderAdditionalController', {
             var additional = this.getSession().createRecord("OrderAdditional");
             document.setOrderAdditional(additional);
         }
+    },
+
+    initSpinner: function(vm){
+        var orderWindow = vm.getView().up('window');
+        var spinner = Ext.create("TransDocs.view.Spinner");
+        spinner.setViewModel(vm);
+        spinner.setView(orderWindow);
+        spinner.addBind("{{document.customerAdditionalCondition}");
+        spinner.addBind("{document.carrierAdditionalCondition}");
+        spinner.addBind("{document.orderTransport}");
+        orderWindow.spinner = spinner;
     },
 
     findTransportType: function(combox, trigger, event){

@@ -41,7 +41,9 @@ Ext.define('TransDocs.viewmodel.document.OrderDocumentViewModel', {
                     }
                     document.setCustomer(customer);
                     me.set("isSelectedCustomer", customer!=null);
-                    me.set("customerPersons", customer.persons());
+                    if(customer) {
+                        me.set("customerPersons", customer.persons());
+                    }
                     document.setCustomerPerson(null);
                 }
                 if(newValue && !newValue.isModel){
@@ -61,9 +63,9 @@ Ext.define('TransDocs.viewmodel.document.OrderDocumentViewModel', {
             }
         },
         customerPersons: {
-            bind: '{document.customer.persons}',
-            get: function(persons){
-                return persons;
+            bind: '{document.customer}',
+            get: function(customer){
+                return customer ? customer.persons() : null;
             }
         },
         carrier: {
@@ -83,7 +85,9 @@ Ext.define('TransDocs.viewmodel.document.OrderDocumentViewModel', {
                     }
                     document.setCarrier(carrier);
                     me.set("isSelectedCarrier", carrier!=null);
-                    me.set("carrierPersons", carrier.persons());
+                    if(carrier) {
+                        me.set("carrierPersons", carrier.persons());
+                    }
                     document.setCarrierPerson(null);
                     var orderTransport = document.getOrderTransport();
                     if(orderTransport){
@@ -109,9 +113,9 @@ Ext.define('TransDocs.viewmodel.document.OrderDocumentViewModel', {
             }
         },
         carrierPersons: {
-            bind: '{document.carrier.persons}',
-            get: function(persons){
-                return persons;
+            bind: '{document.carrier}',
+            get: function(carrier){
+                return carrier ? carrier.persons() : null;
             }
         }
     },

@@ -47,12 +47,35 @@
             'TransDocs.controller.WorkSpaceController'
         ],
         launch: function () {
+            var applyMask = function (window) {
+                if (typeof window.applyMask == "function") {
+                    window.applyMask();
+                } else {
+                    window.setLoading(true, true);
+                }
+            }
+            var hideMask = function (window) {
+                if (typeof window.hideMask == "function") {
+                    window.hideMask();
+                } else {
+                    window.setLoading(false);
+                }
+            }
             Ext.Ajax.on('beforerequest', function () {
                 var window = TransDocs.util.WindowManager.getActiveWindow();
-                if(window && window.autoMask){
-                    window.setLoading(true, true);
-                    Ext.Ajax.on('requestcomplete', function(){if(window && !Ext.Ajax.isLoading()){window.setLoading(false)};}, window);
-                    Ext.Ajax.on('requestexception', function(){if(window && !Ext.Ajax.isLoading())window.setLoading(false);}, window);
+                if (window && window.autoMask) {
+                    applyMask(window);
+
+                    Ext.Ajax.on('requestcomplete', function () {
+                        if (window && !Ext.Ajax.isLoading()) {
+                            hideMask(window);
+                        }
+                    }, window);
+                    Ext.Ajax.on('requestexception', function () {
+                        if (window && !Ext.Ajax.isLoading()) {
+                            hideMask(window);
+                        }
+                    }, window);
                 }
             });
 

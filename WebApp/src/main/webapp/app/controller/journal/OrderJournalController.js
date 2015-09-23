@@ -7,7 +7,8 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
         "TransDocs.view.component.document.OrderDocumentComponent",
         "TransDocs.controller.document.OrderDocumentController",
         "TransDocs.viewmodel.document.OrderDocumentViewModel",
-        "Ext.data.identifier.Uuid"
+        "Ext.data.identifier.Uuid",
+        "TransDocs.view.container.document.OrderDocumentWindow"
     ],
 
     createNewDocument: function () {
@@ -29,12 +30,13 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
         };
         var wndConfig = {
             viewModel: viewModel,
+            type: "TransDocs.view.container.document.OrderDocumentWindow",
             session: session,
             autoWidth: true,
             autoHeight: true,
+            autoMask: false,
             width: 830,
             height: 600,
-            autoMask: true,
             scroll: 'auto',
             controller: 'orderDocumentController',
             callerComponent: me.getView(),
@@ -71,9 +73,9 @@ Ext.define("TransDocs.controller.journal.OrderJournalController", {
 
             viewModel: viewModel,
             session: session,
+            type: "TransDocs.view.container.document.OrderDocumentWindow",
             width: 830,
             height: 600,
-            autoMask: true,
             callerComponent: me.getView(),
             scroll: 'auto',
             controller: 'orderDocumentController',

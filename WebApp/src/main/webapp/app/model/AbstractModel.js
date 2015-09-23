@@ -261,7 +261,7 @@ Ext.define("TransDocs.model.AbstractModel", {
     },
 
     isDirty: function () {
-        this.phantom = this.isNew();
+        this.phantom = this.phantom && this.isNew();
         if(this.phantom)return true;
         var me = this;
         var fields = this.getFields();
