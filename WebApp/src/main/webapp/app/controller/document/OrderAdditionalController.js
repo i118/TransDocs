@@ -40,13 +40,18 @@ Ext.define('TransDocs.controller.document.OrderAdditionalController', {
     },
 
     initSpinner: function(vm){
+        var document = vm.get("document");
         var orderWindow = vm.getView().up('window');
         var spinner = Ext.create("TransDocs.view.Spinner");
         spinner.setViewModel(vm);
         spinner.setView(orderWindow);
-        spinner.addBind("{{document.customerAdditionalCondition}");
+        spinner.addBind("{document.customerAdditionalCondition}");
         spinner.addBind("{document.carrierAdditionalCondition}");
         spinner.addBind("{document.orderTransport}");
+        if(document && document.getCarrier()) {
+            spinner.addBind("{document.carrier.cars}");
+            spinner.addBind("{document.carrier.drivers}");
+        }
         orderWindow.spinner = spinner;
     },
 
