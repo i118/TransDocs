@@ -71,7 +71,7 @@ Ext.define("TransDocs.service.FileService", {
             });
         }catch(e){
             waitMsg.close();
-            this.showMessage("На вашем компьюьтере не установлен java plugin, либо он заблокирован системой безопасности.", Ext.MessageBox.ERROR);
+            this.showMessage("Данный функционал не доступен в связи с доработкой.", Ext.MessageBox.ERROR);
         }
         return result;
     },
@@ -103,7 +103,7 @@ Ext.define("TransDocs.service.FileService", {
             });
         }catch(e){
             waitMsg.close();
-            this.showMessage("На вашем компьюьтере не установлен java plugin, либо он заблокирован системой безопасности.", Ext.MessageBox.ERROR);
+            this.showMessage("Данный функционал не доступен в связи с доработкой.", Ext.MessageBox.ERROR);
         }
         return result;
     },
@@ -146,7 +146,7 @@ Ext.define("TransDocs.service.FileService", {
             });
         }catch(e){
             waitMsg.close();
-            this.showMessage("На вашем компьюьтере не установлен java plugin, либо он заблокирован системой безопасности.", Ext.MessageBox.ERROR);
+            this.showMessage("Данный функционал не доступен в связи с доработкой.", Ext.MessageBox.ERROR);
         }
         return result;
     },
@@ -184,7 +184,7 @@ Ext.define("TransDocs.service.FileService", {
             });
         }catch(e){
             waitMsg.close();
-            this.showMessage("На вашем компьюьтере не установлен java plugin, либо он заблокирован системой безопасности.", Ext.MessageBox.ERROR);
+            this.showMessage("Данный функционал не доступен в связи с доработкой.", Ext.MessageBox.ERROR);
         }
 
         return result;
@@ -230,6 +230,19 @@ Ext.define("TransDocs.service.FileService", {
 
 
     buildFileTransfer: function(){
+        //var attributes = {
+        //    code: 'java:com.td.filetransfer.FileTransfer.class',
+        //    archive: applicationContext.getBaseUrl() + "/app/file-transfer.jar",
+        //    width: 1,
+        //    height: 1,
+        //    id: "fileTransfer"
+        //};
+        //var parameters = {
+        //    sessionId: applicationContext.getSessionId(),
+        //    host: applicationContext.getBaseUrl()
+        //};
+        //var version = '1.6';
+        //deployJava.runApplet(attributes, parameters, version);
         var applet = document.getElementById("fileTransfer");
         return applet;
     },

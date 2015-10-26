@@ -1,3 +1,5 @@
+package com.td.filetransfer;
+
 import netscape.javascript.JSObject;
 
 import java.applet.Applet;
