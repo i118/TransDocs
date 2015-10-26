@@ -53,12 +53,12 @@
                             <archive>
                                 <manifest>
 
-                                    <mainClass>FileTransfer</mainClass>
+                                    <mainClass>com.td.filetransfer.FileTransfer</mainClass>
                                 </manifest>
                                 <manifestEntries>
                                     <Permissions>all-permissions</Permissions>
                                     <Trusted-Library>true</Trusted-Library>
-                                    <Application-Name>FileTransfer</Application-Name>
+                                    <Application-Name>com.td.filetransfer.FileTransfer</Application-Name>
                                     <Caller-Allowable-Codebase>*</Caller-Allowable-Codebase>
                                     <Codebase>*</Codebase>
                                     <Application-Library-Allowable-Codebase>*</Application-Library-Allowable-Codebase>

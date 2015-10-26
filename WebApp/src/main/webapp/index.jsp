@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/tree.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/extjs/ext-all-debug.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/extjs/ext-locale-ru.js"></script>
+    <script src="http://www.java.com/js/deployJava.js"></script>
 </head>
 
 
@@ -91,13 +92,13 @@
     });
 </script>
 
-<object classid="java:FileTransfer.class" type="application/x-java-applet"
-        archive="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/app/file-transfer.jar"
-        width="0" height="0" id="fileTransfer">
-    <PARAM name="sessionId" value="<%=session.getId().toString()%>">
-    <PARAM name="host"
-           value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}">
-</object>
+<%--<object classid="java:com.td.filetransfer.FileTransfer.class" type="application/x-java-applet"--%>
+        <%--archive="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/app/file-transfer.jar"--%>
+        <%--width="0" height="0" id="fileTransfer">--%>
+    <%--<PARAM name="sessionId" value="<%=session.getId().toString()%>">--%>
+    <%--<PARAM name="host"--%>
+           <%--value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}">--%>
+<%--</object>--%>
 
 <iframe id="downloadFileFrame" name="downloadFileFrame" src='about:blank' style='display:none;'>
 </iframe>

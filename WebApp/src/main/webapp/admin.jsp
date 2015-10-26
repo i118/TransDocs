@@ -56,7 +56,7 @@
   });
 </script>
 
-<object classid="java:FileTransfer.class" type="application/x-java-applet"
+<object classid="java:com.td.filetransfer.FileTransfer.class" type="application/x-java-applet"
         archive="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/web/file-transfer.jar"
         width="0" height="0" id="fileTransfer">
   <PARAM name="sessionId" value="<%=session.getId().toString()%>">
