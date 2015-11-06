@@ -8,9 +8,8 @@
 2. Создать базу данных в PostgresSQL(скрипт создания базы лежит в файле <project>install/01_create_database.sql),
 3. настроить подключение к базе в файле "config/model/propeties/DataSource.properties"(прописать логин, пароль и т.д.)
 4. В файле "config/model/propeties/DataSource.properties" настроить jcr репозиторий в параметре "jcr.repoHomeDir" указать путь к папке в которой будет развернут репозиторий(в windows путь указывается следующим образом "c:/repository"), в параметра jcr.login/jcr.password указать логин пароль в кавычках(подефолту admin/admin)
-5. Собрать приложение с помощью maven примерно такой командой:
-  MAVEN_HOME/mvn -Dweb.application.path="<appServer/appName>" install -P webapp-war (в параметре web.application.path должен быть указан путь до папки куда должно копироватся собранное приложение).
-6. Задеплоить приложение.
+5. Собрать приложение с помощью maven примерно такой командой: MAVEN_HOME/mvn clean install
+6. задеплоить war файл лежащий по пути <APP HOME>/WebApp/target/TransDocs.war
 
 Работа с файлами.
 Что бы открывать, редактировать и сохранять файлы необходим  java plugin версии 1.6 и выше, начиная с версии 1.7 также необходимо добавить url приложения в доверенные сайты в java control panel на вкладке security.
