@@ -515,6 +515,84 @@ ALTER TABLE "td_user" ADD CONSTRAINT "fk_td_company" FOREIGN KEY ("company_objec
 
 
 
+CREATE OR REPLACE FUNCTION initDemo()
+  RETURNS INT
+AS $$
+DECLARE
+	userId UUID;
+	roleAdminId UUID;
+	companyId UUID;
+	currentSchema VARCHAR(255);
+BEGIN
+  SELECT current_schema() INTO currentSchema;
+  IF(currentSchema = 'td_demo') THEN
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+
+    SELECT uuid_generate_v4() INTO userId;
+    SELECT r.object_id FROM td_role r where r.role_name = 'ROLE_ADMIN' LIMIT 1 INTO roleAdminId;
+    SELECT uuid_generate_v4() INTO companyId;
+    INSERT INTO "td_company" (
+      object_id,
+      full_name,
+      short_name,
+      legal_form,
+      login,
+      creation_date,
+      modify_date,
+      object_type,
+      version,
+      is_deleted
+    )
+    VALUES (
+      companyId,
+      'DEMO',
+      'DEMO',
+      'LLC',
+      'admin',
+        now(),
+        now(),
+        'td_company',
+        0,
+        '0'
+     );
+
+    INSERT INTO "td_user"(
+        first_name,
+        last_name,
+        patronymic,
+        login,
+        password,
+        object_id,
+        company_object_id,
+        creation_date,
+        modify_date,
+        object_type,
+        version,
+        is_deleted,
+        gender
+    )
+    VALUES (
+      'Admin',
+      'Admin',
+      'Admin',
+      'admin',
+      '041a520fe70f0baf956a56916ea128d464fb1f35',
+      userId,
+      companyId,
+      now(),
+      now(),
+      'td_user',
+      0,
+      '0',
+      0
+    );
+    INSERT INTO "user_to_roles"(user_id, role_id) VALUES (userId,roleAdminId);
+  END IF;
+  RETURN 0::INT;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT initDemo();
 
 

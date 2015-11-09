@@ -558,4 +558,21 @@ ALTER TABLE "order_document" ADD CONSTRAINT "fk_carrier_person" FOREIGN KEY ("ca
 ALTER TABLE "td_user" ADD CONSTRAINT "fk_td_company" FOREIGN KEY ("company_object_id") REFERENCES "td_company" ("object_id") ON UPDATE NO ACTION ON DELETE NO ACTION NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 
+CREATE OR REPLACE FUNCTION initDemo()
+	RETURNS INT
+AS $$
+DECLARE
+	userId UUID;
+	roleAdminId UUID;
+	companyId UUID;
+BEGIN
+  CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+	CREATE SCHEMA td_demo;
+  RETURN 0::INT;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT initDemo();
+
+
 
