@@ -37,7 +37,7 @@ Ext.define("TransDocs.view.component.dictionary.UserInfoComponent", {
                 handler: 'deleteUser'
             }, {
                 xtype: 'tdbutton',
-                text: 'Востановить',
+                text: 'Восстановить',
                 action: 'RestoreUserAction',
                 hidden: true,
                 handler: 'restoreUser'
